@@ -21,60 +21,72 @@ export default class hotSpotPizza extends Component {
       {title: 'First', index: 0},
       {title: 'Second', index: 1},
       {title: 'Third', index: 2},
+      {title: 'Main', index: 3},
     ];
     return (
 
 
-    <Navigator
-      initialRoute={routes[0]}
-      initialRouteStack={routes}
-      renderScene={(route, navigator) =>
-        <TouchableHighlight>
-          <Text>Hello {route.title}!</Text>
-        </TouchableHighlight>
-      }style={{padding: 100}}
-      navigationBar={
-         <Navigator.NavigationBar
-           routeMapper={{
-             LeftButton: (route, navigator, index, navState) =>
-               {
-                 if (route.index === 0) {
-                      return null;
-                    } else {
-                      return (
-                        <TouchableHighlight onPress={() => navigator.pop()}>
-                          <Text>Back</Text>
-                        </TouchableHighlight>
-                      );
-                    }
-               },
-             RightButton: (route, navigator, index, navState) =>
-               {
-                 return (
-                   <TouchableHighlight
-                       onPress={() => {
-                       if (route.index < routes.length-1) {
+      <Provider store={ store }>
+        <Navigator
+          initialRoute={routes[0]}
+          initialRouteStack={routes}
+          renderScene={(route, navigator) => {
+            if (route.index ===3) {
+              return <Main></Main>
+            }else {
+              return (
+                <TouchableHighlight>
+                  <Text>Hello {route.title}!</Text>
+                </TouchableHighlight>
+              )
 
-                         navigator.push(routes[route.index+1]);
-                       }
-                     }}>
-                     <Text>Next</Text>
-                   </TouchableHighlight>
-                 );
-               },
-             Title: (route, navigator, index, navState) =>
-               {
-                 return (
-                   <TouchableHighlight>
-                     <Text>Awesome {route.title}</Text>
-                   </TouchableHighlight>
-                 );
-               },
-           }}
-           style={{backgroundColor: '#BB070C'}}
-         />
-      }
-    />
+            }
+          }
+
+          }style={{padding: 100}}
+          navigationBar={
+             <Navigator.NavigationBar
+               routeMapper={{
+                 LeftButton: (route, navigator, index, navState) =>
+                   {
+                     if (route.index === 0) {
+                          return null;
+                        } else {
+                          return (
+                            <TouchableHighlight onPress={() => navigator.pop()}>
+                              <Text>Back</Text>
+                            </TouchableHighlight>
+                          );
+                        }
+                   },
+                 RightButton: (route, navigator, index, navState) =>
+                   {
+                     return (
+                       <TouchableHighlight
+                           onPress={() => {
+                           if (route.index < routes.length-1) {
+
+                             navigator.push(routes[route.index+1]);
+                           }
+                         }}>
+                         <Text>Next</Text>
+                       </TouchableHighlight>
+                     );
+                   },
+                 Title: (route, navigator, index, navState) =>
+                   {
+                     return (
+                       <TouchableHighlight>
+                         <Text>Awesome {route.title}</Text>
+                       </TouchableHighlight>
+                     );
+                   },
+               }}
+               style={{backgroundColor: '#BB070C'}}
+             />
+          }
+        />
+      </Provider>
 
     );
   }
