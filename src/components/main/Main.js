@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { updateSettings } from '../../actions/updateSettingsPageActions';
+import { updateMain } from '../../actions/updateMainPageActions';
 
 
 import {
@@ -9,15 +10,20 @@ import {
     View,
     Image,
     Button,
-    Navigator
+    Modal,
+    TouchableHighlight
 } from 'react-native'
 
 const onMakePizza = () => {
-  
+
   console.log('Button has been pressed!');
 };
 
 class Main extends Component {
+
+     setModalVisible(visible) {
+       this.props.updateMain({makePizzaModalVisible: visible});
+     }
 
     render() {
         return (
@@ -38,11 +44,32 @@ class Main extends Component {
                       <Text style={styles.instructions}>
                         Get Started by building your Pizza below
                       </Text>
-                      <Button
-                        onPress={onMakePizza}
-                        title='Make A Pizza!'
-                        color = "#BB070C"
-                        accessibilityLabel="Make a Pizza"/>
+
+                      <Modal
+                        animationType={"slide"}
+                        transparent={false}
+                        visible={this.props.makePizzaModalVisible}
+                        onRequestClose={() => {alert("Modal has been closed.")}}
+                        >
+                       <View style={{marginTop: 22}}>
+                        <View>
+                          <Text>Hello World!</Text>
+
+                          <TouchableHighlight onPress={() => {
+                            this.setModalVisible(!this.props.makePizzaModalVisible)
+                          }}>
+                            <Text>Hide Modal</Text>
+                          </TouchableHighlight>
+
+                        </View>
+                       </View>
+                      </Modal>
+
+                      <TouchableHighlight onPress={() => {
+                        this.setModalVisible(true)
+                      }}>
+                        <Text style={{color: 'red'}}>Make A Pizza!</Text>
+                      </TouchableHighlight>
                     </View>
 
                     {/* ----- End Settings Components ----  */}
@@ -56,12 +83,12 @@ mapStateToProps = (state) => {
   console.log(state);
     return {
       testVal: state.settingsPage.testVal,
-      testVal1: state.mainPage.testVal1,
+      makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
     }
 }
 
 const mapDispatchToActionCreators = {
-    updateSettings: updateSettings
+    updateMain: updateMain
 };
 
 const styles = StyleSheet.create({

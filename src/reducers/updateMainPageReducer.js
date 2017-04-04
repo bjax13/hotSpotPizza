@@ -1,8 +1,8 @@
-import { UPDATE_MAIN } from '../actions/updateSettingsPageActions'
+import { UPDATE_MAIN } from '../actions/updateMainPageActions'
 
 const initialState = {
 
-  testVal1: 'Test Main Success'
+  makePizzaModalVisible: false
 }
 
 
