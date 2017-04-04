@@ -7,36 +7,46 @@ import {
     StyleSheet,
     Text,
     View,
-    ScrollView
+    Image,
+    Button,
+    Navigator
 } from 'react-native'
 
+const onMakePizza = () => {
+  
+  console.log('Button has been pressed!');
+};
+
 class Main extends Component {
+
     render() {
-
         return (
-
-          <View>
-
-            <ScrollView>
+          <View style={{flex:1}}>
                 <View style={styles.container}>
+
+                  <View style={styles.circle}>
+                    <Image
+                      style={{width: 141, height: 141 , alignItems: 'center'}}
+                      source={{uri: 'https://www.48hourslogo.com/48hourslogo_data/2014/09/09/201409090947415741.png'}}/>
+                  </View>
 
                     {/* ----- Start Settings Components ----  */}
                     <View style={styles.container}>
                       <Text style={styles.welcome}>
-                        Welcome to Main Page!
+                        Welcome to Hot Spot Pizza!
                       </Text>
                       <Text style={styles.instructions}>
-                        To get started, Do stuve
+                        Get Started by building your Pizza below
                       </Text>
-                      <Text style={styles.instructions}>
-                        {this.props.testVal}
-                        {this.props.testVal1}
-                      </Text>
+                      <Button
+                        onPress={onMakePizza}
+                        title='Make A Pizza!'
+                        color = "#BB070C"
+                        accessibilityLabel="Make a Pizza"/>
                     </View>
 
                     {/* ----- End Settings Components ----  */}
                 </View>
-            </ScrollView>
             </View>
         )
     }
@@ -56,6 +66,15 @@ const mapDispatchToActionCreators = {
 
 const styles = StyleSheet.create({
 
+
+  circle: {
+    width: 200,
+    height: 200,
+    borderRadius: 200/2,
+    backgroundColor: '#000',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   container: {
     flex: 1,
     justifyContent: 'center',

@@ -43,7 +43,7 @@ export default class hotSpotPizza extends Component {
             }
           }
 
-          }style={{padding: 100}}
+        }style={{paddingTop: 64}}
           navigationBar={
              <Navigator.NavigationBar
                routeMapper={{
