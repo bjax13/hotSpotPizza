@@ -18,10 +18,10 @@ import {
 export default class hotSpotPizza extends Component {
   render() {
     const routes = [
-      {title: 'First', index: 0},
-      {title: 'Second', index: 1},
-      {title: 'Third', index: 2},
-      {title: 'Main', index: 3},
+      {title: 'Main', index: 0},
+      {title: 'First', index: 1},
+      {title: 'Second', index: 2},
+      {title: 'Third', index: 3},
     ];
     return (
 
@@ -31,7 +31,7 @@ export default class hotSpotPizza extends Component {
           initialRoute={routes[0]}
           initialRouteStack={routes}
           renderScene={(route, navigator) => {
-            if (route.index ===3) {
+            if (route.index ===0) {
               return <Main></Main>
             }else {
               return (

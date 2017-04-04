@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-// import { updateSettings } from '../../actions/updateSettingsPageActions';
-// import { Actions } from 'react-native-router-flux';
+import { updateSettings } from '../../actions/updateSettingsPageActions';
+
 
 import {
     StyleSheet,
@@ -29,8 +29,8 @@ class Main extends Component {
                         To get started, Do stuve
                       </Text>
                       <Text style={styles.instructions}>
-                        Press Cmd+R to reload,{'\n'}
-                        Cmd+D or shake for dev menu
+                        {this.props.testVal}
+                        {this.props.testVal1}
                       </Text>
                     </View>
 
@@ -43,14 +43,15 @@ class Main extends Component {
 }
 
 mapStateToProps = (state) => {
+  console.log(state);
     return {
-      // ------ example of what do to put items on state -----
-      // notificationNewMatch: state.settingsPage.notificationNewMatch,
+      testVal: state.settingsPage.testVal,
+      testVal1: state.mainPage.testVal1,
     }
 }
 
 const mapDispatchToActionCreators = {
-    // updateSettings: updateSettings
+    updateSettings: updateSettings
 };
 
 const styles = StyleSheet.create({
