@@ -18,8 +18,9 @@ import {
 export default class hotSpotPizza extends Component {
   render() {
     const routes = [
-      {title: 'First Scene', index: 0},
-      {title: 'Second Scene', index: 1},
+      {title: 'First', index: 0},
+      {title: 'Second', index: 1},
+      {title: 'Third', index: 2},
     ];
     return (
 
@@ -28,27 +29,49 @@ export default class hotSpotPizza extends Component {
       initialRoute={routes[0]}
       initialRouteStack={routes}
       renderScene={(route, navigator) =>
-        <TouchableHighlight onPress={() => {
-          if (route.index === 0) {
-            navigator.push(routes[1]);
-          } else {
-            navigator.pop();
-          }
-        }}>
-        <Text>Hello {route.title}!</Text>
+        <TouchableHighlight>
+          <Text>Hello {route.title}!</Text>
         </TouchableHighlight>
-      }
+      }style={{padding: 100}}
       navigationBar={
          <Navigator.NavigationBar
            routeMapper={{
              LeftButton: (route, navigator, index, navState) =>
-              { return (<Text>Cancel</Text>); },
+               {
+                 if (route.index === 0) {
+                      return null;
+                    } else {
+                      return (
+                        <TouchableHighlight onPress={() => navigator.pop()}>
+                          <Text>Back</Text>
+                        </TouchableHighlight>
+                      );
+                    }
+               },
              RightButton: (route, navigator, index, navState) =>
-               { return (<Text>Done</Text>); },
+               {
+                 return (
+                   <TouchableHighlight
+                       onPress={() => {
+                       if (route.index < routes.length-1) {
+
+                         navigator.push(routes[route.index+1]);
+                       }
+                     }}>
+                     <Text>Next</Text>
+                   </TouchableHighlight>
+                 );
+               },
              Title: (route, navigator, index, navState) =>
-               { return (<Text>Awesome Nav Bar</Text>); },
+               {
+                 return (
+                   <TouchableHighlight>
+                     <Text>Awesome {route.title}</Text>
+                   </TouchableHighlight>
+                 );
+               },
            }}
-           style={{backgroundColor: 'gray'}}
+           style={{backgroundColor: '#BB070C'}}
          />
       }
     />
