@@ -10,26 +10,49 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Navigator,
+  TouchableHighlight
 } from 'react-native';
 
 export default class hotSpotPizza extends Component {
   render() {
+    const routes = [
+      {title: 'First Scene', index: 0},
+      {title: 'Second Scene', index: 1},
+    ];
     return (
-      <Provider store={ store }>
-        <View style={styles.container}>
-          <Text style={styles.welcome}>
-            Welcome to React Native!
-          </Text>
-          <Text style={styles.instructions}>
-            To get started, edit index.ios.js
-          </Text>
-          <Text style={styles.instructions}>
-            Press Cmd+R to reload,{'\n'}
-            Cmd+D or shake for dev menu
-          </Text>
-        </View>
-      </Provider>
+
+
+    <Navigator
+      initialRoute={routes[0]}
+      initialRouteStack={routes}
+      renderScene={(route, navigator) =>
+        <TouchableHighlight onPress={() => {
+          if (route.index === 0) {
+            navigator.push(routes[1]);
+          } else {
+            navigator.pop();
+          }
+        }}>
+        <Text>Hello {route.title}!</Text>
+        </TouchableHighlight>
+      }
+      navigationBar={
+         <Navigator.NavigationBar
+           routeMapper={{
+             LeftButton: (route, navigator, index, navState) =>
+              { return (<Text>Cancel</Text>); },
+             RightButton: (route, navigator, index, navState) =>
+               { return (<Text>Done</Text>); },
+             Title: (route, navigator, index, navState) =>
+               { return (<Text>Awesome Nav Bar</Text>); },
+           }}
+           style={{backgroundColor: 'gray'}}
+         />
+      }
+    />
+
     );
   }
 }
