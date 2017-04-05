@@ -51,15 +51,27 @@ class Main extends Component {
                         visible={this.props.makePizzaModalVisible}
                         onRequestClose={() => {alert("Modal has been closed.")}}
                         >
-                       <View style={{marginTop: 22}}>
-                        <View>
-                          <Text>Hello World!</Text>
+                       <View style={{marginTop: 22,flex: 1}}>
+                        <View style={{margin: 5, flex:1}}>
+                          <View style={{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f7d9de'}}>
+                            <Text>{'$'+this.props.totalCost.toFixed(2)}</Text>
+                          </View>
 
-                          <TouchableHighlight onPress={() => {
-                            this.setModalVisible(!this.props.makePizzaModalVisible)
-                          }}>
-                            <Text>Hide Modal</Text>
+                          <TouchableHighlight
+                            style={{position: 'absolute', right: 4 , top: 4 }}
+                            onPress={() =>{
+                              this.setModalVisible(!this.props.makePizzaModalVisible)
+                            }}>
+                            <Text>X</Text>
                           </TouchableHighlight>
+
+                          <View style={{flex:10}}>
+                            <TouchableHighlight onPress={() => {
+                              this.setModalVisible(!this.props.makePizzaModalVisible)
+                            }}>
+                              <Text>Hide Modal</Text>
+                            </TouchableHighlight>
+                          </View>
 
                         </View>
                        </View>
@@ -80,10 +92,10 @@ class Main extends Component {
 }
 
 mapStateToProps = (state) => {
-  console.log(state);
     return {
       testVal: state.settingsPage.testVal,
       makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
+      totalCost: state.mainPage.totalCost,
     }
 }
 

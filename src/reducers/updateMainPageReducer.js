@@ -2,7 +2,8 @@ import { UPDATE_MAIN } from '../actions/updateMainPageActions'
 
 const initialState = {
 
-  makePizzaModalVisible: false
+  makePizzaModalVisible: false,
+  totalCost: 0.00
 }
 
 
