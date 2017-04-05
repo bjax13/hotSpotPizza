@@ -93,7 +93,7 @@ class Main extends Component {
                                 <Text style={styles.instructions}>Build your perfict pizza by adding crusts and options</Text>
                               </View>
                               <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
-                                  {/* This is the deviding line between welcom and instructions */}
+                                  {/* This is the deviding line between welcome and instructions */}
                               </View>
                               <View style={{flex:9.5, padding: 15}}>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -110,15 +110,41 @@ class Main extends Component {
                                   <Text style={styles.optionTitle}>Size:</Text>
 
                                   <ModalDropdown
-                                    style={{borderTopWidth:1, borderBottomWidth:1,  width: 20, height: 20,  justifyContent: 'center' ,alignItems: 'center'}}
+                                    style={{borderTopWidth:1, borderBottomWidth:1,  width: 70, height: 20,  justifyContent: 'center' ,alignItems: 'center'}}
                                     textStyle={{fontSize:15}}
                                     adjustFrame={style => this._dropdown_1_adjustFrame(style)}
-                                    defaultValue = {'1'}
-                                    options={this.props.pizzaQuantityArray}/>
+                                    defaultValue = {'Large'}
+                                    options={this.props.pizzaSizeArray}/>
                                 </View>
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                  <Text style={styles.optionTitle}>Sauce:</Text>
+
+                                  <ModalDropdown
+                                    style={{borderTopWidth:1, borderBottomWidth:1,  width: 150, height: 20,  justifyContent: 'center' ,alignItems: 'center'}}
+                                    textStyle={{fontSize:15}}
+                                    adjustFrame={style => this._dropdown_1_adjustFrame(style)}
+                                    defaultValue = {'Red Sauce'}
+                                    options={this.props.pizzaSauceArray}/>
+                                </View>
+
+                                <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
+                                    {/* This is the deviding line between above Toppings */}
+                                </View>
+                                <View >
+                                  <Text style={styles.welcome}>
+                                    Toppings
+                                  </Text>
+                                </View>
+                                <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
+                                    {/* This is the deviding line between below Toppings */}
+                                </View>
+
+
+                                
                               </View>
                             </ScrollView>
                           </View>
+
 
                         </View>
                        </View>
@@ -142,6 +168,8 @@ mapStateToProps = (state) => {
     return {
       pizzaQuantity: state.mainPage.pizzaQuantity,
       pizzaQuantityArray: state.mainPage.pizzaQuantityArray,
+      pizzaSauceArray: state.mainPage.pizzaSauceArray,
+      pizzaSizeArray: state.mainPage.pizzaSizeArray,
       makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
       totalCost: state.mainPage.totalCost,
     }
