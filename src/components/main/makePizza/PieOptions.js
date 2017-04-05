@@ -18,10 +18,6 @@ import {
     Item
 } from 'react-native'
 
-const onMakePizza = () => {
-
-  console.log('Button has been pressed!');
-};
 
 class PieOptions extends Component {
 
@@ -52,57 +48,55 @@ class PieOptions extends Component {
     }
 
     render() {
-
-
         return (
-                      <View>
+          <View>
 
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                          <Text style={styles.optionTitle}>Quantity:</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={styles.optionTitle}>Quantity:</Text>
 
-                          <ModalDropdown
-                            style={{borderTopWidth:1, borderBottomWidth:1,  width: 20, height: 20,  justifyContent: 'center' ,alignItems: 'center'}}
-                            textStyle={{fontSize:15}}
-                            adjustFrame={style => this._dropdown_1_adjustFrame(style)}
-                            defaultValue = {'1'}
-                            onSelect = {(idx, value)=> this._dropdown_Quantity_onSelect(idx,value)}
-                            options={this.props.pizzaQuantityArray}/>
-                        </View>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                          <Text style={styles.optionTitle}>Size:</Text>
+              <ModalDropdown
+                style={{borderTopWidth:1, borderBottomWidth:1,  width: 20, height: 20,  justifyContent: 'center' ,alignItems: 'center'}}
+                textStyle={{fontSize:15}}
+                adjustFrame={style => this._dropdown_1_adjustFrame(style)}
+                defaultValue = {'1'}
+                onSelect = {(idx, value)=> this._dropdown_Quantity_onSelect(idx,value)}
+                options={this.props.pizzaQuantityArray}/>
+            </View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={styles.optionTitle}>Size:</Text>
 
-                          <ModalDropdown
-                            style={{borderTopWidth:1, borderBottomWidth:1,  width: 70, height: 20,  justifyContent: 'center' ,alignItems: 'center'}}
-                            textStyle={{fontSize:15}}
-                            adjustFrame={style => this._dropdown_1_adjustFrame(style)}
-                            defaultValue = {'Large'}
-                            onSelect = {(idx, value)=> this._dropdown_Size_onSelect(idx,value)}
-                            options={this.props.pizzaSizeArray}/>
-                        </View>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                          <Text style={styles.optionTitle}>Sauce:</Text>
+              <ModalDropdown
+                style={{borderTopWidth:1, borderBottomWidth:1,  width: 70, height: 20,  justifyContent: 'center' ,alignItems: 'center'}}
+                textStyle={{fontSize:15}}
+                adjustFrame={style => this._dropdown_1_adjustFrame(style)}
+                defaultValue = {'Large'}
+                onSelect = {(idx, value)=> this._dropdown_Size_onSelect(idx,value)}
+                options={this.props.pizzaSizeArray}/>
+            </View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={styles.optionTitle}>Sauce:</Text>
 
-                          <ModalDropdown
-                            style={{borderTopWidth:1, borderBottomWidth:1,  width: 150, height: 20,  justifyContent: 'center' ,alignItems: 'center'}}
-                            textStyle={{fontSize:15}}
-                            adjustFrame={style => this._dropdown_1_adjustFrame(style)}
-                            defaultValue = {'Red Sauce'}
-                            onSelect = {(idx, value)=> this._dropdown_Sauce_onSelect(idx,value)}
-                            options={this.props.pizzaSauceArray}/>
-                        </View>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                          <Text style={styles.optionTitle}>Crust: </Text>
+              <ModalDropdown
+                style={{borderTopWidth:1, borderBottomWidth:1,  width: 150, height: 20,  justifyContent: 'center' ,alignItems: 'center'}}
+                textStyle={{fontSize:15}}
+                adjustFrame={style => this._dropdown_1_adjustFrame(style)}
+                defaultValue = {'Red Sauce'}
+                onSelect = {(idx, value)=> this._dropdown_Sauce_onSelect(idx,value)}
+                options={this.props.pizzaSauceArray}/>
+            </View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={styles.optionTitle}>Crust: </Text>
 
-                          <ModalDropdown
-                            style={{borderTopWidth:1, borderBottomWidth:1,  width: 150, height: 20,  justifyContent: 'center' ,alignItems: 'center'}}
-                            textStyle={{fontSize:15}}
-                            adjustFrame={style => this._dropdown_1_adjustFrame(style)}
-                            defaultValue = {'Red Crust'}
-                            onSelect = {(idx, value)=> this._dropdown_Crust_onSelect(idx,value)}
-                            options={this.props.pizzaCrustArray}/>
+              <ModalDropdown
+                style={{borderTopWidth:1, borderBottomWidth:1,  width: 150, height: 20,  justifyContent: 'center' ,alignItems: 'center'}}
+                textStyle={{fontSize:15}}
+                adjustFrame={style => this._dropdown_1_adjustFrame(style)}
+                defaultValue = {'Red Crust'}
+                onSelect = {(idx, value)=> this._dropdown_Crust_onSelect(idx,value)}
+                options={this.props.pizzaCrustArray}/>
 
-                        </View>
-                      </View>
+            </View>
+          </View>
 
         )
     }

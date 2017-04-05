@@ -36,41 +36,41 @@ class PizzaModal extends Component {
     render() {
 
         return (
-             <View style={{marginTop: 22,flex: 1}}>
-              <View style={{margin: 5, flex:1}}>
-                <View style={{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f7d9de'}}>
-                  <Text style= {{fontWeight: '600'}}>{'$'+this.props.totalCost.toFixed(2)}</Text>
-                </View>
-
-                <TouchableHighlight
-                  style={{position: 'absolute', right: 20 , top: 20 }}
-                  onPress={() =>{
-                    this.setModalVisible(!this.props.makePizzaModalVisible)
-                  }}>
-                  <Text style={{fontWeight: '900', color: 'gray'}}>X</Text>
-                </TouchableHighlight>
-
-                <View style={{flex:9.5}}>
-                  <ScrollView >
-
-                    <View style={{flex:1.5, padding: 15}}>
-                      <Text style={styles.welcome}>Pizza Builder</Text>
-                      <Text style={styles.instructions}>Build your perfict pizza by adding crusts and options</Text>
-                    </View>
-
-                    <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
-                        {/* This is the deviding line between welcome and instructions */}
-                    </View>
-
-                    <View style={{flex:9.5, padding: 15}}>
-                      <PieOptions></PieOptions>
-                      <Toppings></Toppings>
-                    </View>
-
-                  </ScrollView>
-                </View>
+           <View style={{marginTop: 22,flex: 1}}>
+            <View style={{margin: 5, flex:1}}>
+              <View style={{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f7d9de'}}>
+                <Text style= {{fontWeight: '600'}}>{'$'+this.props.totalCost.toFixed(2)}</Text>
               </View>
-             </View>
+
+              <TouchableHighlight
+                style={{position: 'absolute', right: 20 , top: 20 }}
+                onPress={() =>{
+                  this.setModalVisible(!this.props.makePizzaModalVisible)
+                }}>
+                <Text style={{fontWeight: '900', color: 'gray'}}>X</Text>
+              </TouchableHighlight>
+
+              <View style={{flex:9.5}}>
+                <ScrollView >
+
+                  <View style={{flex:1.5, padding: 15}}>
+                    <Text style={styles.welcome}>Pizza Builder</Text>
+                    <Text style={styles.instructions}>Build your perfict pizza by adding crusts and options</Text>
+                  </View>
+
+                  <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
+                      {/* This is the deviding line between welcome and instructions */}
+                  </View>
+
+                  <View style={{flex:9.5, padding: 15}}>
+                    <PieOptions></PieOptions>
+                    <Toppings></Toppings>
+                  </View>
+
+                </ScrollView>
+              </View>
+            </View>
+           </View>
 
         )
     }

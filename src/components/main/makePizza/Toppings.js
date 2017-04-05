@@ -14,9 +14,12 @@ class Toppings extends Component {
 
     render() {
 
-        // let pizzaQty = this.props.pizzaQuantityArray.map( (s, i) => {
-        //     return <Picker.Item key={i} value={s} label={s.toString()} />
-        // });
+        let pizzaQty = this.props.pizzaToppingArray.map( (s, i) => {
+            console.log("tiz me");
+            return (
+              <Text key={i}> test {i}</Text>
+            );
+        });
 
         return (
             <View>
@@ -29,6 +32,8 @@ class Toppings extends Component {
               </View>
               <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
               </View>
+
+              {pizzaQty}
             </View>
 
         )
@@ -38,6 +43,7 @@ class Toppings extends Component {
 mapStateToProps = (state) => {
     return {
       pizzaTest: state.mainPage.pizzaTest,
+      pizzaToppingArray: state.mainPage.pizzaToppingArray,
     }
 }
 
