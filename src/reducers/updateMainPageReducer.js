@@ -11,6 +11,27 @@ const initialState = {
   pizzaSizeArray: ['Small','Medium', 'Large', 'X Large', 'XX Large'],
   pizzaSauce: 'Red Sauce',
   pizzaSauceArray: ['Red Sauce','Garlic White Sauce', 'BBQ Sauce', 'Buffalo Sauce'],
+  pizzaCrust: 'Red Crust',
+  pizzaCrustArray: ['Red Crust','Garlic White Crust', 'BBQ Crust', 'Buffalo Crust'],
+  pizzaToppingArray: [
+        {
+            "id": 1,
+            "name": "Pepperoni",
+            "price": "0.50",
+            "image": null
+        },
+        {
+            "id": 2,
+            "name": "Shrooms",
+            "price": "0.50",
+            "image": null
+        },
+        {
+            "id": 3,
+            "name": "Pineapple",
+            "price": "1.00",
+            "image": null
+        }],
 }
 
 
