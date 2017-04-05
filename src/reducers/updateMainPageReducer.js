@@ -7,7 +7,9 @@ const initialState = {
   pizzaQuantity: 1,
   pizzaTest: -9,
   pizzaQuantityArray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+  pizzaSize: 'Large',
   pizzaSizeArray: ['Small','Medium', 'Large', 'X Large', 'XX Large'],
+  pizzaSauce: 'Red Sauce',
   pizzaSauceArray: ['Red Sauce','Garlic White Sauce', 'BBQ Sauce', 'Buffalo Sauce'],
 }
 

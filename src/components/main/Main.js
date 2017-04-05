@@ -35,17 +35,22 @@ class Main extends Component {
       style.left -= 9;
       return style;
     }
-    _dropdown_6_onSelect(idx, value) {
+    _dropdown_Test_onSelect(idx, value) {
 
       console.log('idx - '+ idx);
       console.log('value - '+ value);
 
       this.props.updateMain({pizzaTest: value});
-
-    // this.setState({
-    //   dropdown_6_icon_heart: !this.state.dropdown_6_icon_heart,
-    // })
-  }
+    }
+    _dropdown_Quantity_onSelect(idx, value) {
+      this.props.updateMain({pizzaQuantity: value});
+    }
+    _dropdown_Size_onSelect(idx, value) {
+      this.props.updateMain({pizzaSize: value});
+    }
+    _dropdown_Sauce_onSelect(idx, value) {
+      this.props.updateMain({pizzaSauce: value});
+    }
 
     render() {
 
@@ -104,14 +109,14 @@ class Main extends Component {
                               </View>
                               <View style={{flex:9.5, padding: 15}}>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                  <Text style={styles.optionTitle}>Quantity: {this.props.pizzaTest} </Text>
+                                  <Text style={styles.optionTitle}>Quantity:</Text>
 
                                   <ModalDropdown
                                     style={{borderTopWidth:1, borderBottomWidth:1,  width: 20, height: 20,  justifyContent: 'center' ,alignItems: 'center'}}
                                     textStyle={{fontSize:15}}
                                     adjustFrame={style => this._dropdown_1_adjustFrame(style)}
                                     defaultValue = {'1'}
-                                    onSelect = {(idx, value)=> this._dropdown_6_onSelect(idx,value)}
+                                    onSelect = {(idx, value)=> this._dropdown_Quantity_onSelect(idx,value)}
                                     options={this.props.pizzaQuantityArray}/>
                                 </View>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -122,6 +127,7 @@ class Main extends Component {
                                     textStyle={{fontSize:15}}
                                     adjustFrame={style => this._dropdown_1_adjustFrame(style)}
                                     defaultValue = {'Large'}
+                                    onSelect = {(idx, value)=> this._dropdown_Size_onSelect(idx,value)}
                                     options={this.props.pizzaSizeArray}/>
                                 </View>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -132,6 +138,7 @@ class Main extends Component {
                                     textStyle={{fontSize:15}}
                                     adjustFrame={style => this._dropdown_1_adjustFrame(style)}
                                     defaultValue = {'Red Sauce'}
+                                    onSelect = {(idx, value)=> this._dropdown_Sauce_onSelect(idx,value)}
                                     options={this.props.pizzaSauceArray}/>
                                 </View>
 
@@ -176,6 +183,8 @@ mapStateToProps = (state) => {
     return {
       pizzaQuantity: state.mainPage.pizzaQuantity,
       pizzaTest: state.mainPage.pizzaTest,
+      pizzaSize: state.mainPage.pizzaSize,
+      pizzaSauce: state.mainPage.pizzaSauce,
       pizzaQuantityArray: state.mainPage.pizzaQuantityArray,
       pizzaSauceArray: state.mainPage.pizzaSauceArray,
       pizzaSizeArray: state.mainPage.pizzaSizeArray,
