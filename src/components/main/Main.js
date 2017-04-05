@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { updateSettings } from '../../actions/updateSettingsPageActions';
 import { updateMain } from '../../actions/updateMainPageActions';
 
+import ModalDropdown from 'react-native-modal-dropdown';
 
 import {
     StyleSheet,
@@ -11,7 +12,10 @@ import {
     Image,
     Button,
     Modal,
-    TouchableHighlight
+    TouchableHighlight,
+    ScrollView,
+    Picker,
+    Item
 } from 'react-native'
 
 const onMakePizza = () => {
@@ -25,7 +29,23 @@ class Main extends Component {
        this.props.updateMain({makePizzaModalVisible: visible});
      }
 
+     _setSearchDistance = (value) => {
+      this.props.updateMain({pizzaQuantity:value})
+    }
+
+    _dropdown_1_adjustFrame(style) {
+      // console.log(`frameStyle={width:${style.width}, height:${style.height}, top:${style.top}, left:${style.left}, right:${style.right}}`);
+      style.top += 5;
+      style.left -= 9;
+      return style;
+    }
+
     render() {
+
+        let pizzaQty = this.props.pizzaQuantityArray.map( (s, i) => {
+            return <Picker.Item key={i} value={s} label={s.toString()} />
+        });
+
         return (
           <View style={{flex:1}}>
                 <View style={styles.container}>
@@ -65,12 +85,39 @@ class Main extends Component {
                             <Text>X</Text>
                           </TouchableHighlight>
 
-                          <View style={{flex:10}}>
-                            <TouchableHighlight onPress={() => {
-                              this.setModalVisible(!this.props.makePizzaModalVisible)
-                            }}>
-                              <Text>Hide Modal</Text>
-                            </TouchableHighlight>
+                          <View style={{flex:9.5}}>
+                            <ScrollView >
+                              <View style={{flex:1.5, padding: 15}}>
+                                <Text style={styles.welcome}>Pizza Builder</Text>
+
+                                <Text style={styles.instructions}>Build your perfict pizza by adding crusts and options</Text>
+                              </View>
+                              <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
+                                  {/* This is the deviding line between welcom and instructions */}
+                              </View>
+                              <View style={{flex:9.5, padding: 15}}>
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                  <Text style={styles.optionTitle}>Quantity:</Text>
+
+                                  <ModalDropdown
+                                    style={{borderTopWidth:1, borderBottomWidth:1,  width: 20, height: 20,  justifyContent: 'center' ,alignItems: 'center'}}
+                                    textStyle={{fontSize:15}}
+                                    adjustFrame={style => this._dropdown_1_adjustFrame(style)}
+                                    defaultValue = {'1'}
+                                    options={this.props.pizzaQuantityArray}/>
+                                </View>
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                  <Text style={styles.optionTitle}>Size:</Text>
+
+                                  <ModalDropdown
+                                    style={{borderTopWidth:1, borderBottomWidth:1,  width: 20, height: 20,  justifyContent: 'center' ,alignItems: 'center'}}
+                                    textStyle={{fontSize:15}}
+                                    adjustFrame={style => this._dropdown_1_adjustFrame(style)}
+                                    defaultValue = {'1'}
+                                    options={this.props.pizzaQuantityArray}/>
+                                </View>
+                              </View>
+                            </ScrollView>
                           </View>
 
                         </View>
@@ -93,7 +140,8 @@ class Main extends Component {
 
 mapStateToProps = (state) => {
     return {
-      testVal: state.settingsPage.testVal,
+      pizzaQuantity: state.mainPage.pizzaQuantity,
+      pizzaQuantityArray: state.mainPage.pizzaQuantityArray,
       makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
       totalCost: state.mainPage.totalCost,
     }
@@ -114,6 +162,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  picker: {
+    width: 100,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -122,7 +173,14 @@ const styles = StyleSheet.create({
   },
   welcome: {
     fontSize: 20,
+    fontWeight: '600',
     textAlign: 'center',
+    margin: 10,
+  },
+  optionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    textAlign: 'left',
     margin: 10,
   },
   instructions: {

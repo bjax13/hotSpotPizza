@@ -2,7 +2,7 @@ import { UPDATE_SETTINGS } from '../actions/updateSettingsPageActions'
 
 const initialState = {
 
-  testVal: 'Test Success'
+  testVal: 'key0'
 }
 
 

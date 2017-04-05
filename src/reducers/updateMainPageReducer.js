@@ -3,7 +3,9 @@ import { UPDATE_MAIN } from '../actions/updateMainPageActions'
 const initialState = {
 
   makePizzaModalVisible: false,
-  totalCost: 0.00
+  totalCost: 0.00,
+  pizzaQuantity: 1,
+  pizzaQuantityArray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 }
 
 
