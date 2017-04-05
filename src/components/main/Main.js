@@ -29,16 +29,23 @@ class Main extends Component {
        this.props.updateMain({makePizzaModalVisible: visible});
      }
 
-     _setSearchDistance = (value) => {
-      this.props.updateMain({pizzaQuantity:value})
-    }
-
     _dropdown_1_adjustFrame(style) {
       // console.log(`frameStyle={width:${style.width}, height:${style.height}, top:${style.top}, left:${style.left}, right:${style.right}}`);
       style.top += 5;
       style.left -= 9;
       return style;
     }
+    _dropdown_6_onSelect(idx, value) {
+
+      console.log('idx - '+ idx);
+      console.log('value - '+ value);
+
+      this.props.updateMain({pizzaTest: value});
+
+    // this.setState({
+    //   dropdown_6_icon_heart: !this.state.dropdown_6_icon_heart,
+    // })
+  }
 
     render() {
 
@@ -97,13 +104,14 @@ class Main extends Component {
                               </View>
                               <View style={{flex:9.5, padding: 15}}>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                  <Text style={styles.optionTitle}>Quantity:</Text>
+                                  <Text style={styles.optionTitle}>Quantity: {this.props.pizzaTest} </Text>
 
                                   <ModalDropdown
                                     style={{borderTopWidth:1, borderBottomWidth:1,  width: 20, height: 20,  justifyContent: 'center' ,alignItems: 'center'}}
                                     textStyle={{fontSize:15}}
                                     adjustFrame={style => this._dropdown_1_adjustFrame(style)}
                                     defaultValue = {'1'}
+                                    onSelect = {(idx, value)=> this._dropdown_6_onSelect(idx,value)}
                                     options={this.props.pizzaQuantityArray}/>
                                 </View>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -140,7 +148,7 @@ class Main extends Component {
                                 </View>
 
 
-                                
+
                               </View>
                             </ScrollView>
                           </View>
@@ -167,6 +175,7 @@ class Main extends Component {
 mapStateToProps = (state) => {
     return {
       pizzaQuantity: state.mainPage.pizzaQuantity,
+      pizzaTest: state.mainPage.pizzaTest,
       pizzaQuantityArray: state.mainPage.pizzaQuantityArray,
       pizzaSauceArray: state.mainPage.pizzaSauceArray,
       pizzaSizeArray: state.mainPage.pizzaSizeArray,
