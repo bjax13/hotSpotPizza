@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
+import CheckBox from 'react-native-checkbox';
+
 import {
     StyleSheet,
     Text,
@@ -14,10 +16,21 @@ class Toppings extends Component {
 
     render() {
 
-        let pizzaQty = this.props.pizzaToppingArray.map( (s, i) => {
-            console.log("tiz me");
+        let pizzaToppings = this.props.pizzaToppingArray.map( (toppingObj, i) => {
+            console.log(toppingObj);
+            let checkTest = true;
             return (
-              <Text key={i}> test {i}</Text>
+              <View key={toppingObj.name} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
+                <CheckBox
+                  label={toppingObj.name}
+                  checked={this.checkTest}
+                  labelStyle={styles.optionTitle}
+                  onChange={(checked) => {
+                    this.checkTest = !checked;
+                  }}
+                />
+                <Text >{"$"+parseFloat(toppingObj.price).toFixed(2)}</Text>
+              </View>
             );
         });
 
@@ -33,7 +46,7 @@ class Toppings extends Component {
               <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
               </View>
 
-              {pizzaQty}
+              {pizzaToppings}
             </View>
 
         )
@@ -67,6 +80,7 @@ const styles = StyleSheet.create({
   },
   optionTitle: {
     fontSize: 18,
+    color: '#000',
     fontWeight: '600',
     textAlign: 'left',
     margin: 10,
