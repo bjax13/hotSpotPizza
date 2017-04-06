@@ -4,6 +4,7 @@ import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
 import ModalDropdown from 'react-native-modal-dropdown';
+import axios from 'axios';
 
 import {
     StyleSheet,
@@ -20,6 +21,7 @@ import {
 
 
 class PieOptions extends Component {
+    
 
     _dropdown_1_adjustFrame(style) {
       // console.log(`frameStyle={width:${style.width}, height:${style.height}, top:${style.top}, left:${style.left}, right:${style.right}}`);
@@ -28,10 +30,6 @@ class PieOptions extends Component {
       return style;
     }
     _dropdown_Test_onSelect(idx, value) {
-
-      console.log('idx - '+ idx);
-      console.log('value - '+ value);
-
       this.props.updateMain({pizzaTest: value});
     }
     _dropdown_Quantity_onSelect(idx, value) {
@@ -69,9 +67,9 @@ class PieOptions extends Component {
                 style={styles.pieOptionDropdown}
                 textStyle={styles.font15}
                 adjustFrame={style => this._dropdown_1_adjustFrame(style)}
-                defaultValue = {this.props.pizzaSizeArray[2]}
+                defaultValue = {this.props.pizzaSizeNameArray[2]}
                 onSelect = {(idx, value)=> this._dropdown_Size_onSelect(idx,value)}
-                options={this.props.pizzaSizeArray}/>
+                options={this.props.pizzaSizeNameArray}/>
             </View>
             <View style={styles.pieOptionRow}>
               <Text style={styles.optionTitle}>Sauce:</Text>
@@ -113,6 +111,7 @@ mapStateToProps = (state) => {
       pizzaQuantityArray: state.mainPage.pizzaQuantityArray,
       pizzaSauceArray: state.mainPage.pizzaSauceArray,
       pizzaSizeArray: state.mainPage.pizzaSizeArray,
+      pizzaSizeNameArray: state.mainPage.pizzaSizeNameArray,
       totalCost: state.mainPage.totalCost,
       pizzaToppingArray: state.mainPage.pizzaToppingArray,
     }

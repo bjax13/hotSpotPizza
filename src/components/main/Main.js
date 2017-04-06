@@ -4,6 +4,7 @@ import { updateSettings } from '../../actions/updateSettingsPageActions';
 import { updateMain } from '../../actions/updateMainPageActions';
 
 import ModalDropdown from 'react-native-modal-dropdown';
+import axios from 'axios';
 
 import PizzaModal from './makePizza/PizzaModal';
 
@@ -51,7 +52,28 @@ class Main extends Component {
                       </Modal>
 
                       <TouchableHighlight onPress={() => {
-                        this.setModalVisible(true)
+                        axios.get('http://10.100.0.98:8000/api/sizes/')
+                          .then((response) => {
+
+                            this.props.updateMain({pizzaSizeArray: response.data.results});
+                            let resArr = response.data.results
+                            let arr = []
+                            //sort arr so pizzaNames reads sm - med - lrg in order
+                            resArr.sort((a,b)=> a.id - b.id)
+                            //populate arr with the names of each item. 
+                            for (var i = 0; i < resArr.length; i++) {
+                              arr.push(resArr[i].name)
+                              console.log(resArr[i].name);
+                            }
+                            this.props.updateMain({pizzaSizeNameArray: arr});
+                            console.log(response);
+                          })
+                          .catch((error) => {
+                            console.log(error);
+                          });
+                          console.log(this.props.updateMain);
+                          this.props.updateMain({makePizzaModalVisible: true});
+                        // this.setModalVisible(true)
                       }}>
                         <Text style={{color: 'red'}}>Make A Pizza!</Text>
                       </TouchableHighlight>
@@ -65,6 +87,8 @@ class Main extends Component {
 mapStateToProps = (state) => {
     return {
       makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
+      pizzaSizeNameArray: state.mainPage.pizzaSizeNameArray,
+      pizzaSizeArray: state.mainPage.pizzaSizeArray,
     }
 }
 
