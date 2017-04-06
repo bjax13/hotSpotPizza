@@ -17,25 +17,7 @@ const initialState = {
   pizzaCrust: 'Red Crust',
   pizzaCrustArray: [],
   pizzaCrustNameArray: ['Red Crust','Garlic White Crust', 'BBQ Crust', 'Buffalo Crust'],
-  pizzaToppingArray: [
-        {
-            "id": 1,
-            "name": "Pepperoni",
-            "price": "0.50",
-            "image": null
-        },
-        {
-            "id": 2,
-            "name": "Shrooms",
-            "price": "0.50",
-            "image": null
-        },
-        {
-            "id": 3,
-            "name": "Pineapple",
-            "price": "1.00",
-            "image": null
-        }],
+  pizzaToppingArray: [],
 }
 
 

@@ -35,7 +35,7 @@ class AddToOrder extends Component {
               style={ this.props.submitPizza ? styles.buttonPress2 : styles.button2 }
               onHideUnderlay={this._onHideUnderlay.bind(this)}
               onShowUnderlay={this._onShowUnderlay.bind(this)}
-              onPress={()=>console.log(this.props.pizzaSizeArray)}>
+              onPress={()=>console.log(this.props.pizzaToppingArray)}>
 
               <View>
                 <Text style={this.props.submitPizza ? styles.buttonPress : styles.button}>
@@ -55,7 +55,7 @@ mapStateToProps = (state) => {
       pizzaTest: state.mainPage.pizzaTest,
       submitPizza: state.mainPage.submitPizza,
       totalCost: state.mainPage.totalCost,
-      pizzaSizeArray: state.mainPage.pizzaSizeArray,
+      pizzaToppingArray: state.mainPage.pizzaToppingArray,
 
     }
 }

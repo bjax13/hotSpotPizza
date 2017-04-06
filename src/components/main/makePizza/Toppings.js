@@ -4,6 +4,7 @@ import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
 import CheckBox from 'react-native-checkbox';
+import axios from 'axios';
 
 import {
     StyleSheet,
@@ -13,6 +14,18 @@ import {
 
 
 class Toppings extends Component {
+  componentDidMount(){
+    axios.get('http://10.100.0.98:8000/api/toppings/')
+      .then((response) => {
+        console.log(response);
+
+        this.props.updateMain({pizzaToppingArray: response.data.results});
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
     render() {
 
