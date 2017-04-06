@@ -9,20 +9,40 @@ import {
     Text,
     View,
     TouchableHighlight,
+    TouchableWithoutFeedback,
 
 } from 'react-native'
 
 
 class AddToOrder extends Component {
 
-
+    _onSubmit(){
+      console.log('clicked-submit')
+    }
+    _onHideUnderlay(){
+      this.props.updateMain({ submitPizza: false });
+    }
+    _onShowUnderlay(){
+      this.props.updateMain({ submitPizza: true });
+    }
 
     render() {
         return (
           <View style={styles.container}>
-            <Text style={styles.button}>
-              Submit
-            </Text>
+            <TouchableHighlight
+              activeOpacity={1}
+              underlayColor= {'transparent'}
+              style={ this.props.submitPizza ? styles.buttonPress2 : styles.button2 }
+              onHideUnderlay={this._onHideUnderlay.bind(this)}
+              onShowUnderlay={this._onShowUnderlay.bind(this)}
+              onPress={this._onSubmit}>
+
+              <View>
+                <Text style={this.props.submitPizza ? styles.buttonPress : styles.button}>
+                  Submit
+                </Text>
+              </View>
+            </TouchableHighlight>
 
           </View>
 
@@ -32,7 +52,8 @@ class AddToOrder extends Component {
 
 mapStateToProps = (state) => {
     return {
-
+      pizzaTest: state.mainPage.pizzaTest,
+      submitPizza: state.mainPage.submitPizza,
       totalCost: state.mainPage.totalCost,
 
     }
@@ -50,19 +71,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-
+    paddingTop:10,
     height: 40,
     textAlign: 'center',
     width: 130,
-    borderRadius: 20,
 
-    borderWidth: 2,
-    borderColor: '#1ECD97',
-    color: '#1ECD97',
+    color: '#F692A0',
     fontWeight: 'bold',
+  },
+  buttonPress: {
+    paddingTop:10,
+    height: 40,
+    textAlign: 'center',
+    width: 130,
+    color: '#CCC',
+    fontWeight: 'bold',
+  },
+  button2: {
+    borderColor: '#F692A0',
+    borderWidth: 2,
+    borderRadius: 20,
+  },
+  buttonPress2: {
+    borderColor: '#CCC',
+    borderWidth: 2,
+    borderRadius: 20,
+  },
 
-    // transition: all 0.25s ease;
-  }
 
 });
 

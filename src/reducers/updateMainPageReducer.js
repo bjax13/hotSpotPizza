@@ -3,6 +3,7 @@ import { UPDATE_MAIN } from '../actions/updateMainPageActions'
 const initialState = {
 
   pizzaTest: false,
+  submitPizza: false,
 
   makePizzaModalVisible: false,
   totalCost: 0.00,
