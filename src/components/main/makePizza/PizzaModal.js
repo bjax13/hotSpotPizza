@@ -7,6 +7,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 
 import Toppings from './Toppings';
 import PieOptions from './PieOptions';
+import AddToOrder from './AddToOrder';
 
 import {
     StyleSheet,
@@ -65,6 +66,7 @@ class PizzaModal extends Component {
                   <View style={{flex:9.5, padding: 15}}>
                     <PieOptions></PieOptions>
                     <Toppings></Toppings>
+                    <AddToOrder></AddToOrder>
                   </View>
 
                 </ScrollView>

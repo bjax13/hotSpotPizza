@@ -58,7 +58,7 @@ class PieOptions extends Component {
                 style={styles.pieOptionDropdown}
                 textStyle={styles.font15}
                 adjustFrame={style => this._dropdown_1_adjustFrame(style)}
-                defaultValue = {'1'}
+                defaultValue = {this.props.pizzaQuantityArray[0].toString()}
                 onSelect = {(idx, value)=> this._dropdown_Quantity_onSelect(idx,value)}
                 options={this.props.pizzaQuantityArray}/>
             </View>
@@ -69,7 +69,7 @@ class PieOptions extends Component {
                 style={styles.pieOptionDropdown}
                 textStyle={styles.font15}
                 adjustFrame={style => this._dropdown_1_adjustFrame(style)}
-                defaultValue = {'Large'}
+                defaultValue = {this.props.pizzaSizeArray[2]}
                 onSelect = {(idx, value)=> this._dropdown_Size_onSelect(idx,value)}
                 options={this.props.pizzaSizeArray}/>
             </View>
@@ -80,7 +80,7 @@ class PieOptions extends Component {
                 style={styles.pieOptionDropdown}
                 textStyle={styles.font15}
                 adjustFrame={style => this._dropdown_1_adjustFrame(style)}
-                defaultValue = {'Red Sauce'}
+                defaultValue = {this.props.pizzaSauceArray[0]}
                 onSelect = {(idx, value)=> this._dropdown_Sauce_onSelect(idx,value)}
                 options={this.props.pizzaSauceArray}/>
             </View>
@@ -91,7 +91,7 @@ class PieOptions extends Component {
                 style={styles.pieOptionDropdown}
                 textStyle={styles.font15}
                 adjustFrame={style => this._dropdown_1_adjustFrame(style)}
-                defaultValue = {'Red Crust'}
+                defaultValue = {this.props.pizzaCrustArray[0]}
                 onSelect = {(idx, value)=> this._dropdown_Crust_onSelect(idx,value)}
                 options={this.props.pizzaCrustArray}/>
 
