@@ -21,7 +21,43 @@ import {
 
 
 class PieOptions extends Component {
-    
+
+    componentDidMount(){
+      axios.get('http://10.100.0.98:8000/api/sizes/')
+        .then((response) => {
+
+          this.props.updateMain({pizzaSizeArray: response.data.results});
+          let resArr = response.data.results
+          let arr = []
+          //sort arr so pizzaNames reads sm - med - lrg in order
+          resArr.sort((a,b)=> a.id - b.id)
+          //populate arr with the names of each item.
+          for (var i = 0; i < resArr.length; i++) {
+            arr.push(resArr[i].name)
+
+          }
+          this.props.updateMain({pizzaSizeNameArray: arr});
+
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      axios.get('http://10.100.0.98:8000/api/crusts/')
+        .then((response) => {
+
+          this.props.updateMain({pizzaCrustArray: response.data.results});
+          let resArr = response.data.results
+          let arr = []
+          for (var i = 0; i < resArr.length; i++) {
+            arr.push(resArr[i].name)
+          }
+          this.props.updateMain({pizzaCrustNameArray: arr});
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
 
     _dropdown_1_adjustFrame(style) {
       // console.log(`frameStyle={width:${style.width}, height:${style.height}, top:${style.top}, left:${style.left}, right:${style.right}}`);
@@ -89,9 +125,9 @@ class PieOptions extends Component {
                 style={styles.pieOptionDropdown}
                 textStyle={styles.font15}
                 adjustFrame={style => this._dropdown_1_adjustFrame(style)}
-                defaultValue = {this.props.pizzaCrustArray[0]}
+                defaultValue = {this.props.pizzaCrustNameArray[0]}
                 onSelect = {(idx, value)=> this._dropdown_Crust_onSelect(idx,value)}
-                options={this.props.pizzaCrustArray}/>
+                options={this.props.pizzaCrustNameArray}/>
 
             </View>
           </View>
@@ -108,6 +144,7 @@ mapStateToProps = (state) => {
       pizzaSauce: state.mainPage.pizzaSauce,
       pizzaCrust: state.mainPage.pizzaCrust,
       pizzaCrustArray: state.mainPage.pizzaCrustArray,
+      pizzaCrustNameArray: state.mainPage.pizzaCrustNameArray,
       pizzaQuantityArray: state.mainPage.pizzaQuantityArray,
       pizzaSauceArray: state.mainPage.pizzaSauceArray,
       pizzaSizeArray: state.mainPage.pizzaSizeArray,

@@ -10,12 +10,13 @@ const initialState = {
   pizzaQuantity: 1,
   pizzaQuantityArray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
   pizzaSize: 'Large',
-  pizzaSizeArray: ['Small','Medium'],
+  pizzaSizeArray: [],
   pizzaSizeNameArray: ['Small','Medium', 'Large', 'X Large', 'XX Large'],
   pizzaSauce: 'Red Sauce',
-  pizzaSauceArray: ['Red Sauce','Garlic White Sauce', 'BBQ Sauce', 'Buffalo Sauce'],
+  pizzaSauceArray: ['Red Sauce'],
   pizzaCrust: 'Red Crust',
-  pizzaCrustArray: ['Red Crust','Garlic White Crust', 'BBQ Crust', 'Buffalo Crust'],
+  pizzaCrustArray: [],
+  pizzaCrustNameArray: ['Red Crust','Garlic White Crust', 'BBQ Crust', 'Buffalo Crust'],
   pizzaToppingArray: [
         {
             "id": 1,
