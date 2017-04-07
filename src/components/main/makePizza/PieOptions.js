@@ -40,12 +40,12 @@ class PieOptions extends Component {
           }
           this.props.updateMain({pizzaSizeNameArray: arr});
           for (var i = 0; i < this.props.pizzaSizeArray.length; i++) {
-            if (this.props.pizzaSizeArray[i].name === this.props.pizzaSize) {
+            if (this.props.pizzaSizeArray[i].name === this.props.pizzaSize[0]) {
               pizzaCost+= parseFloat(this.props.pizzaSizeArray[i].price);
               i=this.props.pizzaSizeArray.length
             }
           }
-          this.props.updateMain({totalCost: pizzaCost* this.props.pizzaQuantity})
+          this.props.updateMain({pizzaCost: parseFloat(pizzaCost)* this.props.pizzaQuantity})
 
         })
         .catch((error) => {
@@ -55,7 +55,7 @@ class PieOptions extends Component {
         .then((response) => {
 
           this.props.updateMain({pizzaCrustArray: response.data.results});
-          this.props.updateMain({pizzaCrust: response.data.results[0].name});
+          this.props.updateMain({pizzaCrust: [response.data.results[0].name,parseFloat(response.data.results[0].price)]});
           let resArr = response.data.results
           let arr = []
           for (var i = 0; i < resArr.length; i++) {
@@ -63,30 +63,26 @@ class PieOptions extends Component {
           }
           this.props.updateMain({pizzaCrustNameArray: arr});
           for (var i = 0; i < this.props.pizzaCrustArray.length; i++) {
-            console.log(this.props.pizzaCrust);
-            if (this.props.pizzaCrustArray[i].name === this.props.pizzaCrust) {
-              console.log(pizzaCost);
-              console.log(this.props.pizzaCrustArray[i].price);
+            if (this.props.pizzaCrustArray[i].name === this.props.pizzaCrust[0]) {
               pizzaCost+= parseFloat(this.props.pizzaCrustArray[i].price);
               i=this.props.pizzaCrustArray.length
             }
-            this.props.updateMain({totalCost: pizzaCost* this.props.pizzaQuantity})
+            this.props.updateMain({pizzaCost: parseFloat(pizzaCost)* this.props.pizzaQuantity})
           }
         })
         .catch((error) => {
           console.log(error);
         });
-
-      // calculate defaultValue totalCost
-
-
-
-
-
-
-
     }
 
+    componentDidUpdate(){
+      console.log('Quantity - '+ this.props.pizzaQuantity +' '+ typeof this.props.pizzaQuantity);
+      console.log('Size - '+ this.props.pizzaSize[1]+' '+ typeof this.props.pizzaSize[1]);
+      console.log('Sauce - '+ this.props.pizzaSauce[1]+' '+ typeof this.props.pizzaSauce[1]);
+      console.log('Crust - '+ this.props.pizzaCrust[1]+' '+ typeof this.props.pizzaCrust[1]);
+
+      this.props.updateMain({pizzaCost: (this.props.pizzaSize[1]+this.props.pizzaSauce[1]+this.props.pizzaCrust[1])*this.props.pizzaQuantity});
+    }
 
     _dropdown_1_adjustFrame(style) {
       // console.log(`frameStyle={width:${style.width}, height:${style.height}, top:${style.top}, left:${style.left}, right:${style.right}}`);
@@ -101,13 +97,13 @@ class PieOptions extends Component {
       this.props.updateMain({pizzaQuantity: value});
     }
     _dropdown_Size_onSelect(idx, value) {
-      this.props.updateMain({pizzaSize: value});
+      this.props.updateMain({pizzaSize: [value, parseFloat(this.props.pizzaSizeArray[idx].price)]});
     }
     _dropdown_Sauce_onSelect(idx, value) {
-      this.props.updateMain({pizzaSauce: value});
+      this.props.updateMain({pizzaSauce: [value, parseFloat(this.props.pizzaSauceArray[idx].price)]});
     }
     _dropdown_Crust_onSelect(idx, value) {
-      this.props.updateMain({pizzaCrust: value});
+      this.props.updateMain({pizzaCrust: [value, parseFloat(this.props.pizzaCrustArray[idx].price)]});
     }
 
     render() {
