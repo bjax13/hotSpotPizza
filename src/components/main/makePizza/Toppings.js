@@ -15,7 +15,7 @@ import {
 
 class Toppings extends Component {
   componentDidMount(){
-    axios.get('http://10.100.0.98:8000/api/toppings/')
+    axios.get('http://10.100.0.98:8888/api/toppings/')
       .then((response) => {
         let toppingCount = response.data.count
         let resultsPerPage = response.data.results.length

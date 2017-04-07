@@ -7,6 +7,7 @@ const initialState = {
 
   makePizzaModalVisible: false,
   totalCost: 0.00,
+  pizzaCost: 0.00,
   pizzaQuantity: 1,
   pizzaQuantityArray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
   pizzaSize: 'Large',
@@ -14,7 +15,7 @@ const initialState = {
   pizzaSizeNameArray: ['Small','Medium', 'Large', 'X Large', 'XX Large'],
   pizzaSauce: 'Red Sauce',
   pizzaSauceArray: ['Red Sauce'],
-  pizzaCrust: 'Red Crust',
+  pizzaCrust: 'White',
   pizzaCrustArray: [],
   pizzaCrustNameArray: ['Red Crust','Garlic White Crust', 'BBQ Crust', 'Buffalo Crust'],
   pizzaToppingArray: [],

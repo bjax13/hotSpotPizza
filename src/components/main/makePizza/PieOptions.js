@@ -23,7 +23,9 @@ import {
 class PieOptions extends Component {
 
     componentDidMount(){
-      axios.get('http://10.100.0.98:8000/api/sizes/')
+      let pizzaCost = 0
+      // call api's
+      axios.get('http://10.100.0.98:8888/api/sizes/')
         .then((response) => {
 
           this.props.updateMain({pizzaSizeArray: response.data.results});
@@ -37,25 +39,52 @@ class PieOptions extends Component {
 
           }
           this.props.updateMain({pizzaSizeNameArray: arr});
+          for (var i = 0; i < this.props.pizzaSizeArray.length; i++) {
+            if (this.props.pizzaSizeArray[i].name === this.props.pizzaSize) {
+              pizzaCost+= parseFloat(this.props.pizzaSizeArray[i].price);
+              i=this.props.pizzaSizeArray.length
+            }
+          }
+          this.props.updateMain({totalCost: pizzaCost* this.props.pizzaQuantity})
 
         })
         .catch((error) => {
           console.log(error);
         });
-      axios.get('http://10.100.0.98:8000/api/crusts/')
+      axios.get('http://10.100.0.98:8888/api/crusts/')
         .then((response) => {
 
           this.props.updateMain({pizzaCrustArray: response.data.results});
+          this.props.updateMain({pizzaCrust: response.data.results[0].name});
           let resArr = response.data.results
           let arr = []
           for (var i = 0; i < resArr.length; i++) {
             arr.push(resArr[i].name)
           }
           this.props.updateMain({pizzaCrustNameArray: arr});
+          for (var i = 0; i < this.props.pizzaCrustArray.length; i++) {
+            console.log(this.props.pizzaCrust);
+            if (this.props.pizzaCrustArray[i].name === this.props.pizzaCrust) {
+              console.log(pizzaCost);
+              console.log(this.props.pizzaCrustArray[i].price);
+              pizzaCost+= parseFloat(this.props.pizzaCrustArray[i].price);
+              i=this.props.pizzaCrustArray.length
+            }
+            this.props.updateMain({totalCost: pizzaCost* this.props.pizzaQuantity})
+          }
         })
         .catch((error) => {
           console.log(error);
         });
+
+      // calculate defaultValue totalCost
+
+
+
+
+
+
+
     }
 
 
