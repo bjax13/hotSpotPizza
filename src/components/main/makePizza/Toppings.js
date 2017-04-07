@@ -17,9 +17,27 @@ class Toppings extends Component {
   componentDidMount(){
     axios.get('http://10.100.0.98:8000/api/toppings/')
       .then((response) => {
-        console.log(response);
+        let toppingCount = response.data.count
+        let resultsPerPage = response.data.results.length
+        let pages = toppingCount / resultsPerPage;
+        let pageURL = response.data.next;
+
+        if (pageURL.indexOf('=') != -1) {
+          pageURL = pageURL.slice(0,pageURL.indexOf('=')+1)
+          console.log(pageURL);
+          console.log(pages);
+        }
 
         this.props.updateMain({pizzaToppingArray: response.data.results});
+
+        for (var i = 2; i <= pages; i++) {
+          axios.get(pageURL+i)
+            .then((response)=>{
+              this.props.updateMain({pizzaToppingArray: this.props.pizzaToppingArray.concat(response.data.results)})
+            })
+
+        }
+
 
       })
       .catch((error) => {
@@ -30,7 +48,7 @@ class Toppings extends Component {
     render() {
 
         let pizzaToppings = this.props.pizzaToppingArray.map( (toppingObj, i) => {
-            console.log(toppingObj);
+
             let checkTest = true;
             return (
               <View key={toppingObj.name} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
