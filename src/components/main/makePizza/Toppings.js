@@ -49,6 +49,12 @@ class Toppings extends Component {
 
         let pizzaToppings = this.props.pizzaToppingArray.map( (toppingObj, i) => {
 
+            addCost = () =>{
+              this.props.updateMain({pizzaCost: (this.props.pizzaCost + (this.props.pizzaQuantity*parseFloat(toppingObj.price)))})
+            }
+            subCost = () =>{
+              this.props.updateMain({pizzaCost: (this.props.pizzaCost - (this.props.pizzaQuantity*parseFloat(toppingObj.price)))})
+            }
             let checkTest = true;
             return (
               <View key={toppingObj.name} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
@@ -57,7 +63,12 @@ class Toppings extends Component {
                   checked={this.checkTest}
                   labelStyle={styles.optionTitle}
                   onChange={(checked) => {
-                    this.checkTest = !checked;
+                    checkTest = !checked;
+                    if (checkTest) {
+                      addCost();
+                    } else {
+                      subCost();
+                    }
                   }}
                 />
                 <Text >{"$"+parseFloat(toppingObj.price).toFixed(2)}</Text>
@@ -87,6 +98,8 @@ class Toppings extends Component {
 mapStateToProps = (state) => {
     return {
       pizzaTest: state.mainPage.pizzaTest,
+      pizzaCost: state.mainPage.pizzaCost,
+      pizzaQuantity: state.mainPage.pizzaQuantity,
       pizzaToppingArray: state.mainPage.pizzaToppingArray,
     }
 }
