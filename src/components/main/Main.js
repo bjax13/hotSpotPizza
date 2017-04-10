@@ -7,6 +7,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import axios from 'axios';
 
 import PizzaModal from './makePizza/PizzaModal';
+import CartModal from './cart/CartModal';
 
 import {
     StyleSheet,
@@ -43,16 +44,26 @@ class Main extends Component {
                       </Text>
 
                       <Modal
-                        animationType={"slide"}
+                        animationType={"fade"}
                         transparent={false}
                         visible={this.props.makePizzaModalVisible}
                         onRequestClose={() => {alert("Modal has been closed.")}}
                         >
                           <PizzaModal></PizzaModal>
+
+                      </Modal>
+                      <Modal
+                        animationType={"fade"}
+                        transparent={false}
+                        visible={this.props.makeCartModalVisible}
+                        onRequestClose={() => {alert("Modal has been closed.")}}
+                        >
+                          <CartModal></CartModal>
+
                       </Modal>
 
                       <TouchableHighlight onPress={() => {
-                        
+
 
                           this.props.updateMain({makePizzaModalVisible: true});
                         // this.setModalVisible(true)
@@ -69,6 +80,7 @@ class Main extends Component {
 mapStateToProps = (state) => {
     return {
       makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
+      makeCartModalVisible: state.mainPage.makeCartModalVisible,
       pizzaSizeNameArray: state.mainPage.pizzaSizeNameArray,
       pizzaSizeArray: state.mainPage.pizzaSizeArray,
     }

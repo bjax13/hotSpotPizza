@@ -37,27 +37,30 @@ class AddToOrder extends Component {
               onHideUnderlay={this._onHideUnderlay.bind(this)}
               onShowUnderlay={this._onShowUnderlay.bind(this)}
               onPress={()=>{
-                console.log('Added Pizza')
-                axios.post('http://10.100.0.98:8888/api/pizzas/', {
-                  "price": (this.props.pizzaCost/this.props.pizzaQuantity).toFixed(2).toString(),
-                  "public_display": false,
-                  "size": this.props.pizzaSize[2],
-                  "crust": this.props.pizzaCrust[2],
-                  "toppings": this.props.customToppingArr
-                })
-                .then(function (response) {
-                  console.log(response);
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
-                // console.log({
+                this.props.updateMain({ makePizzaModalVisible: !this.props.makePizzaModalVisible});
+                this.props.updateMain({ makeCartModalVisible: !this.props.makeCartModalVisible});
+                this._onHideUnderlay();
+                // console.log('Added Pizza')
+                // axios.post('http://10.100.0.98:8888/api/pizzas/', {
                 //   "price": (this.props.pizzaCost/this.props.pizzaQuantity).toFixed(2).toString(),
                 //   "public_display": false,
                 //   "size": this.props.pizzaSize[2],
                 //   "crust": this.props.pizzaCrust[2],
                 //   "toppings": this.props.customToppingArr
                 // })
+                // .then(function (response) {
+                //   console.log(response);
+                // })
+                // .catch(function (error) {
+                //   console.log(error);
+                // });
+                console.log({
+                  "price": (this.props.pizzaCost/this.props.pizzaQuantity).toFixed(2).toString(),
+                  "public_display": false,
+                  "size": this.props.pizzaSize[2],
+                  "crust": this.props.pizzaCrust[2],
+                  "toppings": this.props.customToppingArr
+                })
               }}>
 
               <View>
@@ -75,6 +78,7 @@ class AddToOrder extends Component {
 
 mapStateToProps = (state) => {
     return {
+
       pizzaTest: state.mainPage.pizzaTest,
       pizzaCost: state.mainPage.pizzaCost,
       customToppingArr: state.mainPage.customToppingArr,
@@ -84,6 +88,7 @@ mapStateToProps = (state) => {
       submitPizza: state.mainPage.submitPizza,
       totalCost: state.mainPage.totalCost,
       pizzaToppingArray: state.mainPage.pizzaToppingArray,
+      makePizzaModalVisible: state.mainPage.makePizzaModalVisible
 
     }
 }
