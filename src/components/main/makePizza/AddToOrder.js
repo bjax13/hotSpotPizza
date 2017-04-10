@@ -44,7 +44,6 @@ class AddToOrder extends Component {
                   "crust": this.props.pizzaCrust[2],
                   "toppings": this.props.customToppingArr
                 })
-
               }}>
 
               <View>
