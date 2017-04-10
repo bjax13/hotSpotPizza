@@ -8,6 +8,7 @@ const initialState = {
   makePizzaModalVisible: false,
   totalCost: 0.00,
   pizzaCost: 0.00,
+  totalToppingsCost: 0.00,
   pizzaQuantity: 1,
   pizzaQuantityArray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
   pizzaSize: ['Large', 12],

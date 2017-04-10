@@ -76,12 +76,14 @@ class PieOptions extends Component {
     }
 
     componentDidUpdate(){
-      console.log('Quantity - '+ this.props.pizzaQuantity +' '+ typeof this.props.pizzaQuantity);
-      console.log('Size - '+ this.props.pizzaSize[1]+' '+ typeof this.props.pizzaSize[1]);
-      console.log('Sauce - '+ this.props.pizzaSauce[1]+' '+ typeof this.props.pizzaSauce[1]);
-      console.log('Crust - '+ this.props.pizzaCrust[1]+' '+ typeof this.props.pizzaCrust[1]);
+      // console.log('Quantity - '+ this.props.pizzaQuantity +' '+ typeof this.props.pizzaQuantity);
+      // console.log('Size - '+ this.props.pizzaSize[1]+' '+ typeof this.props.pizzaSize[1]);
+      // console.log('Sauce - '+ this.props.pizzaSauce[1]+' '+ typeof this.props.pizzaSauce[1]);
+      // console.log('Crust - '+ this.props.pizzaCrust[1]+' '+ typeof this.props.pizzaCrust[1]);
+      // console.log('Toppings - '+ this.props.totalToppingsCost+' '+ typeof this.props.totalToppingsCost);
 
-      this.props.updateMain({pizzaCost: (this.props.pizzaSize[1]+this.props.pizzaSauce[1]+this.props.pizzaCrust[1])*this.props.pizzaQuantity});
+
+      this.props.updateMain({pizzaCost: (this.props.pizzaSize[1]+this.props.pizzaSauce[1]+this.props.pizzaCrust[1]+ this.props.totalToppingsCost)*this.props.pizzaQuantity});
     }
 
     _dropdown_1_adjustFrame(style) {
@@ -167,6 +169,7 @@ mapStateToProps = (state) => {
       pizzaTest: state.mainPage.pizzaTest,
       pizzaSize: state.mainPage.pizzaSize,
       pizzaSauce: state.mainPage.pizzaSauce,
+      totalToppingsCost: state.mainPage.totalToppingsCost,
       pizzaCrust: state.mainPage.pizzaCrust,
       pizzaCrustArray: state.mainPage.pizzaCrustArray,
       pizzaCrustNameArray: state.mainPage.pizzaCrustNameArray,

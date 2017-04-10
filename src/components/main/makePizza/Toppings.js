@@ -52,10 +52,12 @@ class Toppings extends Component {
             let checkTest = true;
 
             addCost = (toppingInputObj) =>{
-              this.props.updateMain({pizzaCost: (this.props.pizzaCost + (this.props.pizzaQuantity*parseFloat(toppingInputObj.price)))})
+              this.props.updateMain({pizzaCost: (this.props.pizzaCost + (this.props.pizzaQuantity*parseFloat(toppingInputObj.price))) })
+              this.props.updateMain({totalToppingsCost: this.props.totalToppingsCost + parseFloat(toppingInputObj.price)})
             }
             subCost = (toppingInputObj) =>{
               this.props.updateMain({pizzaCost: (this.props.pizzaCost - (this.props.pizzaQuantity*parseFloat(toppingInputObj.price)))})
+              this.props.updateMain({totalToppingsCost: this.props.totalToppingsCost - parseFloat(toppingInputObj.price)})
             }
 
             return (
@@ -101,6 +103,7 @@ mapStateToProps = (state) => {
     return {
       pizzaTest: state.mainPage.pizzaTest,
       pizzaCost: state.mainPage.pizzaCost,
+      totalToppingsCost: state.mainPage.totalToppingsCost,
       pizzaQuantity: state.mainPage.pizzaQuantity,
       pizzaToppingArray: state.mainPage.pizzaToppingArray,
     }
