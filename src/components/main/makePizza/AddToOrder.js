@@ -35,7 +35,17 @@ class AddToOrder extends Component {
               style={ this.props.submitPizza ? styles.buttonPress2 : styles.button2 }
               onHideUnderlay={this._onHideUnderlay.bind(this)}
               onShowUnderlay={this._onShowUnderlay.bind(this)}
-              onPress={()=>console.log(this.props.pizzaToppingArray)}>
+              onPress={()=>{
+                console.log('added Pizza')
+                console.log({
+                  "price": (this.props.pizzaCost/this.props.pizzaQuantity).toFixed(2).toString(),
+                  "public_display": false,
+                  "size": this.props.pizzaSize[2],
+                  "crust": this.props.pizzaCrust[2],
+                  "toppings": this.props.customToppingArr
+                })
+
+              }}>
 
               <View>
                 <Text style={this.props.submitPizza ? styles.buttonPress : styles.button}>
@@ -53,6 +63,11 @@ class AddToOrder extends Component {
 mapStateToProps = (state) => {
     return {
       pizzaTest: state.mainPage.pizzaTest,
+      pizzaCost: state.mainPage.pizzaCost,
+      customToppingArr: state.mainPage.customToppingArr,
+      pizzaSize: state.mainPage.pizzaSize,
+      pizzaCrust: state.mainPage.pizzaCrust,
+      pizzaQuantity: state.mainPage.pizzaQuantity,
       submitPizza: state.mainPage.submitPizza,
       totalCost: state.mainPage.totalCost,
       pizzaToppingArray: state.mainPage.pizzaToppingArray,

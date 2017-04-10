@@ -55,7 +55,7 @@ class PieOptions extends Component {
         .then((response) => {
 
           this.props.updateMain({pizzaCrustArray: response.data.results});
-          this.props.updateMain({pizzaCrust: [response.data.results[0].name,parseFloat(response.data.results[0].price)]});
+          this.props.updateMain({pizzaCrust: [response.data.results[0].name,parseFloat(response.data.results[0].price),response.data.results[0].id]});
           let resArr = response.data.results
           let arr = []
           for (var i = 0; i < resArr.length; i++) {
@@ -99,13 +99,13 @@ class PieOptions extends Component {
       this.props.updateMain({pizzaQuantity: value});
     }
     _dropdown_Size_onSelect(idx, value) {
-      this.props.updateMain({pizzaSize: [value, parseFloat(this.props.pizzaSizeArray[idx].price)]});
+      this.props.updateMain({pizzaSize: [value, parseFloat(this.props.pizzaSizeArray[idx].price), this.props.pizzaSizeArray[idx].id]});
     }
     _dropdown_Sauce_onSelect(idx, value) {
-      this.props.updateMain({pizzaSauce: [value, parseFloat(this.props.pizzaSauceArray[idx].price)]});
+      this.props.updateMain({pizzaSauce: [value, parseFloat(this.props.pizzaSauceArray[idx].price), this.props.pizzaSauceArray[idx].id]});
     }
     _dropdown_Crust_onSelect(idx, value) {
-      this.props.updateMain({pizzaCrust: [value, parseFloat(this.props.pizzaCrustArray[idx].price)]});
+      this.props.updateMain({pizzaCrust: [value, parseFloat(this.props.pizzaCrustArray[idx].price), this.props.pizzaCrustArray[idx].id]});
     }
 
     render() {

@@ -51,13 +51,28 @@ class Toppings extends Component {
 
             let checkTest = true;
 
-            addCost = (toppingInputObj) =>{
-              this.props.updateMain({pizzaCost: (this.props.pizzaCost + (this.props.pizzaQuantity*parseFloat(toppingInputObj.price))) })
-              this.props.updateMain({totalToppingsCost: this.props.totalToppingsCost + parseFloat(toppingInputObj.price)})
+            addTopping = (toppingInputObj) =>{
+
+              let newToppArr = this.props.customToppingArr;
+              newToppArr.push(toppingInputObj.id);
+              this.props.updateMain({customToppingArr: newToppArr});
+              this.props.updateMain({pizzaCost: (this.props.pizzaCost + (this.props.pizzaQuantity*parseFloat(toppingInputObj.price))) });
+              this.props.updateMain({totalToppingsCost: this.props.totalToppingsCost + parseFloat(toppingInputObj.price)});
+
             }
-            subCost = (toppingInputObj) =>{
+            subTopping = (toppingInputObj) =>{
+              let newToppArr = this.props.customToppingArr;
               this.props.updateMain({pizzaCost: (this.props.pizzaCost - (this.props.pizzaQuantity*parseFloat(toppingInputObj.price)))})
               this.props.updateMain({totalToppingsCost: this.props.totalToppingsCost - parseFloat(toppingInputObj.price)})
+              for (var i = 0; i < newToppArr.length; i++) {
+                if (newToppArr[i] === toppingInputObj.id) {
+                  newToppArr.splice(i,1)
+                  i = newToppArr.length;
+                }
+              }
+              console.log(this.props.customToppingArr);
+              this.props.updateMain({customToppingArr: newToppArr});
+              console.log(this.props.customToppingArr);
             }
 
             return (
@@ -69,9 +84,9 @@ class Toppings extends Component {
                   onChange={(checked) => {
                     checkTest = !checked;
                     if (checkTest) {
-                      addCost(toppingObj);
+                      addTopping(toppingObj);
                     } else {
-                      subCost(toppingObj);
+                      subTopping(toppingObj);
                     }
                   }}
                 />
@@ -103,6 +118,7 @@ mapStateToProps = (state) => {
     return {
       pizzaTest: state.mainPage.pizzaTest,
       pizzaCost: state.mainPage.pizzaCost,
+      customToppingArr: state.mainPage.customToppingArr,
       totalToppingsCost: state.mainPage.totalToppingsCost,
       pizzaQuantity: state.mainPage.pizzaQuantity,
       pizzaToppingArray: state.mainPage.pizzaToppingArray,
