@@ -19,13 +19,11 @@ class Toppings extends Component {
       .then((response) => {
         let toppingCount = response.data.count
         let resultsPerPage = response.data.results.length
-        let pages = toppingCount / resultsPerPage;
+        let pages = Math.ceil(toppingCount / resultsPerPage);
         let pageURL = response.data.next;
 
         if (pageURL.indexOf('=') != -1) {
           pageURL = pageURL.slice(0,pageURL.indexOf('=')+1)
-          console.log(pageURL);
-          console.log(pages);
         }
 
         this.props.updateMain({pizzaToppingArray: response.data.results});
