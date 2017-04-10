@@ -49,13 +49,15 @@ class Toppings extends Component {
 
         let pizzaToppings = this.props.pizzaToppingArray.map( (toppingObj, i) => {
 
-            addCost = () =>{
-              this.props.updateMain({pizzaCost: (this.props.pizzaCost + (this.props.pizzaQuantity*parseFloat(toppingObj.price)))})
-            }
-            subCost = () =>{
-              this.props.updateMain({pizzaCost: (this.props.pizzaCost - (this.props.pizzaQuantity*parseFloat(toppingObj.price)))})
-            }
             let checkTest = true;
+
+            addCost = (toppingInputObj) =>{
+              this.props.updateMain({pizzaCost: (this.props.pizzaCost + (this.props.pizzaQuantity*parseFloat(toppingInputObj.price)))})
+            }
+            subCost = (toppingInputObj) =>{
+              this.props.updateMain({pizzaCost: (this.props.pizzaCost - (this.props.pizzaQuantity*parseFloat(toppingInputObj.price)))})
+            }
+
             return (
               <View key={toppingObj.name} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
                 <CheckBox
@@ -65,9 +67,9 @@ class Toppings extends Component {
                   onChange={(checked) => {
                     checkTest = !checked;
                     if (checkTest) {
-                      addCost();
+                      addCost(toppingObj);
                     } else {
-                      subCost();
+                      subCost(toppingObj);
                     }
                   }}
                 />
