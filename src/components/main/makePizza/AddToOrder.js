@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
+import axios from 'axios';
 
 import {
     StyleSheet,
@@ -36,19 +37,32 @@ class AddToOrder extends Component {
               onHideUnderlay={this._onHideUnderlay.bind(this)}
               onShowUnderlay={this._onShowUnderlay.bind(this)}
               onPress={()=>{
-                console.log('added Pizza')
-                console.log({
+                console.log('Added Pizza')
+                axios.post('http://10.100.0.98:8888/api/pizzas/', {
                   "price": (this.props.pizzaCost/this.props.pizzaQuantity).toFixed(2).toString(),
                   "public_display": false,
                   "size": this.props.pizzaSize[2],
                   "crust": this.props.pizzaCrust[2],
                   "toppings": this.props.customToppingArr
                 })
+                .then(function (response) {
+                  console.log(response);
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+                // console.log({
+                //   "price": (this.props.pizzaCost/this.props.pizzaQuantity).toFixed(2).toString(),
+                //   "public_display": false,
+                //   "size": this.props.pizzaSize[2],
+                //   "crust": this.props.pizzaCrust[2],
+                //   "toppings": this.props.customToppingArr
+                // })
               }}>
 
               <View>
                 <Text style={this.props.submitPizza ? styles.buttonPress : styles.button}>
-                  Submit
+                  Add to order
                 </Text>
               </View>
             </TouchableHighlight>

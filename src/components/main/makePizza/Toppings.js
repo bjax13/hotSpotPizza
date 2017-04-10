@@ -70,9 +70,7 @@ class Toppings extends Component {
                   i = newToppArr.length;
                 }
               }
-              console.log(this.props.customToppingArr);
               this.props.updateMain({customToppingArr: newToppArr});
-              console.log(this.props.customToppingArr);
             }
 
             return (
