@@ -12,6 +12,7 @@ import {
     StyleSheet,
     Text,
     View,
+    TouchableHighlight,
 } from 'react-native'
 
 
@@ -29,8 +30,15 @@ class OrderSummary extends Component {
 
 
                 {/* <Text> Line Item {lineItem[1].name}</Text> */}
-                <Text>{this.props.pizzaSizeNameArray[lineItem[1].size-1]} {lineItem[1].toppings.length} Topping {lineItem[0]}</Text>
-                <Text>{"$"+parseFloat(lineItem[1].price).toFixed(2)}</Text>
+                <TouchableHighlight style={{flex:1}}>
+                  <View>
+                    <Text>
+                      X
+                    </Text>
+                  </View>
+                </TouchableHighlight>
+                <Text style={{flex:10}}>{this.props.pizzaSizeNameArray[lineItem[1].size-1]} {lineItem[1].toppings.length} Topping {lineItem[0]}</Text>
+                <Text style={{flex:2}}>{"$"+parseFloat(lineItem[1].price).toFixed(2)}</Text>
               </View>
             );
         });
