@@ -5,7 +5,7 @@ import { updateMain } from '../../../actions/updateMainPageActions';
 
 import ModalDropdown from 'react-native-modal-dropdown';
 
-
+import OrderSummary from './OrderSummary';
 
 import {
     StyleSheet,
@@ -38,7 +38,7 @@ class CartModal extends Component {
            <View style={{marginTop: 22,flex: 1}}>
             <View style={{margin: 5, flex:1}}>
               <View style={{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f7d9de'}}>
-                <Text style= {{fontWeight: '600'}}>{'$'+(this.props.totalCost+this.props.pizzaCost).toFixed(2)}</Text>
+                <Text style= {{fontWeight: '600'}}> Total - {'$'+(this.props.totalCost+this.props.pizzaCost).toFixed(2)}</Text>
               </View>
 
               <TouchableHighlight
@@ -62,6 +62,7 @@ class CartModal extends Component {
                   </View>
 
                   <View style={{flex:9.5, padding: 15}}>
+                    <OrderSummary></OrderSummary>
 
                   </View>
 

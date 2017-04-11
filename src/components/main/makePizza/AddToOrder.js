@@ -37,30 +37,45 @@ class AddToOrder extends Component {
               onHideUnderlay={this._onHideUnderlay.bind(this)}
               onShowUnderlay={this._onShowUnderlay.bind(this)}
               onPress={()=>{
-                this.props.updateMain({ makePizzaModalVisible: !this.props.makePizzaModalVisible});
-                this.props.updateMain({ makeCartModalVisible: !this.props.makeCartModalVisible});
+
                 this._onHideUnderlay();
-                // console.log('Added Pizza')
-                // axios.post('http://10.100.0.98:8888/api/pizzas/', {
-                //   "price": (this.props.pizzaCost/this.props.pizzaQuantity).toFixed(2).toString(),
-                //   "public_display": false,
-                //   "size": this.props.pizzaSize[2],
-                //   "crust": this.props.pizzaCrust[2],
-                //   "toppings": this.props.customToppingArr
-                // })
-                // .then(function (response) {
-                //   console.log(response);
-                // })
-                // .catch(function (error) {
-                //   console.log(error);
-                // });
-                console.log({
+                console.log('Added Pizza')
+                axios.post('http://10.100.0.98:8888/api/pizzas/', {
                   "price": (this.props.pizzaCost/this.props.pizzaQuantity).toFixed(2).toString(),
                   "public_display": false,
                   "size": this.props.pizzaSize[2],
                   "crust": this.props.pizzaCrust[2],
                   "toppings": this.props.customToppingArr
                 })
+                .then((response)=> {
+                  let currentCart = this.props.cartItems;
+                  let total = this.props.totalCost;
+                  total += this.props.pizzaCost;
+                  this.props.updateMain({totalCost: total})
+
+                  currentCart.push(['Pizza',response.data])
+
+                  this.props.updateMain({cartItems: currentCart})
+                  console.log(currentCart);
+
+                  this.props.updateMain({ makePizzaModalVisible: !this.props.makePizzaModalVisible});
+                  this.props.updateMain({ makeCartModalVisible: !this.props.makeCartModalVisible});
+                  this.props.updateMain({
+                    customToppingArr: [],
+                    pizzaCost: 0
+                  })
+
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+                // console.log({
+                //   "price": (this.props.pizzaCost/this.props.pizzaQuantity).toFixed(2).toString(),
+                //   "public_display": false,
+                //   "size": this.props.pizzaSize[2],
+                //   "crust": this.props.pizzaCrust[2],
+                //   "toppings": this.props.customToppingArr
+                // })
               }}>
 
               <View>
@@ -80,6 +95,8 @@ mapStateToProps = (state) => {
     return {
 
       pizzaTest: state.mainPage.pizzaTest,
+      totalCost: state.mainPage.totalCost,
+      cartItems: state.mainPage.cartItems,
       pizzaCost: state.mainPage.pizzaCost,
       customToppingArr: state.mainPage.customToppingArr,
       pizzaSize: state.mainPage.pizzaSize,
