@@ -30,6 +30,8 @@ const initialState = {
   pizzaCrustNameArray: ['Red Crust','Garlic White Crust', 'BBQ Crust', 'Buffalo Crust'],
   pizzaToppingArray: [],
   cartItems: [],
+  deleted: [],
+  data: [ {id: 1,text: 'This is a test'}, {id: 2,text: 'This is a test'}, {id: 3,text: 'This is a test'}, {id: 4,text: 'This is a test'},],
 }
 
 

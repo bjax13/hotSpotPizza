@@ -7,6 +7,7 @@ import CheckBox from 'react-native-checkbox';
 import axios from 'axios';
 
 import TotalLine from './TotalLine'
+import LineItems from './LineItems'
 
 import {
     StyleSheet,
@@ -17,32 +18,7 @@ import {
 
 
 class OrderSummary extends Component {
-
     render() {
-
-        let orderLineItems = this.props.cartItems.map( (lineItem, i) => {
-
-            let includeInCheckout = true;
-
-            return (
-              <View key={i} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
-
-
-
-                {/* <Text> Line Item {lineItem[1].name}</Text> */}
-                <TouchableHighlight style={{flex:1}}>
-                  <View>
-                    <Text>
-                      X
-                    </Text>
-                  </View>
-                </TouchableHighlight>
-                <Text style={{flex:10}}>{this.props.pizzaSizeNameArray[lineItem[1].size-1]} {lineItem[1].toppings.length} Topping {lineItem[0]}</Text>
-                <Text style={{flex:2}}>{"$"+parseFloat(lineItem[1].price).toFixed(2)}</Text>
-              </View>
-            );
-        });
-
         return (
             <View>
               <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
@@ -55,9 +31,10 @@ class OrderSummary extends Component {
               <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
               </View>
 
-              {orderLineItems}
 
+              <LineItems></LineItems>
               <TotalLine></TotalLine>
+
             </View>
 
         )

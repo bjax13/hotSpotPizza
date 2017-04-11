@@ -53,7 +53,7 @@ class AddToOrder extends Component {
                   total += this.props.pizzaCost;
                   this.props.updateMain({totalCost: total})
 
-                  currentCart.push(['Pizza',response.data])
+                  currentCart.push({id: response.data.id , type: 'Pizza', data: response.data})
 
                   this.props.updateMain({cartItems: currentCart})
                   console.log(currentCart);
