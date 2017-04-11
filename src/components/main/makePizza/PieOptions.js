@@ -10,13 +10,6 @@ import {
     StyleSheet,
     Text,
     View,
-    Image,
-    Button,
-    Modal,
-    TouchableHighlight,
-    ScrollView,
-    Picker,
-    Item
 } from 'react-native'
 
 
