@@ -6,6 +6,8 @@ import { updateMain } from '../../../actions/updateMainPageActions';
 import CheckBox from 'react-native-checkbox';
 import axios from 'axios';
 
+import TotalLine from './TotalLine'
+
 import {
     StyleSheet,
     Text,
@@ -47,7 +49,7 @@ class OrderSummary extends Component {
 
               {orderLineItems}
 
-              <Text>Total {"$"+parseFloat(this.props.totalCost).toFixed(2)}</Text>
+              <TotalLine></TotalLine>
             </View>
 
         )
