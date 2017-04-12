@@ -47,7 +47,7 @@ class AddPizza extends Component {
 
               <View>
                 <Text style={this.props.submitPizza ? styles.buttonPress : styles.button}>
-                  AddPizza
+                  Add Pizza
                 </Text>
               </View>
             </TouchableHighlight>

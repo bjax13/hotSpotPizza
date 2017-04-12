@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { updateSettings } from '../../actions/updateSettingsPageActions';
 import { updateMain } from '../../actions/updateMainPageActions';
 
+import { NativeRouter, Route, Link } from 'react-router-native'
+
 import ModalDropdown from 'react-native-modal-dropdown';
 import axios from 'axios';
 

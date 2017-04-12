@@ -44,7 +44,7 @@ class AddSides extends Component {
 
               <View>
                 <Text style={this.props.submitPizza ? styles.buttonPress : styles.button}>
-                  AddSides
+                  Add Sides
                 </Text>
               </View>
             </TouchableHighlight>
