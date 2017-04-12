@@ -15,7 +15,7 @@ import {
 } from 'react-native'
 
 
-class Checkout extends Component {
+class AddSides extends Component {
 
     _onSubmit(){
       console.log('clicked-submit')
@@ -39,12 +39,12 @@ class Checkout extends Component {
               onPress={()=>{
 
                 this._onHideUnderlay();
-                console.log('Checkout')
+                console.log('AddSides')
               }}>
 
               <View>
                 <Text style={this.props.submitPizza ? styles.buttonPress : styles.button}>
-                  Checkout
+                  AddSides
                 </Text>
               </View>
             </TouchableHighlight>
@@ -116,4 +116,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToActionCreators)(Checkout)
+export default connect(mapStateToProps, mapDispatchToActionCreators)(AddSides)

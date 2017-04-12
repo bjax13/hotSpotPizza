@@ -7,6 +7,8 @@ import ModalDropdown from 'react-native-modal-dropdown';
 
 import OrderSummary from './OrderSummary';
 import Checkout from './Checkout';
+import AddPizza from './AddPizza';
+import AddSides from './AddSides';
 
 import {
     StyleSheet,
@@ -55,11 +57,17 @@ class CartModal extends Component {
 
                   <View style={{flex:1.5, padding: 15}}>
                     <Text style={styles.welcome}>Cart</Text>
-                    <View style={{flex:1, flexDirection: 'row'}}>
-                      <Text style={[styles.instructions,{flex:1}]}>Add more or Checkout</Text>
-                      {/* <View>
+                    <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                      {/* <Text style={[styles.instructions,{flex:1}]}>Add more or Checkout</Text> */}
+                      <View>
+                        <AddPizza></AddPizza>
+                      </View>
+                      <View>
+                        <AddSides></AddSides>
+                      </View>
+                      <View>
                         <Checkout></Checkout>
-                      </View> */}
+                      </View>
                     </View>
                   </View>
 
