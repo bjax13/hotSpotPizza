@@ -30,6 +30,14 @@ const onMakePizza = () => {
 class PizzaModal extends Component {
 
      setModalVisible(visible) {
+       this.props.updateMain({
+         customToppingArr: [],
+         pizzaCrust: ['White', 0 , 1],
+         pizzaSauce: ['Red Sauce',0 , -1],
+         pizzaQuantity: 1,
+         pizzaSize: ['Large', 12, 3],
+         totalToppingsCost: 0,
+       })
        this.props.updateMain({makePizzaModalVisible: visible});
      }
 
@@ -46,6 +54,10 @@ class PizzaModal extends Component {
               <TouchableHighlight
                 style={{position: 'absolute', right: 20 , top: 20 }}
                 onPress={() =>{
+                  console.log(this.props.totalCost);
+                  console.log(this.props.pizzaCost);
+
+
                   this.setModalVisible(!this.props.makePizzaModalVisible)
                 }}>
                 <Text style={{fontWeight: '900', color: 'gray'}}>X</Text>

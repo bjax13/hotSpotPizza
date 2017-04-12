@@ -96,6 +96,8 @@ mapStateToProps = (state) => {
       makeCartModalVisible: state.mainPage.makeCartModalVisible,
       totalCost: state.mainPage.totalCost,
       pizzaCost: state.mainPage.pizzaCost,
+      totalToppingsCost: state.mainPage.totalToppingsCost,
+      customToppingArr: state.mainPage.customToppingArr,
     }
 }
 

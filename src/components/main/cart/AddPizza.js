@@ -38,6 +38,9 @@ class AddPizza extends Component {
               onShowUnderlay={this._onShowUnderlay.bind(this)}
               onPress={()=>{
 
+                this.props.updateMain({ makePizzaModalVisible: !this.props.makePizzaModalVisible});
+                this.props.updateMain({ makeCartModalVisible: !this.props.makeCartModalVisible});
+
                 this._onHideUnderlay();
                 console.log('AddPizza')
               }}>
@@ -58,18 +61,12 @@ class AddPizza extends Component {
 mapStateToProps = (state) => {
     return {
 
-      pizzaTest: state.mainPage.pizzaTest,
-      totalCost: state.mainPage.totalCost,
-      cartItems: state.mainPage.cartItems,
-      pizzaCost: state.mainPage.pizzaCost,
-      customToppingArr: state.mainPage.customToppingArr,
-      pizzaSize: state.mainPage.pizzaSize,
-      pizzaCrust: state.mainPage.pizzaCrust,
-      pizzaQuantity: state.mainPage.pizzaQuantity,
+
       submitPizza: state.mainPage.submitPizza,
       totalCost: state.mainPage.totalCost,
       pizzaToppingArray: state.mainPage.pizzaToppingArray,
-      makePizzaModalVisible: state.mainPage.makePizzaModalVisible
+      makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
+      makeCartModalVisible: state.mainPage.makeCartModalVisible
 
     }
 }
