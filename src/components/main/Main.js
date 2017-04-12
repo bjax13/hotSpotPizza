@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { updateSettings } from '../../actions/updateSettingsPageActions';
 import { updateMain } from '../../actions/updateMainPageActions';
 
-import { NativeRouter, Route, Link } from 'react-router-native'
+import { Link } from 'react-router-native'
 
 import ModalDropdown from 'react-native-modal-dropdown';
 import axios from 'axios';
@@ -63,6 +63,13 @@ class Main extends Component {
                           <CartModal></CartModal>
 
                       </Modal>
+
+                      <Link
+                        to="/Cart"
+                        underlayColor='#f0f4f7'
+                        style={styles.navItem}>
+                          <Text>Cart</Text>
+                      </Link>
 
                       <TouchableHighlight onPress={() => {
 
