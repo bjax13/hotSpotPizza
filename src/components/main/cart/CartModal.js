@@ -6,6 +6,7 @@ import { updateMain } from '../../../actions/updateMainPageActions';
 import ModalDropdown from 'react-native-modal-dropdown';
 
 import OrderSummary from './OrderSummary';
+import Checkout from './Checkout';
 
 import {
     StyleSheet,
@@ -54,7 +55,12 @@ class CartModal extends Component {
 
                   <View style={{flex:1.5, padding: 15}}>
                     <Text style={styles.welcome}>Cart</Text>
-                    <Text style={styles.instructions}>Add more or Checkout?</Text>
+                    <View style={{flex:1, flexDirection: 'row'}}>
+                      <Text style={[styles.instructions,{flex:1}]}>Add more or Checkout</Text>
+                      {/* <View>
+                        <Checkout></Checkout>
+                      </View> */}
+                    </View>
                   </View>
 
                   <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
@@ -63,6 +69,7 @@ class CartModal extends Component {
 
                   <View style={{flex:9.5, padding: 15}}>
                     <OrderSummary></OrderSummary>
+                    <Checkout></Checkout>
 
                   </View>
 
