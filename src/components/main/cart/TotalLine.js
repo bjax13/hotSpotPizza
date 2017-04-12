@@ -23,7 +23,7 @@ class TotalLine extends Component {
             <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
             </View>
 
-            <View style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
+            <View style={{paddingTop: 10, paddingRight: 8, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
               <Text>Total</Text>
               <Text>{"$"+parseFloat(this.props.totalCost).toFixed(2)}</Text>
             </View>

@@ -15,6 +15,14 @@ import {
 class LineItems extends Component {
 
     onDelete (id) {
+
+      for (var i = 0; i < this.props.cartItems.length; i++) {
+        if (id === this.props.cartItems[i].id) {
+          let totalCost = this.props.totalCost;
+          totalCost -= this.props.cartItems[i].data.price
+          this.props.updateMain({totalCost: totalCost})
+        }
+      }
       this.props.updateMain({deleted: this.props.deleted.concat([id])})
     }
 
