@@ -62,7 +62,8 @@ class AddToOrder extends Component {
                   this.props.updateMain({ makeCartModalVisible: !this.props.makeCartModalVisible});
                   this.props.updateMain({
                     customToppingArr: [],
-                    pizzaCost: 0
+                    pizzaCost: 0,
+                    totalToppingsCost: 0, 
                   })
 
                 })
