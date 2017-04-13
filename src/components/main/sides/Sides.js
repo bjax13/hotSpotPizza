@@ -10,6 +10,7 @@ import {
     StyleSheet,
     Text,
     View,
+    TouchableHighlight,
 } from 'react-native'
 
 
@@ -48,46 +49,66 @@ class Sides extends Component {
 
         let pizzaSides = this.props.pizzaSidesArray.map( (sidesObj, i) => {
 
+          sidesObj.count = 0;
+          console.log(sidesObj);
+
             let checkTest = true;
 
             addSides = (sidesInputObj) =>{
 
-              let newToppArr = this.props.customSidesArr;
-              newToppArr.push(sidesInputObj.id);
-              this.props.updateMain({customSidesArr: newToppArr});
+              let newSideArr = this.props.customSidesArr;
+              newSideArr.push(sidesInputObj.id);
+              this.props.updateMain({customSidesArr: newSideArr});
               this.props.updateMain({pizzaCost: (this.props.pizzaCost + (this.props.pizzaQuantity*parseFloat(sidesInputObj.price))) });
               this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(sidesInputObj.price)});
 
             }
             subSides = (sidesInputObj) =>{
-              let newToppArr = this.props.customSidesArr;
+              let newSideArr = this.props.customSidesArr;
               this.props.updateMain({pizzaCost: (this.props.pizzaCost - (this.props.pizzaQuantity*parseFloat(sidesInputObj.price)))})
               this.props.updateMain({totalSidesCost: this.props.totalSidesCost - parseFloat(sidesInputObj.price)})
-              for (var i = 0; i < newToppArr.length; i++) {
-                if (newToppArr[i] === sidesInputObj.id) {
-                  newToppArr.splice(i,1)
-                  i = newToppArr.length;
+              for (var i = 0; i < newSideArr.length; i++) {
+                if (newSideArr[i] === sidesInputObj.id) {
+                  newSideArr.splice(i,1)
+                  i = newSideArr.length;
                 }
               }
-              this.props.updateMain({customSidesArr: newToppArr});
+              this.props.updateMain({customSidesArr: newSideArr});
             }
 
             return (
               <View key={sidesObj.name} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
-                <CheckBox
-                  label={sidesObj.name}
-                  checked={this.checkTest}
-                  labelStyle={styles.optionTitle}
-                  onChange={(checked) => {
-                    checkTest = !checked;
-                    if (checkTest) {
-                      addSides(sidesObj);
-                    } else {
-                      subSides(sidesObj);
-                    }
-                  }}
-                />
-                <Text >{"$"+parseFloat(sidesObj.price).toFixed(2)}</Text>
+                <View style={{flex:4}}>
+                  <CheckBox
+
+                    label={sidesObj.name}
+                    checked={this.checkTest}
+                    labelStyle={styles.optionTitle}
+                    onChange={(checked) => {
+                      checkTest = !checked;
+                      if (checkTest) {
+                        addSides(sidesObj);
+                      } else {
+                        subSides(sidesObj);
+                      }
+                    }}
+                  />
+                </View>
+
+                <View style={{flex:1.5,flexDirection: 'row'}}>
+                  <TouchableHighlight style={{flex:1}}>
+                    <Text>-</Text>
+                  </TouchableHighlight>
+                  <Text style={{flex:1}}>
+                    {sidesObj.count}
+                  </Text>
+                  <TouchableHighlight style={{flex:1}}>
+                    <Text>+</Text>
+                  </TouchableHighlight>
+                </View>
+                <View style={{flex:1, alignItems: 'flex-end'}}>
+                  <Text >{"$"+parseFloat(sidesObj.price).toFixed(2)}</Text>
+                </View>
               </View>
             );
         });
