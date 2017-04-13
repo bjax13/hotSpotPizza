@@ -11,6 +11,7 @@ const initialState = {
   totalCost: 0.00,
   pizzaCost: 0.00,
   customToppingArr: [],
+  customSidesArr: [],
   customPizzaObj: {
             "price": "0.00",
             "public_display": false,
@@ -19,6 +20,7 @@ const initialState = {
             "toppings": [1]
         },
   totalToppingsCost: 0.00,
+  totalSidesCost: 0.00,
   pizzaQuantity: 1,
   pizzaQuantityArray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
   pizzaSize: ['Large', 12, 3],
@@ -30,6 +32,7 @@ const initialState = {
   pizzaCrustArray: [],
   pizzaCrustNameArray: ['Red Crust','Garlic White Crust', 'BBQ Crust', 'Buffalo Crust'],
   pizzaToppingArray: [],
+  pizzaSidesArray: [],
   cartItems: [],
   deleted: [],
   data: [ {id: 1,text: 'This is a test'}, {id: 2,text: 'This is a test'}, {id: 3,text: 'This is a test'}, {id: 4,text: 'This is a test'},],

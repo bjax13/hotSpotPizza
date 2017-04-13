@@ -66,15 +66,6 @@ class SideModal extends Component {
               <View style={{flex:9.5}}>
                 <ScrollView >
 
-                  {/* <View style={{flex:1.5, padding: 15}}>
-                    <Text style={styles.welcome}>Pizza Builder</Text>
-                    <Text style={styles.instructions}>Build your perfict pizza by adding crusts and options</Text>
-                  </View>
-
-                  <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
-                      //This is the deviding line between welcome and instructions
-                  </View> */}
-
                   <View style={{flex:9.5, padding: 15}}>
                     <Sides></Sides>
                     <AddToOrder></AddToOrder>

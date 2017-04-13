@@ -15,26 +15,27 @@ import {
 
 class Sides extends Component {
   componentDidMount(){
-    axios.get('http://10.100.0.98:8888/api/toppings/')
+    axios.get('http://10.100.0.98:8888/api/sides/')
       .then((response) => {
-        let toppingCount = response.data.count
+        let sidesCount = response.data.count
         let resultsPerPage = response.data.results.length
-        let pages = Math.ceil(toppingCount / resultsPerPage);
+        let pages = Math.ceil(sidesCount / resultsPerPage);
         let pageURL = response.data.next;
 
         if (pageURL.indexOf('=') != -1) {
           pageURL = pageURL.slice(0,pageURL.indexOf('=')+1)
         }
 
-        this.props.updateMain({pizzaToppingArray: response.data.results});
+        this.props.updateMain({pizzaSidesArray: response.data.results});
 
         for (var i = 2; i <= pages; i++) {
           axios.get(pageURL+i)
             .then((response)=>{
-              this.props.updateMain({pizzaToppingArray: this.props.pizzaToppingArray.concat(response.data.results)})
+              this.props.updateMain({pizzaSidesArray: this.props.pizzaSidesArray.concat(response.data.results)})
             })
 
         }
+        console.log('sides.then');
 
 
       })
@@ -45,48 +46,48 @@ class Sides extends Component {
 
     render() {
 
-        let pizzaToppings = this.props.pizzaToppingArray.map( (toppingObj, i) => {
+        let pizzaSides = this.props.pizzaSidesArray.map( (sidesObj, i) => {
 
             let checkTest = true;
 
-            addTopping = (toppingInputObj) =>{
+            addSides = (sidesInputObj) =>{
 
-              let newToppArr = this.props.customToppingArr;
-              newToppArr.push(toppingInputObj.id);
-              this.props.updateMain({customToppingArr: newToppArr});
-              this.props.updateMain({pizzaCost: (this.props.pizzaCost + (this.props.pizzaQuantity*parseFloat(toppingInputObj.price))) });
-              this.props.updateMain({totalToppingsCost: this.props.totalToppingsCost + parseFloat(toppingInputObj.price)});
+              let newToppArr = this.props.customSidesArr;
+              newToppArr.push(sidesInputObj.id);
+              this.props.updateMain({customSidesArr: newToppArr});
+              this.props.updateMain({pizzaCost: (this.props.pizzaCost + (this.props.pizzaQuantity*parseFloat(sidesInputObj.price))) });
+              this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(sidesInputObj.price)});
 
             }
-            subTopping = (toppingInputObj) =>{
-              let newToppArr = this.props.customToppingArr;
-              this.props.updateMain({pizzaCost: (this.props.pizzaCost - (this.props.pizzaQuantity*parseFloat(toppingInputObj.price)))})
-              this.props.updateMain({totalToppingsCost: this.props.totalToppingsCost - parseFloat(toppingInputObj.price)})
+            subSides = (sidesInputObj) =>{
+              let newToppArr = this.props.customSidesArr;
+              this.props.updateMain({pizzaCost: (this.props.pizzaCost - (this.props.pizzaQuantity*parseFloat(sidesInputObj.price)))})
+              this.props.updateMain({totalSidesCost: this.props.totalSidesCost - parseFloat(sidesInputObj.price)})
               for (var i = 0; i < newToppArr.length; i++) {
-                if (newToppArr[i] === toppingInputObj.id) {
+                if (newToppArr[i] === sidesInputObj.id) {
                   newToppArr.splice(i,1)
                   i = newToppArr.length;
                 }
               }
-              this.props.updateMain({customToppingArr: newToppArr});
+              this.props.updateMain({customSidesArr: newToppArr});
             }
 
             return (
-              <View key={toppingObj.name} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
+              <View key={sidesObj.name} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
                 <CheckBox
-                  label={toppingObj.name}
+                  label={sidesObj.name}
                   checked={this.checkTest}
                   labelStyle={styles.optionTitle}
                   onChange={(checked) => {
                     checkTest = !checked;
                     if (checkTest) {
-                      addTopping(toppingObj);
+                      addSides(sidesObj);
                     } else {
-                      subTopping(toppingObj);
+                      subSides(sidesObj);
                     }
                   }}
                 />
-                <Text >{"$"+parseFloat(toppingObj.price).toFixed(2)}</Text>
+                <Text >{"$"+parseFloat(sidesObj.price).toFixed(2)}</Text>
               </View>
             );
         });
@@ -103,7 +104,7 @@ class Sides extends Component {
               <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
               </View>
 
-              {pizzaToppings}
+              {pizzaSides}
             </View>
 
         )
@@ -114,10 +115,10 @@ mapStateToProps = (state) => {
     return {
       pizzaTest: state.mainPage.pizzaTest,
       pizzaCost: state.mainPage.pizzaCost,
-      customToppingArr: state.mainPage.customToppingArr,
-      totalToppingsCost: state.mainPage.totalToppingsCost,
+      customSidesArr: state.mainPage.customSidesArr,
+      totalSidesCost: state.mainPage.totalSidesCost,
       pizzaQuantity: state.mainPage.pizzaQuantity,
-      pizzaToppingArray: state.mainPage.pizzaToppingArray,
+      pizzaSidesArray: state.mainPage.pizzaSidesArray,
     }
 }
 
