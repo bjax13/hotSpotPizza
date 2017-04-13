@@ -7,6 +7,7 @@ const initialState = {
 
   makePizzaModalVisible: false,
   makeCartModalVisible: false,
+  makeSideModalVisible: false,
   totalCost: 0.00,
   pizzaCost: 0.00,
   customToppingArr: [],

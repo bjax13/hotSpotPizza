@@ -10,6 +10,7 @@ import axios from 'axios';
 
 import PizzaModal from './makePizza/PizzaModal';
 import CartModal from './cart/CartModal';
+import SideModal from './sides/SideModal';
 
 import {
     StyleSheet,
@@ -63,6 +64,15 @@ class Main extends Component {
                           <CartModal></CartModal>
 
                       </Modal>
+                      <Modal
+                        animationType={"fade"}
+                        transparent={false}
+                        visible={this.props.makeSideModalVisible}
+                        onRequestClose={() => {alert("Modal has been closed.")}}
+                        >
+                          <SideModal></SideModal>
+
+                      </Modal>
 
                       <TouchableHighlight onPress={() => {
 
@@ -83,6 +93,7 @@ mapStateToProps = (state) => {
     return {
       makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
       makeCartModalVisible: state.mainPage.makeCartModalVisible,
+      makeSideModalVisible: state.mainPage.makeSideModalVisible,
       pizzaSizeNameArray: state.mainPage.pizzaSizeNameArray,
       pizzaSizeArray: state.mainPage.pizzaSizeArray,
       pizzaSize: state.mainPage.pizzaSize,

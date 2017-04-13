@@ -38,6 +38,9 @@ class AddSides extends Component {
               onShowUnderlay={this._onShowUnderlay.bind(this)}
               onPress={()=>{
 
+                this.props.updateMain({ makeSideModalVisible: !this.props.makeSideModalVisible});
+                this.props.updateMain({ makeCartModalVisible: !this.props.makeCartModalVisible});
+
                 this._onHideUnderlay();
                 console.log('AddSides')
               }}>
@@ -69,7 +72,8 @@ mapStateToProps = (state) => {
       submitPizza: state.mainPage.submitPizza,
       totalCost: state.mainPage.totalCost,
       pizzaToppingArray: state.mainPage.pizzaToppingArray,
-      makePizzaModalVisible: state.mainPage.makePizzaModalVisible
+      makeCartModalVisible: state.mainPage.makeCartModalVisible,
+      makeSideModalVisible: state.mainPage.makeSideModalVisible,
 
     }
 }
