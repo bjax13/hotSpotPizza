@@ -39,6 +39,7 @@ class SideModal extends Component {
          totalToppingsCost: 0,
        })
        this.props.updateMain({makeSideModalVisible: visible});
+       this.props.updateMain({makeCartModalVisible: !visible});
      }
 
 
@@ -59,6 +60,7 @@ class SideModal extends Component {
 
 
                   this.setModalVisible(!this.props.makeSideModalVisible)
+
                 }}>
                 <Text style={{fontWeight: '900', color: 'gray'}}>X</Text>
               </TouchableHighlight>
@@ -84,6 +86,7 @@ mapStateToProps = (state) => {
     return {
       pizzaTest: state.mainPage.pizzaTest,
       makeSideModalVisible: state.mainPage.makeSideModalVisible,
+      makeCartModalVisible: state.mainPage.makeCartModalVisible,
       totalCost: state.mainPage.totalCost,
       pizzaCost: state.mainPage.pizzaCost,
     }
