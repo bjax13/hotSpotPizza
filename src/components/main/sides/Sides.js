@@ -28,11 +28,9 @@ class Sides extends Component {
         }
 
         this.props.updateMain({pizzaSidesArray: response.data.results});
-        console.log(response.data.results);
         for (var i = 0; i < response.data.results.length; i++) {
           response.data.results[i].count = 0
         }
-        console.log(response.data.results);
 
         for (var i = 2; i <= pages; i++) {
           axios.get(pageURL+i)
@@ -42,11 +40,7 @@ class Sides extends Component {
               }
               this.props.updateMain({pizzaSidesArray: this.props.pizzaSidesArray.concat(response.data.results)})
             })
-
         }
-        console.log('sides.then');
-
-
       })
       .catch((error) => {
         console.log(error);
@@ -57,39 +51,41 @@ class Sides extends Component {
 
         let pizzaSides = this.props.pizzaSidesArray.map( (sidesObj, i) => {
 
-
-          console.log(sidesObj);
-
-            let checkTest = true;
+            let defaultVal = true;
 
             getCount = () => {
               return sidesObj.count
             }
 
             decrement = () =>{
+              console.log(defaultVal);
               let arr = this.props.pizzaSidesArray;
-
-
               if (arr[i].count > 0) {
-                console.log(arr);
                 arr[i].count--;
-                console.log('dec '+ i + ' ' + arr[i].count) ;
-
-                console.log(arr[i].count);
                 this.props.updateMain({pizzaSidesArray: arr})
+
+                if (this.props.customSidesArr.indexOf(arr[i].id) != -1) {
+                  this.props.updateMain({pizzaCost: (this.props.pizzaCost - (parseFloat(arr[i].price))) });
+                  this.props.updateMain({totalSidesCost: this.props.totalSidesCost - parseFloat(arr[i].price)});
+                }
 
               }
               this.forceUpdate()
-
             }
             increment = () =>{
+              console.log(defaultVal);
               let arr = this.props.pizzaSidesArray;
-              console.log(arr);
               arr[i].count++;
-              console.log('inc '+ i + ' ' + arr[i].count);
-
-              console.log(arr);
+              defaultVal= false;
               this.props.updateMain({pizzaSidesArray: arr})
+
+              if (this.props.customSidesArr.indexOf(arr[i].id) != -1) {
+                this.props.updateMain({pizzaCost: (this.props.pizzaCost + (parseFloat(arr[i].price))) });
+                this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(arr[i].price)});
+              }
+
+
+
               this.forceUpdate()
             }
 
@@ -98,13 +94,13 @@ class Sides extends Component {
               let newSideArr = this.props.customSidesArr;
               newSideArr.push(sidesInputObj.id);
               this.props.updateMain({customSidesArr: newSideArr});
-              this.props.updateMain({pizzaCost: (this.props.pizzaCost + (this.props.pizzaQuantity*parseFloat(sidesInputObj.price))) });
+              this.props.updateMain({pizzaCost: (this.props.pizzaCost + (sidesInputObj.count*parseFloat(sidesInputObj.price))) });
               this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(sidesInputObj.price)});
 
             }
             subSides = (sidesInputObj) =>{
               let newSideArr = this.props.customSidesArr;
-              this.props.updateMain({pizzaCost: (this.props.pizzaCost - (this.props.pizzaQuantity*parseFloat(sidesInputObj.price)))})
+              this.props.updateMain({pizzaCost: (this.props.pizzaCost - (sidesInputObj.count*parseFloat(sidesInputObj.price)))})
               this.props.updateMain({totalSidesCost: this.props.totalSidesCost - parseFloat(sidesInputObj.price)})
               for (var i = 0; i < newSideArr.length; i++) {
                 if (newSideArr[i] === sidesInputObj.id) {
@@ -121,11 +117,11 @@ class Sides extends Component {
                   <CheckBox
 
                     label={sidesObj.name}
-                    checked={this.checkTest}
+                    checked={this.defaultVal}
                     labelStyle={styles.optionTitle}
                     onChange={(checked) => {
-                      checkTest = !checked;
-                      if (checkTest) {
+                      defaultVal = !checked;
+                      if (defaultVal) {
                         addSides(sidesObj);
                       } else {
                         subSides(sidesObj);
