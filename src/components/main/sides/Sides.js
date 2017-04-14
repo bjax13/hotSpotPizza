@@ -28,10 +28,18 @@ class Sides extends Component {
         }
 
         this.props.updateMain({pizzaSidesArray: response.data.results});
+        console.log(response.data.results);
+        for (var i = 0; i < response.data.results.length; i++) {
+          response.data.results[i].count = 0
+        }
+        console.log(response.data.results);
 
         for (var i = 2; i <= pages; i++) {
           axios.get(pageURL+i)
             .then((response)=>{
+              for (var i = 0; i < response.data.results.length; i++) {
+                response.data.results[i].count = 0
+              }
               this.props.updateMain({pizzaSidesArray: this.props.pizzaSidesArray.concat(response.data.results)})
             })
 
@@ -49,10 +57,41 @@ class Sides extends Component {
 
         let pizzaSides = this.props.pizzaSidesArray.map( (sidesObj, i) => {
 
-          sidesObj.count = 0;
+
           console.log(sidesObj);
 
             let checkTest = true;
+
+            getCount = () => {
+              return sidesObj.count
+            }
+
+            decrement = () =>{
+              let arr = this.props.pizzaSidesArray;
+
+
+              if (arr[i].count > 0) {
+                console.log(arr);
+                arr[i].count--;
+                console.log('dec '+ i + ' ' + arr[i].count) ;
+
+                console.log(arr[i].count);
+                this.props.updateMain({pizzaSidesArray: arr})
+
+              }
+              this.forceUpdate()
+
+            }
+            increment = () =>{
+              let arr = this.props.pizzaSidesArray;
+              console.log(arr);
+              arr[i].count++;
+              console.log('inc '+ i + ' ' + arr[i].count);
+
+              console.log(arr);
+              this.props.updateMain({pizzaSidesArray: arr})
+              this.forceUpdate()
+            }
 
             addSides = (sidesInputObj) =>{
 
@@ -96,14 +135,18 @@ class Sides extends Component {
                 </View>
 
                 <View style={{flex:1.5,flexDirection: 'row'}}>
-                  <TouchableHighlight style={{flex:1}}>
-                    <Text>-</Text>
+                  <TouchableHighlight
+                    onPress={ decrement}
+                    style={{flex:1}}>
+                    <Text> - </Text>
                   </TouchableHighlight>
                   <Text style={{flex:1}}>
-                    {sidesObj.count}
+                    {this.props.pizzaSidesArray[i].count}
                   </Text>
-                  <TouchableHighlight style={{flex:1}}>
-                    <Text>+</Text>
+                  <TouchableHighlight
+                    onPress={ increment}
+                    style={{flex:1}}>
+                    <Text> + </Text>
                   </TouchableHighlight>
                 </View>
                 <View style={{flex:1, alignItems: 'flex-end'}}>
