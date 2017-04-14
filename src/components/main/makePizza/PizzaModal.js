@@ -78,7 +78,7 @@ class PizzaModal extends Component {
                   <View style={{flex:9.5, padding: 15}}>
                     <PieOptions></PieOptions>
                     <Toppings></Toppings>
-                    <AddToOrder></AddToOrder>
+                    <AddToOrder type="pizzas"></AddToOrder>
                   </View>
 
                 </ScrollView>

@@ -70,7 +70,7 @@ class SideModal extends Component {
 
                   <View style={{flex:9.5, padding: 15}}>
                     <Sides></Sides>
-                    <AddToOrder></AddToOrder>
+                    <AddToOrder type="sides"></AddToOrder>
                   </View>
 
                 </ScrollView>

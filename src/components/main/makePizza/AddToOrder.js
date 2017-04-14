@@ -17,6 +17,7 @@ import {
 
 class AddToOrder extends Component {
 
+
     _onSubmit(){
       console.log('clicked-submit')
     }
@@ -28,6 +29,42 @@ class AddToOrder extends Component {
     }
 
     render() {
+      addPizzas = ()=>{
+        axios.post('http://10.100.0.98:8888/api/pizzas/', {
+          "price": (this.props.pizzaCost/this.props.pizzaQuantity).toFixed(2).toString(),
+          "public_display": false,
+          "size": this.props.pizzaSize[2],
+          "crust": this.props.pizzaCrust[2],
+          "toppings": this.props.customToppingArr
+        })
+        .then((response)=> {
+          let currentCart = this.props.cartItems;
+          let total = this.props.totalCost;
+          total += this.props.pizzaCost;
+          this.props.updateMain({totalCost: total})
+
+          currentCart.push({id: response.data.id , type: 'Pizza', data: response.data})
+
+          this.props.updateMain({cartItems: currentCart})
+          console.log(currentCart);
+
+          this.props.updateMain({ makePizzaModalVisible: !this.props.makePizzaModalVisible});
+          this.props.updateMain({ makeCartModalVisible: !this.props.makeCartModalVisible});
+          this.props.updateMain({
+            customToppingArr: [],
+            pizzaCost: 0,
+            totalToppingsCost: 0,
+          })
+
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+      addSides = ()=>{
+        console.log('you added da sides yo!');
+      }
+
         return (
           <View style={styles.container}>
             <TouchableHighlight
@@ -39,37 +76,14 @@ class AddToOrder extends Component {
               onPress={()=>{
 
                 this._onHideUnderlay();
-                console.log('Added Pizza')
-                axios.post('http://10.100.0.98:8888/api/pizzas/', {
-                  "price": (this.props.pizzaCost/this.props.pizzaQuantity).toFixed(2).toString(),
-                  "public_display": false,
-                  "size": this.props.pizzaSize[2],
-                  "crust": this.props.pizzaCrust[2],
-                  "toppings": this.props.customToppingArr
-                })
-                .then((response)=> {
-                  let currentCart = this.props.cartItems;
-                  let total = this.props.totalCost;
-                  total += this.props.pizzaCost;
-                  this.props.updateMain({totalCost: total})
 
-                  currentCart.push({id: response.data.id , type: 'Pizza', data: response.data})
-
-                  this.props.updateMain({cartItems: currentCart})
-                  console.log(currentCart);
-
-                  this.props.updateMain({ makePizzaModalVisible: !this.props.makePizzaModalVisible});
-                  this.props.updateMain({ makeCartModalVisible: !this.props.makeCartModalVisible});
-                  this.props.updateMain({
-                    customToppingArr: [],
-                    pizzaCost: 0,
-                    totalToppingsCost: 0, 
-                  })
-
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
+                if (this.props.type === 'pizzas') {
+                  addPizzas();
+                }else if (this.props.type === 'sides') {
+                  addSides();
+                }else {
+                  console.log('You need to specify a correct type ex: pizzas or sides');
+                }
                 // console.log({
                 //   "price": (this.props.pizzaCost/this.props.pizzaQuantity).toFixed(2).toString(),
                 //   "public_display": false,
