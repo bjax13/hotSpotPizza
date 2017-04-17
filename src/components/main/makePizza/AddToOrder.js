@@ -62,24 +62,26 @@ class AddToOrder extends Component {
         });
       }
       addSidesToOrder = ()=>{
-
+        let last = 0
         for (var i = 0; i < this.props.customSidesArr.length; i++) {
 
+
           if (this.props.pizzaSidesArray[this.props.customSidesArr[i]-1].count > 0) {
+            last++;
             axios.post('http://10.100.0.98:8888/api/side-counts/', {
                 "count": this.props.pizzaSidesArray[this.props.customSidesArr[i]-1].count,
                 "side": this.props.customSidesArr[i],
             })
             .then((response)=> {
-
+              last--;
               let currentCart = this.props.cartItems;
               let total = this.props.totalCost;
               let data = response.data;
               data.name = this.props.pizzaSidesArray[response.data.side-1].name
               data.price = this.props.pizzaSidesArray[response.data.side-1].price
-              total += this.props.sidesCost;
 
-              this.props.updateMain({totalCost: total})
+
+
 
               console.log({id: 's'+response.data.id , type: 'Side', data: response.data})
               currentCart.push({id: 's'+response.data.id , type: 'Side', data: response.data})
@@ -87,16 +89,20 @@ class AddToOrder extends Component {
               this.props.updateMain({cartItems: currentCart})
               console.log(currentCart);
 
-              this.props.updateMain({ makeSideModalVisible: !this.props.makeSideModalVisible});
-              this.props.updateMain({ makeCartModalVisible: true});
+              if (last === 0) {
+                total += this.props.sidesCost;
+                this.props.updateMain({totalCost: total})
+                this.props.updateMain({ makeSideModalVisible: !this.props.makeSideModalVisible});
+                this.props.updateMain({ makeCartModalVisible: true});
 
-              this.props.updateMain({
-                customToppingArr: [],
-                customSidesArr: [],
-                sidesCost: 0,
-                totalSidesCost: 0,
-                totalToppingsCost: 0,
-              })
+                this.props.updateMain({
+                  customToppingArr: [],
+                  customSidesArr: [],
+                  sidesCost: 0,
+                  totalSidesCost: 0,
+                  totalToppingsCost: 0,
+                })
+              }
 
             })
             .catch(function (error) {
