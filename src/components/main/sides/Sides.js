@@ -65,7 +65,7 @@ class Sides extends Component {
                 this.props.updateMain({pizzaSidesArray: arr})
 
                 if (this.props.customSidesArr.indexOf(arr[i].id) != -1) {
-                  this.props.updateMain({pizzaCost: (this.props.pizzaCost - (parseFloat(arr[i].price))) });
+                  this.props.updateMain({sidesCost: (this.props.sidesCost - (parseFloat(arr[i].price))) });
                   this.props.updateMain({totalSidesCost: this.props.totalSidesCost - parseFloat(arr[i].price)});
                 }
 
@@ -80,7 +80,7 @@ class Sides extends Component {
               this.props.updateMain({pizzaSidesArray: arr})
 
               if (this.props.customSidesArr.indexOf(arr[i].id) != -1) {
-                this.props.updateMain({pizzaCost: (this.props.pizzaCost + (parseFloat(arr[i].price))) });
+                this.props.updateMain({sidesCost: (this.props.sidesCost + (parseFloat(arr[i].price))) });
                 this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(arr[i].price)});
               }
 
@@ -94,13 +94,13 @@ class Sides extends Component {
               let newSideArr = this.props.customSidesArr;
               newSideArr.push(sidesInputObj.id);
               this.props.updateMain({customSidesArr: newSideArr});
-              this.props.updateMain({pizzaCost: (this.props.pizzaCost + (sidesInputObj.count*parseFloat(sidesInputObj.price))) });
+              this.props.updateMain({sidesCost: (this.props.sidesCost + (sidesInputObj.count*parseFloat(sidesInputObj.price))) });
               this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(sidesInputObj.price)});
 
             }
             subSides = (sidesInputObj) =>{
               let newSideArr = this.props.customSidesArr;
-              this.props.updateMain({pizzaCost: (this.props.pizzaCost - (sidesInputObj.count*parseFloat(sidesInputObj.price)))})
+              this.props.updateMain({sidesCost: (this.props.sidesCost - (sidesInputObj.count*parseFloat(sidesInputObj.price)))})
               this.props.updateMain({totalSidesCost: this.props.totalSidesCost - parseFloat(sidesInputObj.price)})
               for (var i = 0; i < newSideArr.length; i++) {
                 if (newSideArr[i] === sidesInputObj.id) {
@@ -174,7 +174,7 @@ class Sides extends Component {
 mapStateToProps = (state) => {
     return {
       pizzaTest: state.mainPage.pizzaTest,
-      pizzaCost: state.mainPage.pizzaCost,
+      sidesCost: state.mainPage.sidesCost,
       customSidesArr: state.mainPage.customSidesArr,
       totalSidesCost: state.mainPage.totalSidesCost,
       pizzaQuantity: state.mainPage.pizzaQuantity,

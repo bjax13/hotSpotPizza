@@ -8,8 +8,10 @@ const initialState = {
   makePizzaModalVisible: false,
   makeCartModalVisible: false,
   makeSideModalVisible: false,
+
   totalCost: 0.00,
   pizzaCost: 0.00,
+  sidesCost: 0.00,
   customToppingArr: [],
   customSidesArr: [],
   customPizzaObj: {
@@ -31,6 +33,7 @@ const initialState = {
   pizzaCrust: ['White', 0 , 1],
   pizzaCrustArray: [],
   pizzaCrustNameArray: ['Red Crust','Garlic White Crust', 'BBQ Crust', 'Buffalo Crust'],
+
   pizzaToppingArray: [],
   pizzaSidesArray: [],
   cartItems: [],

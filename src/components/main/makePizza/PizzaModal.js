@@ -48,7 +48,7 @@ class PizzaModal extends Component {
            <View style={{marginTop: 22,flex: 1}}>
             <View style={{margin: 5, flex:1}}>
               <View style={{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f7d9de'}}>
-                <Text style= {{fontWeight: '600'}}>{'$'+(this.props.totalCost+this.props.pizzaCost).toFixed(2)}</Text>
+                <Text style= {{fontWeight: '600'}}>{'$'+(this.props.totalCost+this.props.pizzaCost+this.props.sidesCost).toFixed(2)}</Text>
               </View>
 
               <TouchableHighlight
@@ -96,6 +96,7 @@ mapStateToProps = (state) => {
       makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
       totalCost: state.mainPage.totalCost,
       pizzaCost: state.mainPage.pizzaCost,
+      sidesCost: state.mainPage.sidesCost,
     }
 }
 

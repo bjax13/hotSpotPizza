@@ -27,13 +27,32 @@ class LineItems extends Component {
     }
 
     render() {
+      console.log(this.props.cartItems);
+
+
+
         let Items = this.props.cartItems
         .filter(item => this.props.deleted.indexOf(item.id) === -1)
         .map(item=> {
+          let ItemName = '';
+          let Price = 0;
+
+          console.log(item);
+
+
+          if (item.type === 'Side') {
+            ItemName = item.data.name
+          }else if (item.type === 'Pizza') {
+            ItemName = (this.props.pizzaSizeNameArray[item.data.size-1] + item.data.toppings.length +' Topping '+item.type);
+          }
+          else {
+            ItemName = 'erroros'
+          }
+
           return(
             <Item key={item.id} id={item.id} onDelete={id => this.onDelete(id)} >
               <View style={{flex:1, flexDirection: 'row'}}>
-                <Text style={{flex:20}}>{this.props.pizzaSizeNameArray[item.data.size-1]} {item.data.toppings.length} Topping {item.type}</Text>
+                <Text style={{flex:20}}>{ItemName}</Text>
                 <Text style={{flex:4}}>{"$"+parseFloat(item.data.price).toFixed(2)}</Text>
               </View>
             </Item>

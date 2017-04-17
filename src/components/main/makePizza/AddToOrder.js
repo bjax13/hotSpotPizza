@@ -29,7 +29,7 @@ class AddToOrder extends Component {
     }
 
     render() {
-      addPizzas = ()=>{
+      addPizzasToOrder = ()=>{
         axios.post('http://10.100.0.98:8888/api/pizzas/', {
           "price": (this.props.pizzaCost/this.props.pizzaQuantity).toFixed(2).toString(),
           "public_display": false,
@@ -43,7 +43,7 @@ class AddToOrder extends Component {
           total += this.props.pizzaCost;
           this.props.updateMain({totalCost: total})
 
-          currentCart.push({id: response.data.id , type: 'Pizza', data: response.data})
+          currentCart.push({id: 'p'+response.data.id , type: 'Pizza', data: response.data})
 
           this.props.updateMain({cartItems: currentCart})
           console.log(currentCart);
@@ -61,8 +61,55 @@ class AddToOrder extends Component {
           console.log(error);
         });
       }
-      addSides = ()=>{
+      addSidesToOrder = ()=>{
         console.log('you added da sides yo!');
+        console.log(this.props.pizzaSidesArray);
+        console.log(this.props.totalSidesCost);
+        console.log(this.props.customSidesArr);
+        for (var i = 0; i < this.props.customSidesArr.length; i++) {
+
+          if (this.props.pizzaSidesArray[this.props.customSidesArr[i]-1].count > 0) {
+            axios.post('http://10.100.0.98:8888/api/side-counts/', {
+                "count": this.props.pizzaSidesArray[this.props.customSidesArr[i]-1].count,
+                "side": this.props.customSidesArr[i],
+            })
+            .then((response)=> {
+              console.log(response);
+
+              console.log(this.props.sidesCost);
+              console.log(this.props.pizzaSidesArray[response.data.side-1].name);
+
+              let currentCart = this.props.cartItems;
+              let total = this.props.totalCost;
+              let data = response.data;
+              data.name = this.props.pizzaSidesArray[response.data.side-1].name
+              total += this.props.sidesCost;
+
+              this.props.updateMain({totalCost: total})
+
+              console.log({id: 's'+response.data.id , type: 'Side', data: response.data})
+              currentCart.push({id: 's'+response.data.id , type: 'Side', data: response.data})
+
+              this.props.updateMain({cartItems: currentCart})
+              console.log(currentCart);
+
+              this.props.updateMain({ makeSideModalVisible: !this.props.makeSideModalVisible});
+              this.props.updateMain({ makeCartModalVisible: true});
+
+              this.props.updateMain({
+                customToppingArr: [],
+                customSidesArr: [],
+                sidesCost: 0,
+                totalSidesCost: 0,
+                totalToppingsCost: 0,
+              })
+
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          }
+        }
       }
 
         return (
@@ -78,19 +125,12 @@ class AddToOrder extends Component {
                 this._onHideUnderlay();
 
                 if (this.props.type === 'pizzas') {
-                  addPizzas();
+                  addPizzasToOrder();
                 }else if (this.props.type === 'sides') {
-                  addSides();
+                  addSidesToOrder();
                 }else {
                   console.log('You need to specify a correct type ex: pizzas or sides');
                 }
-                // console.log({
-                //   "price": (this.props.pizzaCost/this.props.pizzaQuantity).toFixed(2).toString(),
-                //   "public_display": false,
-                //   "size": this.props.pizzaSize[2],
-                //   "crust": this.props.pizzaCrust[2],
-                //   "toppings": this.props.customToppingArr
-                // })
               }}>
 
               <View>
@@ -108,19 +148,25 @@ class AddToOrder extends Component {
 
 mapStateToProps = (state) => {
     return {
+      totalCost: state.mainPage.totalCost,
 
       pizzaTest: state.mainPage.pizzaTest,
-      totalCost: state.mainPage.totalCost,
-      cartItems: state.mainPage.cartItems,
       pizzaCost: state.mainPage.pizzaCost,
-      customToppingArr: state.mainPage.customToppingArr,
       pizzaSize: state.mainPage.pizzaSize,
       pizzaCrust: state.mainPage.pizzaCrust,
-      pizzaQuantity: state.mainPage.pizzaQuantity,
       submitPizza: state.mainPage.submitPizza,
-      totalCost: state.mainPage.totalCost,
+      pizzaQuantity: state.mainPage.pizzaQuantity,
+      customToppingArr: state.mainPage.customToppingArr,
       pizzaToppingArray: state.mainPage.pizzaToppingArray,
-      makePizzaModalVisible: state.mainPage.makePizzaModalVisible
+      makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
+
+      sidesCost: state.mainPage.sidesCost,
+      totalSidesCost: state.mainPage.totalSidesCost,
+      pizzaSidesArray: state.mainPage.pizzaSidesArray,
+      customSidesArr: state.mainPage.customSidesArr,
+      makeSideModalVisible: state.mainPage.makeSideModalVisible,
+
+      cartItems: state.mainPage.cartItems,
 
     }
 }
