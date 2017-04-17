@@ -46,7 +46,6 @@ class AddToOrder extends Component {
           currentCart.push({id: 'p'+response.data.id , type: 'Pizza', data: response.data})
 
           this.props.updateMain({cartItems: currentCart})
-          console.log(currentCart);
 
           this.props.updateMain({ makePizzaModalVisible: !this.props.makePizzaModalVisible});
           this.props.updateMain({ makeCartModalVisible: !this.props.makeCartModalVisible});
@@ -62,10 +61,7 @@ class AddToOrder extends Component {
         });
       }
       addSidesToOrder = ()=>{
-        console.log('you added da sides yo!');
-        console.log(this.props.pizzaSidesArray);
-        console.log(this.props.totalSidesCost);
-        console.log(this.props.customSidesArr);
+
         for (var i = 0; i < this.props.customSidesArr.length; i++) {
 
           if (this.props.pizzaSidesArray[this.props.customSidesArr[i]-1].count > 0) {
@@ -74,10 +70,6 @@ class AddToOrder extends Component {
                 "side": this.props.customSidesArr[i],
             })
             .then((response)=> {
-              console.log(response);
-
-              console.log(this.props.sidesCost);
-              console.log(this.props.pizzaSidesArray[response.data.side-1].name);
 
               let currentCart = this.props.cartItems;
               let total = this.props.totalCost;

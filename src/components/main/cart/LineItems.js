@@ -53,6 +53,7 @@ class LineItems extends Component {
             <Item key={item.id} id={item.id} onDelete={id => this.onDelete(id)} >
               <View style={{flex:1, flexDirection: 'row'}}>
                 <Text style={{flex:20}}>{ItemName}</Text>
+                <Text style={{flex:4}}>{item.data.count}</Text>
                 <Text style={{flex:4}}>{"$"+parseFloat(item.data.price).toFixed(2)}</Text>
               </View>
             </Item>
