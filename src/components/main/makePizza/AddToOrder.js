@@ -83,6 +83,7 @@ class AddToOrder extends Component {
               let total = this.props.totalCost;
               let data = response.data;
               data.name = this.props.pizzaSidesArray[response.data.side-1].name
+              data.price = this.props.pizzaSidesArray[response.data.side-1].price
               total += this.props.sidesCost;
 
               this.props.updateMain({totalCost: total})
