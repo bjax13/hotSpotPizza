@@ -73,7 +73,6 @@ class Sides extends Component {
               this.forceUpdate()
             }
             increment = () =>{
-              console.log(defaultVal);
               let arr = this.props.pizzaSidesArray;
               arr[i].count++;
               defaultVal= false;

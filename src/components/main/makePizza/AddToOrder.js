@@ -80,14 +80,10 @@ class AddToOrder extends Component {
               data.name = this.props.pizzaSidesArray[response.data.side-1].name
               data.price = this.props.pizzaSidesArray[response.data.side-1].price
 
-
-
-
-              console.log({id: 's'+response.data.id , type: 'Side', data: response.data})
               currentCart.push({id: 's'+response.data.id , type: 'Side', data: response.data})
 
               this.props.updateMain({cartItems: currentCart})
-              console.log(currentCart);
+
 
               if (last === 0) {
                 total += this.props.sidesCost;

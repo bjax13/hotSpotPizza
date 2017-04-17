@@ -15,12 +15,8 @@ import {
 class LineItems extends Component {
 
     onDelete (id) {
-
-      console.log(this.props.cartItems);
-
       for (var i = 0; i < this.props.cartItems.length; i++) {
         if (id === this.props.cartItems[i].id) {
-          console.log(this.props.cartItems[i].data);
           let totalCost = this.props.totalCost;
           totalCost -= this.props.cartItems[i].data.price * this.props.cartItems[i].data.count
           this.props.updateMain({totalCost: totalCost})
@@ -30,20 +26,13 @@ class LineItems extends Component {
     }
 
     render() {
-      console.log(this.props.cartItems);
-
-
-
         let Items = this.props.cartItems
         .filter(item => this.props.deleted.indexOf(item.id) === -1)
         .map(item=> {
           let ItemName = '';
           let Price = 0;
 
-          console.log(item);
-
-
-          if (item.type === 'Side') {
+        if (item.type === 'Side') {
             ItemName = item.data.name
           }else if (item.type === 'Pizza') {
             ItemName = (this.props.pizzaSizeNameArray[item.data.size-1] + item.data.toppings.length +' Topping '+item.type);
@@ -91,7 +80,6 @@ class Item extends Component {
           <View style={{flex:20}}>
             {this.props.children}
           </View>
-
       </View>
     )
   }
