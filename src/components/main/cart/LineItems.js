@@ -16,10 +16,13 @@ class LineItems extends Component {
 
     onDelete (id) {
 
+      console.log(this.props.cartItems);
+
       for (var i = 0; i < this.props.cartItems.length; i++) {
         if (id === this.props.cartItems[i].id) {
+          console.log(this.props.cartItems[i].data);
           let totalCost = this.props.totalCost;
-          totalCost -= this.props.cartItems[i].data.price
+          totalCost -= this.props.cartItems[i].data.price * this.props.cartItems[i].data.count
           this.props.updateMain({totalCost: totalCost})
         }
       }
@@ -54,7 +57,7 @@ class LineItems extends Component {
               <View style={{flex:1, flexDirection: 'row'}}>
                 <Text style={{flex:20}}>{ItemName}</Text>
                 <Text style={{flex:4}}>{item.data.count}</Text>
-                <Text style={{flex:4}}>{"$"+parseFloat(item.data.price).toFixed(2)}</Text>
+                <Text style={{flex:4}}>{"$"+parseFloat(item.data.price * item.data.count).toFixed(2)}</Text>
               </View>
             </Item>
           );

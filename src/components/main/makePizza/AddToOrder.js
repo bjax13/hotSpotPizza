@@ -40,6 +40,7 @@ class AddToOrder extends Component {
         .then((response)=> {
           let currentCart = this.props.cartItems;
           let total = this.props.totalCost;
+          response.data.count = this.props.pizzaQuantity;
           total += this.props.pizzaCost;
           this.props.updateMain({totalCost: total})
 
