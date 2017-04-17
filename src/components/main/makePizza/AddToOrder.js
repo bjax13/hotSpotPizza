@@ -46,17 +46,28 @@ class AddToOrder extends Component {
 
           currentCart.push({id: 'p'+response.data.id , type: 'Pizza', data: response.data})
 
-          this.props.updateMain({cartItems: currentCart})
-
-          this.props.updateMain({ makePizzaModalVisible: !this.props.makePizzaModalVisible});
-          this.props.updateMain({ makeCartModalVisible: !this.props.makeCartModalVisible});
-          this.props.updateMain({
-            customToppingArr: [],
-            pizzaCost: 0,
-            totalToppingsCost: 0,
+          axios.post('http://10.100.0.98:8888/api/pizza-counts/', {
+              "count": this.props.pizzaQuantity,
+              "pizza": response.data.id
           })
+          .then((response)=> {
 
-        })
+            currentCart[currentCart.length-1].data.countID = response.data.id;
+
+            this.props.updateMain({cartItems: currentCart})
+
+            this.props.updateMain({ makePizzaModalVisible: !this.props.makePizzaModalVisible});
+            this.props.updateMain({ makeCartModalVisible: !this.props.makeCartModalVisible});
+            this.props.updateMain({
+              customToppingArr: [],
+              pizzaCost: 0,
+              totalToppingsCost: 0,
+            })
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+          })
         .catch(function (error) {
           console.log(error);
         });

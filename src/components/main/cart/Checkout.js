@@ -39,6 +39,33 @@ class Checkout extends Component {
               onPress={()=>{
 
                 this._onHideUnderlay();
+                let p = [];
+                let s = [];
+
+                for (var i = 0; i < this.props.cartItems.length; i++) {
+
+                  if (this.props.cartItems[i].id[0] === 'p') {
+                    p.push(this.props.cartItems[i].data.countID)
+                  }else if (this.props.cartItems[i].id[0] === 's') {
+                    s.push(this.props.cartItems[i].data.id)
+                  }else {
+                    console.log('IDError: ID does not start with p or s');
+                  }
+                }
+                axios.post('http://10.100.0.98:8888/api/orders/', {
+                    "total": this.props.totalCost,
+                    "user": "dc6bb53d-2f23-4131-8ea4-a81a24063c0d",
+                    "pizzas": p,
+                    "sides": s,
+                })
+                .then((response)=> {
+                  console.log(response);
+                  console.log('AND THen?');
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+
                 console.log('Checkout')
               }}>
 
@@ -48,9 +75,7 @@ class Checkout extends Component {
                 </Text>
               </View>
             </TouchableHighlight>
-
           </View>
-
         )
     }
 }
@@ -112,8 +137,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 20,
   },
-
-
 });
 
 export default connect(mapStateToProps, mapDispatchToActionCreators)(Checkout)
