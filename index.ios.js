@@ -1,91 +1,52 @@
-
 import React, { Component } from 'react';
 import{ Provider } from 'react-redux'
 import store from './src/store'
 
 import Main from './src/components/main/Main'
+import CartModal from './src/components/main/cart/CartModal'
 
+import { NativeRouter, Route, Link } from 'react-router-native'
 
 import {
   AppRegistry,
   StyleSheet,
   Text,
   View,
-  Navigator,
   TouchableHighlight
 } from 'react-native';
 
+const Home = () => (
+  <Main></Main>
+)
+
 export default class hotSpotPizza extends Component {
   render() {
-    const routes = [
-      {title: 'Main', index: 0},
-      {title: 'First', index: 1},
-      {title: 'Second', index: 2},
-      {title: 'Third', index: 3},
-    ];
     return (
-
-
       <Provider store={ store }>
-        <Navigator
-          initialRoute={routes[0]}
-          initialRouteStack={routes}
-          renderScene={(route, navigator) => {
-            if (route.index ===0) {
-              return <Main></Main>
-            }else {
-              return (
-                <TouchableHighlight>
-                  <Text>Hello {route.title}!</Text>
-                </TouchableHighlight>
-              )
+        <NativeRouter>
+        <View style={styles.container}>
+          <View style={styles.nav}>
+            {/* <Link
+              to="/"
+              underlayColor='#f0f4f7'
+              style={styles.navItem}>
+                <Text>Main</Text>
+            </Link>
+            <Link
+              to="/Cart"
+              underlayColor='#f0f4f7'
+              style={styles.navItem}>
+                <Text>Cart</Text>
+            </Link> */}
 
-            }
-          }
+          </View>
 
-        }style={{paddingTop: 64}}
-          navigationBar={
-             <Navigator.NavigationBar
-               routeMapper={{
-                 LeftButton: (route, navigator, index, navState) =>
-                   {
-                     if (route.index === 0) {
-                          return null;
-                        } else {
-                          return (
-                            <TouchableHighlight onPress={() => navigator.pop()}>
-                              <Text>Back</Text>
-                            </TouchableHighlight>
-                          );
-                        }
-                   },
-                 RightButton: (route, navigator, index, navState) =>
-                   {
-                     return (
-                       <TouchableHighlight
-                           onPress={() => {
-                           if (route.index < routes.length-1) {
-
-                             navigator.push(routes[route.index+1]);
-                           }
-                         }}>
-                         <Text>Next</Text>
-                       </TouchableHighlight>
-                     );
-                   },
-                 Title: (route, navigator, index, navState) =>
-                   {
-                     return (
-                       <TouchableHighlight>
-                         <Text>Awesome {route.title}</Text>
-                       </TouchableHighlight>
-                     );
-                   },
-               }}
-               style={{backgroundColor: '#BB070C'}}
-             />
-          }
-        />
+          <Route exact path="/" component={Main}/>
+          <Route exact path="/Cart" component={CartModal}/>
+          {/* <Route path="/about" component={About}/>
+          <Route path="/topics" component={Topics}/> */}
+        </View>
+      </NativeRouter>
       </Provider>
 
     );
@@ -94,21 +55,30 @@ export default class hotSpotPizza extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    flex:1,
+    backgroundColor: '#f4fcff',
+    marginTop: 25,
+    padding: 10,
   },
-  welcome: {
+  header: {
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  nav: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
+  navItem: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 10,
+  },
+  subNavItem: {
+    padding: 5,
+  },
+  topic: {
+    textAlign: 'center',
+    fontSize: 15,
+  }
 });
 
 AppRegistry.registerComponent('hotSpotPizza', () => hotSpotPizza);
