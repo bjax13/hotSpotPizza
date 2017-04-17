@@ -52,19 +52,29 @@ class Checkout extends Component {
                     console.log('IDError: ID does not start with p or s');
                   }
                 }
-                axios.post('http://10.100.0.98:8888/api/orders/', {
-                    "total": this.props.totalCost,
-                    "user": "dc6bb53d-2f23-4131-8ea4-a81a24063c0d",
-                    "pizzas": p,
-                    "sides": s,
-                })
-                .then((response)=> {
-                  console.log(response);
-                  console.log('AND THen?');
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
+                console.log(p.length);
+                console.log(s.length);
+                console.log(this.props.deleted.length);
+                if (p.length + s.length > this.props.deleted.length ) {
+                  console.log('api Called');
+                  axios.post('http://10.100.0.98:8888/api/orders/', {
+                      "total": this.props.totalCost,
+                      "user": "dc6bb53d-2f23-4131-8ea4-a81a24063c0d",
+                      "pizzas": p,
+                      "sides": s,
+                  })
+                  .then((response)=> {
+                    this.props.updateMain({totalCost: 0})
+                    this.props.updateMain({cartItems: []})
+                    this.props.updateMain({makeCartModalVisible: false})
+
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+                }else {
+                  console.log('no items in cart');
+                }
 
                 console.log('Checkout')
               }}>
@@ -86,6 +96,7 @@ mapStateToProps = (state) => {
       pizzaTest: state.mainPage.pizzaTest,
       totalCost: state.mainPage.totalCost,
       cartItems: state.mainPage.cartItems,
+      deleted: state.mainPage.deleted,
       pizzaCost: state.mainPage.pizzaCost,
       customToppingArr: state.mainPage.customToppingArr,
       pizzaSize: state.mainPage.pizzaSize,
@@ -94,7 +105,8 @@ mapStateToProps = (state) => {
       submitPizza: state.mainPage.submitPizza,
       totalCost: state.mainPage.totalCost,
       pizzaToppingArray: state.mainPage.pizzaToppingArray,
-      makePizzaModalVisible: state.mainPage.makePizzaModalVisible
+      makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
+      makeCartModalVisible: state.mainPage.makeCartModalVisible,
 
     }
 }
