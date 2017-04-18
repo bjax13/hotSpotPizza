@@ -17,17 +17,11 @@ import {
     Text,
     View,
     Image,
-    Modal,
     TouchableHighlight,
 } from 'react-native'
 
 
 class Main extends Component {
-
-     setModalVisible(visible) {
-       this.props.updateMain({makePizzaModalVisible: visible});
-     }
-
     render() {
         return (
           <View style={{flex:1}}>
@@ -59,9 +53,6 @@ class Main extends Component {
 
 mapStateToProps = (state) => {
     return {
-      makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
-      makeCartModalVisible: state.mainPage.makeCartModalVisible,
-      makeSideModalVisible: state.mainPage.makeSideModalVisible,
       pizzaSizeNameArray: state.mainPage.pizzaSizeNameArray,
       pizzaSizeArray: state.mainPage.pizzaSizeArray,
       pizzaSize: state.mainPage.pizzaSize,

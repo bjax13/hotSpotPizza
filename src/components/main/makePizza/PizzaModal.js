@@ -15,8 +15,6 @@ import {
     Text,
     View,
     Image,
-    Button,
-    Modal,
     TouchableHighlight,
     ScrollView,
     Picker,
@@ -30,7 +28,7 @@ const onMakePizza = () => {
 
 class PizzaModal extends Component {
 
-     setModalVisible(visible) {
+     setDefaulValues() {
        this.props.updateMain({
          customToppingArr: [],
          pizzaCrust: ['White', 0 , 1],
@@ -39,7 +37,6 @@ class PizzaModal extends Component {
          pizzaSize: ['Large', 12, 3],
          totalToppingsCost: 0,
        })
-       this.props.updateMain({makePizzaModalVisible: visible});
      }
 
 
@@ -90,7 +87,6 @@ class PizzaModal extends Component {
 mapStateToProps = (state) => {
     return {
       pizzaTest: state.mainPage.pizzaTest,
-      makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
       totalCost: state.mainPage.totalCost,
       pizzaCost: state.mainPage.pizzaCost,
       sidesCost: state.mainPage.sidesCost,

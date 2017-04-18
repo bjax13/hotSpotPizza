@@ -17,8 +17,6 @@ import {
     Text,
     View,
     Image,
-    Button,
-    Modal,
     TouchableHighlight,
     ScrollView,
     Picker,
@@ -31,10 +29,6 @@ const onMakePizza = () => {
 };
 
 class CartModal extends Component {
-
-     setModalVisible(visible) {
-       this.props.updateMain({makeCartModalVisible: visible});
-     }
 
     render() {
 
@@ -92,7 +86,6 @@ class CartModal extends Component {
 mapStateToProps = (state) => {
     return {
       pizzaTest: state.mainPage.pizzaTest,
-      makeCartModalVisible: state.mainPage.makeCartModalVisible,
       totalCost: state.mainPage.totalCost,
       pizzaCost: state.mainPage.pizzaCost,
       totalToppingsCost: state.mainPage.totalToppingsCost,

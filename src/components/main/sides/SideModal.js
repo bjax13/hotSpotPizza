@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
-import ModalDropdown from 'react-native-modal-dropdown';
-
 import { Actions } from 'react-native-router-flux'
 
 import Sides from './Sides';
@@ -16,8 +14,6 @@ import {
     Text,
     View,
     Image,
-    Button,
-    Modal,
     TouchableHighlight,
     ScrollView,
     Picker,
@@ -40,8 +36,6 @@ class SideModal extends Component {
          pizzaSize: ['Large', 12, 3],
          totalToppingsCost: 0,
        })
-       this.props.updateMain({makeSideModalVisible: visible});
-       this.props.updateMain({makeCartModalVisible: !visible});
      }
 
 
@@ -80,8 +74,6 @@ class SideModal extends Component {
 mapStateToProps = (state) => {
     return {
       pizzaTest: state.mainPage.pizzaTest,
-      makeSideModalVisible: state.mainPage.makeSideModalVisible,
-      makeCartModalVisible: state.mainPage.makeCartModalVisible,
       totalCost: state.mainPage.totalCost,
       pizzaCost: state.mainPage.pizzaCost,
       sidesCost: state.mainPage.sidesCost,

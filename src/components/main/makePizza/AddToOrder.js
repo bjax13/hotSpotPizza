@@ -99,8 +99,6 @@ class AddToOrder extends Component {
               if (last === 0) {
                 total += this.props.sidesCost;
                 this.props.updateMain({totalCost: total})
-                this.props.updateMain({ makeSideModalVisible: !this.props.makeSideModalVisible});
-                this.props.updateMain({ makeCartModalVisible: true});
 
                 this.props.updateMain({
                   customToppingArr: [],
@@ -168,13 +166,11 @@ mapStateToProps = (state) => {
       pizzaQuantity: state.mainPage.pizzaQuantity,
       customToppingArr: state.mainPage.customToppingArr,
       pizzaToppingArray: state.mainPage.pizzaToppingArray,
-      makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
 
       sidesCost: state.mainPage.sidesCost,
       totalSidesCost: state.mainPage.totalSidesCost,
       pizzaSidesArray: state.mainPage.pizzaSidesArray,
       customSidesArr: state.mainPage.customSidesArr,
-      makeSideModalVisible: state.mainPage.makeSideModalVisible,
 
       cartItems: state.mainPage.cartItems,
 

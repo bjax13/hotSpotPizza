@@ -5,10 +5,6 @@ const initialState = {
   pizzaTest: false,
   submitPizza: false,
 
-  makePizzaModalVisible: false,
-  makeCartModalVisible: false,
-  makeSideModalVisible: false,
-
   totalCost: 0.00,
   pizzaCost: 0.00,
   sidesCost: 0.00,

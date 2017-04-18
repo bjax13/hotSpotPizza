@@ -66,8 +66,6 @@ class Checkout extends Component {
                   .then((response)=> {
                     this.props.updateMain({totalCost: 0})
                     this.props.updateMain({cartItems: []})
-                    this.props.updateMain({makeCartModalVisible: false})
-
                   })
                   .catch(function (error) {
                     console.log(error);
@@ -105,8 +103,6 @@ mapStateToProps = (state) => {
       submitPizza: state.mainPage.submitPizza,
       totalCost: state.mainPage.totalCost,
       pizzaToppingArray: state.mainPage.pizzaToppingArray,
-      makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
-      makeCartModalVisible: state.mainPage.makeCartModalVisible,
 
     }
 }
