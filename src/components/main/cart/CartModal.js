@@ -19,8 +19,6 @@ import {
     Image,
     TouchableHighlight,
     ScrollView,
-    Picker,
-    Item
 } from 'react-native'
 
 const onMakePizza = () => {

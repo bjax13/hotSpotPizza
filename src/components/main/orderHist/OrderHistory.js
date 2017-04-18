@@ -3,12 +3,7 @@ import { connect } from 'react-redux'
 import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
-import ModalDropdown from 'react-native-modal-dropdown';
 import { Actions } from 'react-native-router-flux'
-
-import Toppings from './Toppings';
-import PieOptions from './PieOptions';
-import AddToOrder from './AddToOrder';
 
 import {
     StyleSheet,
@@ -24,19 +19,7 @@ const onMakePizza = () => {
   console.log('Button has been pressed!');
 };
 
-class PizzaModal extends Component {
-
-     setDefaulValues() {
-       this.props.updateMain({
-         customToppingArr: [],
-         pizzaCrust: ['White', 0 , 1],
-         pizzaSauce: ['Red Sauce',0 , -1],
-         pizzaQuantity: 1,
-         pizzaSize: ['Large', 12, 3],
-         totalToppingsCost: 0,
-       })
-     }
-
+class OrderHistory extends Component {
 
     render() {
 
@@ -44,33 +27,20 @@ class PizzaModal extends Component {
            <View style={{marginTop: 22,flex: 1}}>
             <View style={{margin: 5, flex:1}}>
               <View style={{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f7d9de'}}>
-                <Text style= {{fontWeight: '600'}}>{'$'+(this.props.totalCost+this.props.pizzaCost).toFixed(2)}</Text>
+                <Text style= {{fontWeight: '600'}}>Order History</Text>
               </View>
 
               <TouchableHighlight
                 style={{position: 'absolute', right: 20 , top: 20 }}
-                onPress={() =>{
-                  Actions.pop()
-                }}>
+                onPress={Actions.pop}>
                 <Text style={{fontWeight: '900', color: 'gray'}}>X</Text>
               </TouchableHighlight>
 
               <View style={{flex:9.5}}>
                 <ScrollView >
 
-                  <View style={{flex:1.5, padding: 15}}>
-                    <Text style={styles.welcome}>Pizza Builder</Text>
-                    <Text style={styles.instructions}>Build your perfict pizza by adding crusts and options</Text>
-                  </View>
-
-                  <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
-                      {/* This is the deviding line between welcome and instructions */}
-                  </View>
-
                   <View style={{flex:9.5, padding: 15}}>
-                    <PieOptions></PieOptions>
-                    <Toppings></Toppings>
-                    <AddToOrder type="pizzas"></AddToOrder>
+
                   </View>
 
                 </ScrollView>
@@ -122,4 +92,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToActionCreators)(PizzaModal)
+export default connect(mapStateToProps, mapDispatchToActionCreators)(OrderHistory)

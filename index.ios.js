@@ -6,6 +6,7 @@ import Main from './src/components/main/Main'
 import CartModal from './src/components/main/cart/CartModal'
 import PizzaModal from './src/components/main/makePizza/PizzaModal'
 import SideModal from './src/components/main/sides/SideModal'
+import OrderHistory from './src/components/main/orderHist/OrderHistory'
 
 import { Router, Scene } from 'react-native-router-flux'
 
@@ -29,8 +30,9 @@ export default class hotSpotPizza extends Component {
          <Scene key="root">
            <Scene key="Main" component={Main} title="Main Page" initial={true} />
            <Scene key="Cart" component={CartModal} title="Cart Page" />
-           <Scene key="MakePizza" component={PizzaModal} title="Cart Page" />
-           <Scene key="AddSides" component={SideModal} title="Cart Page" />
+           <Scene key="MakePizza" component={PizzaModal} title="MakePizza Page" />
+           <Scene key="AddSides" component={SideModal} title="AddSides Page" />
+           <Scene key="OrderHistory" component={OrderHistory} title="OrderHistory Page" />
          </Scene>
        </Router>
       </Provider>

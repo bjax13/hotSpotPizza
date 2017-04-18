@@ -44,6 +44,12 @@ class Main extends Component {
                       <TouchableHighlight onPress={Actions.MakePizza}>
                         <Text style={{color: 'red'}}>Make A Pizza!</Text>
                       </TouchableHighlight>
+                      <Text>
+
+                      </Text>
+                      <TouchableHighlight onPress={Actions.OrderHistory}>
+                        <Text style={{color: 'blue'}}>Order History</Text>
+                      </TouchableHighlight>
                     </View>
                 </View>
             </View>
