@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
-import ModalDropdown from 'react-native-modal-dropdown';
-
 import OrderSummary from './OrderSummary';
 import Checkout from './Checkout';
 import AddPizza from './AddPizza';
@@ -16,7 +14,6 @@ import {
     StyleSheet,
     Text,
     View,
-    Image,
     TouchableHighlight,
     ScrollView,
 } from 'react-native'
@@ -83,11 +80,7 @@ class CartModal extends Component {
 
 mapStateToProps = (state) => {
     return {
-      pizzaTest: state.mainPage.pizzaTest,
       totalCost: state.mainPage.totalCost,
-      pizzaCost: state.mainPage.pizzaCost,
-      totalToppingsCost: state.mainPage.totalToppingsCost,
-      customToppingArr: state.mainPage.customToppingArr,
     }
 }
 

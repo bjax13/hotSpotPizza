@@ -12,10 +12,7 @@ import {
     Text,
     View,
     TouchableHighlight,
-    TouchableWithoutFeedback,
-
 } from 'react-native'
-
 
 class AddSides extends Component {
 
@@ -49,18 +46,14 @@ class AddSides extends Component {
                 </Text>
               </View>
             </TouchableHighlight>
-
           </View>
-
         )
     }
 }
 
 mapStateToProps = (state) => {
     return {
-
       submitPizza: state.mainPage.submitPizza,
-
     }
 }
 

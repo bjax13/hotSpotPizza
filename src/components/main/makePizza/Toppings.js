@@ -112,7 +112,6 @@ class Toppings extends Component {
 
 mapStateToProps = (state) => {
     return {
-      pizzaTest: state.mainPage.pizzaTest,
       pizzaCost: state.mainPage.pizzaCost,
       customToppingArr: state.mainPage.customToppingArr,
       totalToppingsCost: state.mainPage.totalToppingsCost,

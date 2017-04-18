@@ -12,8 +12,6 @@ import {
     Text,
     View,
     TouchableHighlight,
-    TouchableWithoutFeedback,
-
 } from 'react-native'
 
 
@@ -58,9 +56,7 @@ class AddPizza extends Component {
 
 mapStateToProps = (state) => {
     return {
-
       submitPizza: state.mainPage.submitPizza,
-
     }
 }
 

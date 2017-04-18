@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
-import CheckBox from 'react-native-checkbox';
 import axios from 'axios';
 
 import TotalLine from './TotalLine'
@@ -30,8 +29,6 @@ class OrderSummary extends Component {
               </View>
               <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
               </View>
-
-
               <LineItems></LineItems>
               <TotalLine></TotalLine>
 
@@ -43,10 +40,7 @@ class OrderSummary extends Component {
 
 mapStateToProps = (state) => {
     return {
-      pizzaTest: state.mainPage.pizzaTest,
-      pizzaSizeNameArray: state.mainPage.pizzaSizeNameArray,
-      cartItems: state.mainPage.cartItems,
-      totalCost: state.mainPage.totalCost,
+
     }
 }
 

@@ -14,11 +14,6 @@ import {
     ScrollView,
 } from 'react-native'
 
-const onMakePizza = () => {
-
-  console.log('Button has been pressed!');
-};
-
 class OrderHistory extends Component {
 
     render() {
@@ -54,10 +49,7 @@ class OrderHistory extends Component {
 
 mapStateToProps = (state) => {
     return {
-      pizzaTest: state.mainPage.pizzaTest,
-      totalCost: state.mainPage.totalCost,
-      pizzaCost: state.mainPage.pizzaCost,
-      sidesCost: state.mainPage.sidesCost,
+      // pizzaTest: state.mainPage.pizzaTest,
     }
 }
 

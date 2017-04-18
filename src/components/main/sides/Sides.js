@@ -172,11 +172,9 @@ class Sides extends Component {
 
 mapStateToProps = (state) => {
     return {
-      pizzaTest: state.mainPage.pizzaTest,
       sidesCost: state.mainPage.sidesCost,
       customSidesArr: state.mainPage.customSidesArr,
       totalSidesCost: state.mainPage.totalSidesCost,
-      pizzaQuantity: state.mainPage.pizzaQuantity,
       pizzaSidesArray: state.mainPage.pizzaSidesArray,
     }
 }

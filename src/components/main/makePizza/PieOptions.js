@@ -164,8 +164,6 @@ mapStateToProps = (state) => {
       pizzaSauceArray: state.mainPage.pizzaSauceArray,
       pizzaSizeArray: state.mainPage.pizzaSizeArray,
       pizzaSizeNameArray: state.mainPage.pizzaSizeNameArray,
-      totalCost: state.mainPage.totalCost,
-      pizzaToppingArray: state.mainPage.pizzaToppingArray,
     }
 }
 

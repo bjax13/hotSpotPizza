@@ -6,14 +6,12 @@ import { updateMain } from '../../../actions/updateMainPageActions';
 import { Actions } from 'react-native-router-flux'
 
 import Sides from './Sides';
-import PieOptions from '../makePizza/PieOptions';
 import AddToOrder from '../makePizza/AddToOrder';
 
 import {
     StyleSheet,
     Text,
     View,
-    Image,
     TouchableHighlight,
     ScrollView,
 } from 'react-native'
@@ -71,9 +69,7 @@ class SideModal extends Component {
 
 mapStateToProps = (state) => {
     return {
-      pizzaTest: state.mainPage.pizzaTest,
       totalCost: state.mainPage.totalCost,
-      pizzaCost: state.mainPage.pizzaCost,
       sidesCost: state.mainPage.sidesCost,
     }
 }

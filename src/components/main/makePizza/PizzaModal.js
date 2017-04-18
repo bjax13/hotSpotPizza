@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
-import ModalDropdown from 'react-native-modal-dropdown';
 import { Actions } from 'react-native-router-flux'
 
 import Toppings from './Toppings';
@@ -18,11 +17,6 @@ import {
     TouchableHighlight,
     ScrollView,
 } from 'react-native'
-
-const onMakePizza = () => {
-
-  console.log('Button has been pressed!');
-};
 
 class PizzaModal extends Component {
 
@@ -84,10 +78,8 @@ class PizzaModal extends Component {
 
 mapStateToProps = (state) => {
     return {
-      pizzaTest: state.mainPage.pizzaTest,
       totalCost: state.mainPage.totalCost,
       pizzaCost: state.mainPage.pizzaCost,
-      sidesCost: state.mainPage.sidesCost,
     }
 }
 

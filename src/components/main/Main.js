@@ -5,12 +5,7 @@ import { updateMain } from '../../actions/updateMainPageActions';
 
 import { Actions } from 'react-native-router-flux'
 
-import ModalDropdown from 'react-native-modal-dropdown';
 import axios from 'axios';
-
-import PizzaModal from './makePizza/PizzaModal';
-import CartModal from './cart/CartModal';
-import SideModal from './sides/SideModal';
 
 import {
     StyleSheet,
@@ -59,13 +54,7 @@ class Main extends Component {
 
 mapStateToProps = (state) => {
     return {
-      pizzaSizeNameArray: state.mainPage.pizzaSizeNameArray,
-      pizzaSizeArray: state.mainPage.pizzaSizeArray,
-      pizzaSize: state.mainPage.pizzaSize,
-      pizzaSauce: state.mainPage.pizzaSauce,
-      pizzaCrust: state.mainPage.pizzaCrust,
-      totalToppingsCost: state.mainPage.totalToppingsCost,
-      pizzaQuantity: state.mainPage.pizzaQuantity,
+      // pizzaSize: state.mainPage.pizzaSize,
     }
 }
 

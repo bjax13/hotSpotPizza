@@ -11,17 +11,11 @@ import {
     Text,
     View,
     TouchableHighlight,
-    TouchableWithoutFeedback,
-
 } from 'react-native'
 
 
 class AddToOrder extends Component {
 
-
-    _onSubmit(){
-      console.log('clicked-submit')
-    }
     _onHideUnderlay(){
       this.props.updateMain({ submitPizza: false });
     }
@@ -158,14 +152,12 @@ mapStateToProps = (state) => {
     return {
       totalCost: state.mainPage.totalCost,
 
-      pizzaTest: state.mainPage.pizzaTest,
       pizzaCost: state.mainPage.pizzaCost,
       pizzaSize: state.mainPage.pizzaSize,
       pizzaCrust: state.mainPage.pizzaCrust,
       submitPizza: state.mainPage.submitPizza,
       pizzaQuantity: state.mainPage.pizzaQuantity,
       customToppingArr: state.mainPage.customToppingArr,
-      pizzaToppingArray: state.mainPage.pizzaToppingArray,
 
       sidesCost: state.mainPage.sidesCost,
       totalSidesCost: state.mainPage.totalSidesCost,
