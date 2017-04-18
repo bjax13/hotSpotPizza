@@ -5,11 +5,12 @@ import { updateMain } from '../../../actions/updateMainPageActions';
 
 import { Actions } from 'react-native-router-flux'
 
+import PastOrders from './PastOrders'
+
 import {
     StyleSheet,
     Text,
     View,
-    Image,
     TouchableHighlight,
     ScrollView,
 } from 'react-native'
@@ -35,7 +36,7 @@ class OrderHistory extends Component {
                 <ScrollView >
 
                   <View style={{flex:9.5, padding: 15}}>
-
+                    <PastOrders></PastOrders>
                   </View>
 
                 </ScrollView>
