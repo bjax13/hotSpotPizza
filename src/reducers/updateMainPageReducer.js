@@ -31,6 +31,7 @@ const initialState = {
   pizzaCrustNameArray: ['Red Crust','Garlic White Crust', 'BBQ Crust', 'Buffalo Crust'],
 
   orderHistoryArray: [],
+  orderHistoryModal: false,
   pizzaToppingArray: [],
   pizzaSidesArray: [],
   cartItems: [],

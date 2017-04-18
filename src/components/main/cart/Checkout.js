@@ -4,6 +4,7 @@ import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
 import axios from 'axios';
+import { Actions } from 'react-native-router-flux'
 
 import {
     StyleSheet,
@@ -16,9 +17,6 @@ import {
 
 class Checkout extends Component {
 
-    _onSubmit(){
-      console.log('clicked-submit')
-    }
     _onHideUnderlay(){
       this.props.updateMain({ submitPizza: false });
     }
@@ -62,6 +60,7 @@ class Checkout extends Component {
                   .then((response)=> {
                     this.props.updateMain({totalCost: 0})
                     this.props.updateMain({cartItems: []})
+                    Actions.Main();
                   })
                   .catch(function (error) {
                     console.log(error);

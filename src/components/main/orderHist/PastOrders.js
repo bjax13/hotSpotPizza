@@ -81,6 +81,7 @@ mapStateToProps = (state) => {
     return {
       pizzaTest: state.mainPage.pizzaTest,
       orderHistoryArray: state.mainPage.orderHistoryArray,
+      orderHistoryModal: state.mainPage.orderHistoryModal,
     }
 }
 
