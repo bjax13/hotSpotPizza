@@ -25,7 +25,7 @@ export default class hotSpotPizza extends Component {
   render() {
     return (
       <Provider store={ store }>
-        <Router>
+        <Router hideNavBar={true}>
          <Scene key="root">
            <Scene key="Main" component={Main} title="Main Page" initial={true} />
            <Scene key="Cart" component={CartModal} title="Cart Page" />

@@ -46,7 +46,7 @@ class LineItems extends Component {
               <View style={{flex:1, flexDirection: 'row'}}>
                 <Text style={{flex:20}}>{ItemName}</Text>
                 <Text style={{flex:4}}>{item.data.count}</Text>
-                <Text style={{flex:4}}>{"$"+parseFloat(item.data.price * item.data.count).toFixed(2)}</Text>
+                <Text style={{flex:5}}>{"$"+parseFloat(item.data.price * item.data.count).toFixed(2)}</Text>
               </View>
             </Item>
           );
