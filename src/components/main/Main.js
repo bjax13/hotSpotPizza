@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { updateSettings } from '../../actions/updateSettingsPageActions';
 import { updateMain } from '../../actions/updateMainPageActions';
 
-import { Link } from 'react-router-native'
+import { Actions } from 'react-native-router-flux'
 
 import ModalDropdown from 'react-native-modal-dropdown';
 import axios from 'axios';
@@ -46,47 +46,8 @@ class Main extends Component {
                         Get Started by building your Pizza below
                       </Text>
 
-                      <Modal
-                        animationType={"fade"}
-                        transparent={false}
-                        visible={this.props.makePizzaModalVisible}
-                        onRequestClose={() => {alert("Modal has been closed.")}}
-                        >
-                          <PizzaModal></PizzaModal>
 
-                      </Modal>
-                      <Modal
-                        animationType={"fade"}
-                        transparent={false}
-                        visible={this.props.makeCartModalVisible}
-                        onRequestClose={() => {alert("Modal has been closed.")}}
-                        >
-                          <CartModal></CartModal>
-
-                      </Modal>
-                      <Modal
-                        animationType={"fade"}
-                        transparent={false}
-                        visible={this.props.makeSideModalVisible}
-                        onRequestClose={() => {alert("Modal has been closed.")}}
-                        >
-                          <SideModal></SideModal>
-
-                      </Modal>
-
-                      <Link
-                        to="/Cart"
-                        underlayColor='#f0f4f7'
-                        style={styles.navItem}>
-                          <Text>Cart</Text>
-                      </Link>
-
-                      <TouchableHighlight onPress={() => {
-
-
-                          this.props.updateMain({makePizzaModalVisible: true});
-                        // this.setModalVisible(true)
-                      }}>
+                      <TouchableHighlight onPress={Actions.MakePizza}>
                         <Text style={{color: 'red'}}>Make A Pizza!</Text>
                       </TouchableHighlight>
                     </View>

@@ -5,6 +5,8 @@ import { updateMain } from '../../../actions/updateMainPageActions';
 
 import axios from 'axios';
 
+import { Actions } from 'react-native-router-flux'
+
 import {
     StyleSheet,
     Text,
@@ -37,12 +39,8 @@ class AddPizza extends Component {
               onHideUnderlay={this._onHideUnderlay.bind(this)}
               onShowUnderlay={this._onShowUnderlay.bind(this)}
               onPress={()=>{
-
-                this.props.updateMain({ makePizzaModalVisible: !this.props.makePizzaModalVisible});
-                this.props.updateMain({ makeCartModalVisible: !this.props.makeCartModalVisible});
-
                 this._onHideUnderlay();
-                console.log('AddPizza')
+                Actions.MakePizza();
               }}>
 
               <View>

@@ -4,8 +4,10 @@ import store from './src/store'
 
 import Main from './src/components/main/Main'
 import CartModal from './src/components/main/cart/CartModal'
+import PizzaModal from './src/components/main/makePizza/PizzaModal'
+import SideModal from './src/components/main/sides/SideModal'
 
-import { NativeRouter, Route, Link } from 'react-router-native'
+import { Router, Scene } from 'react-native-router-flux'
 
 import {
   AppRegistry,
@@ -23,30 +25,14 @@ export default class hotSpotPizza extends Component {
   render() {
     return (
       <Provider store={ store }>
-        <NativeRouter>
-        <View style={styles.container}>
-          <View style={styles.nav}>
-            {/* <Link
-              to="/"
-              underlayColor='#f0f4f7'
-              style={styles.navItem}>
-                <Text>Main</Text>
-            </Link>
-            <Link
-              to="/Cart"
-              underlayColor='#f0f4f7'
-              style={styles.navItem}>
-                <Text>Cart</Text>
-            </Link> */}
-
-          </View>
-
-          <Route exact path="/" component={Main}/>
-          <Route exact path="/Cart" component={CartModal}/>
-          {/* <Route path="/about" component={About}/>
-          <Route path="/topics" component={Topics}/> */}
-        </View>
-      </NativeRouter>
+        <Router>
+         <Scene key="root">
+           <Scene key="Main" component={Main} title="Main Page" initial={true} />
+           <Scene key="Cart" component={CartModal} title="Cart Page" />
+           <Scene key="MakePizza" component={PizzaModal} title="Cart Page" />
+           <Scene key="AddSides" component={SideModal} title="Cart Page" />
+         </Scene>
+       </Router>
       </Provider>
 
     );

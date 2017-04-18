@@ -10,6 +10,8 @@ import Checkout from './Checkout';
 import AddPizza from './AddPizza';
 import AddSides from './AddSides';
 
+import { Actions } from 'react-native-router-flux'
+
 import {
     StyleSheet,
     Text,
@@ -46,9 +48,7 @@ class CartModal extends Component {
 
               <TouchableHighlight
                 style={{position: 'absolute', right: 20 , top: 20 }}
-                onPress={() =>{
-                  this.setModalVisible(!this.props.makeCartModalVisible)
-                }}>
+                onPress={Actions.Main}>
                 <Text style={{fontWeight: '900', color: 'gray'}}>X</Text>
               </TouchableHighlight>
 

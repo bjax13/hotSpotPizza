@@ -4,6 +4,7 @@ import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
 import ModalDropdown from 'react-native-modal-dropdown';
+import { Actions } from 'react-native-router-flux'
 
 import Toppings from './Toppings';
 import PieOptions from './PieOptions';
@@ -54,11 +55,7 @@ class PizzaModal extends Component {
               <TouchableHighlight
                 style={{position: 'absolute', right: 20 , top: 20 }}
                 onPress={() =>{
-                  console.log(this.props.totalCost);
-                  console.log(this.props.pizzaCost);
-
-
-                  this.setModalVisible(!this.props.makePizzaModalVisible)
+                  Actions.pop()
                 }}>
                 <Text style={{fontWeight: '900', color: 'gray'}}>X</Text>
               </TouchableHighlight>

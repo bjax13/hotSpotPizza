@@ -4,6 +4,7 @@ import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
 import axios from 'axios';
+import { Actions } from 'react-native-router-flux'
 
 import {
     StyleSheet,
@@ -63,6 +64,7 @@ class AddToOrder extends Component {
               pizzaCost: 0,
               totalToppingsCost: 0,
             })
+            Actions.Cart();
           })
           .catch(function (error) {
             console.log(error);
@@ -109,6 +111,7 @@ class AddToOrder extends Component {
                   totalSidesCost: 0,
                   totalToppingsCost: 0,
                 })
+                Actions.Cart();
               }
 
             })
@@ -133,8 +136,10 @@ class AddToOrder extends Component {
 
                 if (this.props.type === 'pizzas') {
                   addPizzasToOrder();
+
                 }else if (this.props.type === 'sides') {
                   addSidesToOrder();
+
                 }else {
                   console.log('You need to specify a correct type ex: pizzas or sides');
                 }
