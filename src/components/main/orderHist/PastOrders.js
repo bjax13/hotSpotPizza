@@ -44,14 +44,14 @@ class OrderHistory extends Component {
 
     render() {
 
-        let pizzaToppings = this.props.orderHistoryArray.map( (orderObj, i) => {
+        let pizzaToppings = this.props.orderHistoryArray.sort((a,b)=>{return b.id - a.id}).map( (orderObj, i) => {
             console.log(orderObj);
             console.log(i);
             console.log(moment(orderObj.created_at).format('LL'));
 
             return (
               <View key={orderObj.id} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
-                <Text style={[styles.instructions,{flex:10}]}>{moment(orderObj.created_at).format('MMM Do')}</Text>
+                <Text style={[styles.instructions,{flex:10}]}>{moment(orderObj.created_at).format('MMM Do')}  # {orderObj.id}</Text>
                 <Text style={[styles.instructions,{flex:5}]}>{"$"+parseFloat(orderObj.total).toFixed(2)}</Text>
                 <Text style={[styles.instructions,{flex:4}]}>Details ></Text>
               </View>
