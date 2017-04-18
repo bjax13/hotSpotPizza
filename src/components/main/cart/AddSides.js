@@ -59,19 +59,7 @@ class AddSides extends Component {
 mapStateToProps = (state) => {
     return {
 
-      pizzaTest: state.mainPage.pizzaTest,
-      totalCost: state.mainPage.totalCost,
-      cartItems: state.mainPage.cartItems,
-      pizzaCost: state.mainPage.pizzaCost,
-      customToppingArr: state.mainPage.customToppingArr,
-      pizzaSize: state.mainPage.pizzaSize,
-      pizzaCrust: state.mainPage.pizzaCrust,
-      pizzaQuantity: state.mainPage.pizzaQuantity,
       submitPizza: state.mainPage.submitPizza,
-      totalCost: state.mainPage.totalCost,
-      pizzaToppingArray: state.mainPage.pizzaToppingArray,
-      makeCartModalVisible: state.mainPage.makeCartModalVisible,
-      makeSideModalVisible: state.mainPage.makeSideModalVisible,
 
     }
 }

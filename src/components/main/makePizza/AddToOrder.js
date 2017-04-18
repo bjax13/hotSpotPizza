@@ -43,7 +43,7 @@ class AddToOrder extends Component {
           let total = this.props.totalCost;
           response.data.count = this.props.pizzaQuantity;
           total += this.props.pizzaCost;
-          this.props.updateMain({totalCost: total})
+
 
           currentCart.push({id: 'p'+response.data.id , type: 'Pizza', data: response.data})
 
@@ -56,14 +56,12 @@ class AddToOrder extends Component {
             currentCart[currentCart.length-1].data.countID = response.data.id;
 
             this.props.updateMain({cartItems: currentCart})
+            console.log('this is logged');
 
-            this.props.updateMain({ makePizzaModalVisible: !this.props.makePizzaModalVisible});
-            this.props.updateMain({ makeCartModalVisible: !this.props.makeCartModalVisible});
-            this.props.updateMain({
-              customToppingArr: [],
-              pizzaCost: 0,
-              totalToppingsCost: 0,
-            })
+            this.props.updateMain({ pizzaCost: 0});
+            this.props.updateMain({ totalToppingsCost: 0});
+            this.props.updateMain({customToppingArr: []})
+            this.props.updateMain({totalCost: total})
             Actions.Cart();
           })
           .catch(function (error) {

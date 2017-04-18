@@ -59,12 +59,7 @@ class AddPizza extends Component {
 mapStateToProps = (state) => {
     return {
 
-
       submitPizza: state.mainPage.submitPizza,
-      totalCost: state.mainPage.totalCost,
-      pizzaToppingArray: state.mainPage.pizzaToppingArray,
-      makePizzaModalVisible: state.mainPage.makePizzaModalVisible,
-      makeCartModalVisible: state.mainPage.makeCartModalVisible
 
     }
 }
