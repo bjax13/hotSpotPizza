@@ -59,9 +59,6 @@ class OrderHistory extends Component {
               <View key={orderObj.id} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
                 <TouchableHighlight
                   onPress={()=>{
-                    console.log(orderObj)
-                    console.log(i)
-                    console.log(this.props.orderHistoryArray[i])
                     arr = this.props.orderHistoryArray;
                     arr[i].modalVisible = true;
                     this.props.updateMain({orderHistoryArray: arr})
@@ -80,21 +77,58 @@ class OrderHistory extends Component {
                   visible={orderObj.modalVisible || false}
                   onRequestClose={() => {alert("Modal has been closed.")}}
                   >
-                    <View style={{marginTop: 22}}>
-                    <View>
-                      <Text>Hello World!</Text>
+                    <View style={{marginTop: 22, flex: 1}}>
+                      <View style={{margin: 5, flex:1}}>
+                        <View style={{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f7d9de'}}>
+                          <Text style= {{fontWeight: '600'}}>Order Detail</Text>
+                        </View>
 
-                      <TouchableHighlight onPress={() => {
-                        arr = this.props.orderHistoryArray;
-                        arr[i].modalVisible = false;
-                        this.props.updateMain({orderHistoryArray: arr})
-                        this.forceUpdate()
-                      }}>
-                        <Text>Hide Modal</Text>
-                      </TouchableHighlight>
+                        <TouchableHighlight
+                          style={{position: 'absolute', right: 20 , top: 20 }}
+                          onPress={() => {
+                            arr = this.props.orderHistoryArray;
+                            arr[i].modalVisible = false;
+                            this.props.updateMain({orderHistoryArray: arr})
+                            this.forceUpdate()
+                          }}>
+                          <Text style={{fontWeight: '900', color: 'gray'}}>X</Text>
+                        </TouchableHighlight>
 
-                    </View>
-                   </View>
+                        <View style={{flex:9.5}}>
+
+                          <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
+                          </View>
+                          <View >
+                            <Text style={styles.welcome}>
+                              Order Summary
+                            </Text>
+                          </View>
+                          <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
+                          </View>
+                          <View style={{flex:1}}>
+                            <View style={styles.row}>
+                              <Text>Num Items</Text>
+                              <Text>COST</Text>
+                            </View>
+                            <View style={styles.row}>
+                              <Text>Date</Text>
+                              <Text>Time</Text>
+                            </View>
+                          </View>
+                          <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
+                          </View>
+                          <View style={{flex:1}}>
+                            <View style={styles.row}>
+                              <Text>Line Item</Text>
+                              <Text>Cost 4 1</Text>
+                              <Text>#ordered</Text>
+                              <Text>Total</Text>
+                            </View>
+                          </View>
+
+                        </View>
+                      </View>
+                     </View>
                 </Modal>
               </View>
             );
@@ -132,7 +166,11 @@ const mapDispatchToActionCreators = {
 };
 
 const styles = StyleSheet.create({
-
+  row:{
+    flex:1,
+    flexDirection: 'row',
+    paddingTop:5,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
