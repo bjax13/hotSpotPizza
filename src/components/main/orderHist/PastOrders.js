@@ -13,6 +13,7 @@ import {
     Text,
     View,
     TouchableHighlight,
+    Modal,
 } from 'react-native'
 
 class OrderHistory extends Component {
@@ -34,6 +35,14 @@ class OrderHistory extends Component {
           axios.get(pageURL+i)
             .then((response)=>{
               this.props.updateMain({orderHistoryArray: this.props.orderHistoryArray.concat(response.data.results)})
+              if (i = pages) {
+                let arr = []
+                for (var i = 0; i < this.props.orderHistoryArray.length; i++) {
+                  this.props.orderHistoryArray[i].modalVisible = false;
+                  arr.push(this.props.orderHistoryArray[i])
+                }
+                this.props.updateMain({orderHistoryArray: arr})
+              }
             })
         }
       })
@@ -45,15 +54,48 @@ class OrderHistory extends Component {
     render() {
 
         let pizzaToppings = this.props.orderHistoryArray.sort((a,b)=>{return b.id - a.id}).map( (orderObj, i) => {
-            console.log(orderObj);
-            console.log(i);
-            console.log(moment(orderObj.created_at).format('LL'));
 
             return (
               <View key={orderObj.id} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
-                <Text style={[styles.instructions,{flex:10}]}>{moment(orderObj.created_at).format('MMM Do')}  # {orderObj.id}</Text>
-                <Text style={[styles.instructions,{flex:5}]}>{"$"+parseFloat(orderObj.total).toFixed(2)}</Text>
-                <Text style={[styles.instructions,{flex:4}]}>Details ></Text>
+                <TouchableHighlight
+                  onPress={()=>{
+                    console.log(orderObj)
+                    console.log(i)
+                    console.log(this.props.orderHistoryArray[i])
+                    arr = this.props.orderHistoryArray;
+                    arr[i].modalVisible = true;
+                    this.props.updateMain({orderHistoryArray: arr})
+                    this.forceUpdate()
+                  }}
+                  style={{flex:1}}>
+                  <View style={{flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
+                    <Text style={[styles.instructions,{flex:10}]}>{moment(orderObj.created_at).format('MMM Do')}  # {orderObj.id}</Text>
+                    <Text style={[styles.instructions,{flex:5}]}>{"$"+parseFloat(orderObj.total).toFixed(2)}</Text>
+                    <Text style={[styles.instructions,{flex:4}]}>Details ></Text>
+                  </View>
+                </TouchableHighlight>
+                <Modal
+                  animationType={"slide"}
+                  transparent={false}
+                  visible={orderObj.modalVisible || false}
+                  onRequestClose={() => {alert("Modal has been closed.")}}
+                  >
+                    <View style={{marginTop: 22}}>
+                    <View>
+                      <Text>Hello World!</Text>
+
+                      <TouchableHighlight onPress={() => {
+                        arr = this.props.orderHistoryArray;
+                        arr[i].modalVisible = false;
+                        this.props.updateMain({orderHistoryArray: arr})
+                        this.forceUpdate()
+                      }}>
+                        <Text>Hide Modal</Text>
+                      </TouchableHighlight>
+
+                    </View>
+                   </View>
+                </Modal>
               </View>
             );
         });

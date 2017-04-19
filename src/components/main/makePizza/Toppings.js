@@ -33,10 +33,7 @@ class Toppings extends Component {
             .then((response)=>{
               this.props.updateMain({pizzaToppingArray: this.props.pizzaToppingArray.concat(response.data.results)})
             })
-
         }
-
-
       })
       .catch((error) => {
         console.log(error);
