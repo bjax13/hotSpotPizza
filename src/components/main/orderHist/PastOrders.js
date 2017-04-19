@@ -18,8 +18,10 @@ import {
 
 class OrderHistory extends Component {
   componentDidMount(){
+    this.props.updateMain({orderHistoryPageCount: 0})
     axios.get('http://10.100.0.98:8888/api/orders/')
       .then((response) => {
+        this.props.updateMain({orderHistoryPageCount: this.props.orderHistoryPageCount+ response.data.results.length})
         let orderCount = response.data.count
         let resultsPerPage = response.data.results.length
         let pages = Math.ceil(orderCount / resultsPerPage);
@@ -34,14 +36,19 @@ class OrderHistory extends Component {
         for (var i = 2; i <= pages; i++) {
           axios.get(pageURL+i)
             .then((response)=>{
+              this.props.updateMain({orderHistoryPageCount: this.props.orderHistoryPageCount+ response.data.results.length})
               this.props.updateMain({orderHistoryArray: this.props.orderHistoryArray.concat(response.data.results)})
-              if (i = pages) {
+              console.log(this.props.orderHistoryPageCount);
+              if (this.props.orderHistoryPageCount === response.data.count) {
                 let arr = []
                 for (var i = 0; i < this.props.orderHistoryArray.length; i++) {
                   this.props.orderHistoryArray[i].modalVisible = false;
                   arr.push(this.props.orderHistoryArray[i])
                 }
                 this.props.updateMain({orderHistoryArray: arr})
+                for (var i = 0; i < arr.length; i++) {
+                  console.log(arr[i]);
+                }
               }
             })
         }
@@ -53,7 +60,7 @@ class OrderHistory extends Component {
 
     render() {
 
-        let pizzaToppings = this.props.orderHistoryArray.sort((a,b)=>{return b.id - a.id}).map( (orderObj, i) => {
+        let pastOrders = this.props.orderHistoryArray.sort((a,b)=>{return b.id - a.id}).map( (orderObj, i) => {
 
             return (
               <View key={orderObj.id} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
@@ -105,19 +112,21 @@ class OrderHistory extends Component {
                           </View>
                           <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
                           </View>
-                          <View style={{flex:1}}>
+                          <View style={{flex:.2}}>
                             <View style={styles.row}>
-                              <Text>Num Items</Text>
-                              <Text>COST</Text>
+                              <Text>No. Items: {orderObj.pizzas.length + orderObj.sides.length}</Text>
+                              <Text>${orderObj.total}</Text>
                             </View>
                             <View style={styles.row}>
-                              <Text>Date</Text>
-                              <Text>Time</Text>
+                              <Text>{moment(orderObj.created_at).format('MMM Do')}</Text>
+                              <Text>{moment(orderObj.created_at).format('h:mm a')}</Text>
                             </View>
                           </View>
                           <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
                           </View>
                           <View style={{flex:1}}>
+
+
                             <View style={styles.row}>
                               <Text>Line Item</Text>
                               <Text>Cost 4 1</Text>
@@ -125,6 +134,7 @@ class OrderHistory extends Component {
                               <Text>Total</Text>
                             </View>
                           </View>
+
 
                         </View>
                       </View>
@@ -146,7 +156,7 @@ class OrderHistory extends Component {
               <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
               </View>
 
-              {pizzaToppings}
+              {pastOrders}
             </View>
 
         )
@@ -156,6 +166,7 @@ class OrderHistory extends Component {
 mapStateToProps = (state) => {
     return {
       pizzaTest: state.mainPage.pizzaTest,
+      orderHistoryPageCount: state.mainPage.orderHistoryPageCount,
       orderHistoryArray: state.mainPage.orderHistoryArray,
       orderHistoryModal: state.mainPage.orderHistoryModal,
     }
@@ -169,6 +180,7 @@ const styles = StyleSheet.create({
   row:{
     flex:1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     paddingTop:5,
   },
   container: {
