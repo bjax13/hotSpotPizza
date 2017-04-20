@@ -42,11 +42,10 @@ class OrderHistory extends Component {
 
             return(
               <View key={itemName+i}style={styles.row}>
-                <Text>{itemName} </Text>
+                <Text style={{flex:10}}>{itemName} </Text>
 
-                <Text>${singleItemPrice}</Text>
-                <Text>{itemCount}</Text>
-                <Text>${itemTotal}</Text>
+                <Text style={{flex:4 , textAlign: 'right'}}>${singleItemPrice} x {itemCount} = </Text>
+                <Text style={{flex:2.5, textAlign: 'right'}}>${itemTotal}</Text>
               </View>
             )
           })
@@ -58,12 +57,12 @@ class OrderHistory extends Component {
             let itemTotal = singleItemPrice*itemCount;
 
             return(
-              <View key={itemName+i}style={styles.row}>
-                <Text>{itemName} </Text>
+              <View key={itemName+i} style={styles.row}>
+                  <Text style={{flex:10}}>{itemName} </Text>
 
-                <Text>${singleItemPrice}</Text>
-                <Text>{itemCount}</Text>
-                <Text>${itemTotal}</Text>
+                  <Text style={{flex:4, textAlign: 'right'}}>${singleItemPrice} x {itemCount} = </Text>
+                  <Text style={{flex:2.5, textAlign: 'right'}}>${itemTotal}</Text>
+
               </View>
             )
           })
@@ -190,7 +189,6 @@ const mapDispatchToActionCreators = {
 
 const styles = StyleSheet.create({
   row:{
-    flex:1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingTop:5,
