@@ -147,6 +147,7 @@ class OrderHistory extends Component {
                                     pizzaObj.data.id = this.props.orderHistoryPizzaCountObject[pizzaObj.data.countID].pizza
 
                                     pizzaObj.data.crust = this.props.orderHistoryPizzaObject[pizzaObj.data.id].crust
+                                    pizzaObj.data.name = this.props.orderHistoryPizzaObject[pizzaObj.data.id].name
                                     pizzaObj.data.price = this.props.orderHistoryPizzaObject[pizzaObj.data.id].price
                                     pizzaObj.data.public_display = this.props.orderHistoryPizzaObject[pizzaObj.data.id].public_display
                                     pizzaObj.data.size = this.props.orderHistoryPizzaObject[pizzaObj.data.id].size
@@ -162,10 +163,43 @@ class OrderHistory extends Component {
                                     // console.log('sides');
                                     // console.log(this.props.orderHistorySidesCountObject);
                                     // console.log(this.props.orderHistorySidesObject);
+
                                     let currentCart = this.props.cartItems;
                                     currentCart.push(pizzaObj)
                                     this.props.updateMain({cartItems: currentCart})
                                   }
+
+                                  for (var i = 0; i < orderObj.sides.length; i++) {
+                                    let sideObj = {
+                                      id: orderObj.sides[i],
+                                      type: 'sideTest',
+                                      data: {
+                                        id: orderObj.sides[i],
+                                      }
+                                    }
+                                    sideObj.data.count = this.props.orderHistorySidesCountObject[sideObj.data.id].count
+                                    sideObj.data.side = this.props.orderHistorySidesCountObject[sideObj.data.id].side
+
+                                    sideObj.data.price = this.props.orderHistorySidesObject[sideObj.data.side].price
+                                    sideObj.data.name = this.props.orderHistorySidesObject[sideObj.data.side].name
+
+                                    sideObj.id = sideObj.type[0].toLowerCase() + sideObj.data.id
+
+                                    // console.log(sideObj)
+                                    // console.log(orderObj)
+                                    // console.log('side')
+                                    // console.log(this.props.orderHistoryPizzaCountObject);
+                                    // console.log(this.props.orderHistoryPizzaObject);
+                                    // console.log('sides');
+                                    // console.log(this.props.orderHistorySidesCountObject);
+                                    // console.log(this.props.orderHistorySidesObject);
+
+                                    let currentCart = this.props.cartItems;
+                                    currentCart.push(sideObj)
+                                    this.props.updateMain({cartItems: currentCart})
+                                  }
+
+
 
                                   orderObj.modalVisible = false;
                                   this.forceUpdate();
