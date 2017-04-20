@@ -36,6 +36,7 @@ class Checkout extends Component {
               onPress={()=>{
 
                 this._onHideUnderlay();
+                console.log(this.props.cartItems);
                 let p = [];
                 let s = [];
 

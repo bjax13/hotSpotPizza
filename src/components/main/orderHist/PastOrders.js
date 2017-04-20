@@ -22,13 +22,6 @@ class OrderHistory extends Component {
     render() {
 
         let pastOrders = this.props.orderHistoryArray.sort((a,b)=>{return b.id - a.id}).map( (orderObj, i) => {
-          // let pizzaSize = this.props.pizzaSizeNameArray[this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[0]].pizza].size -1]
-          // let pizzaToppingCount = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[0]].pizza].toppings.length
-          // let secondaryName = pizzaSize + ' ' + pizzaToppingCount  + ' Topping Pizza'
-          // let itemName = (this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[0]].pizza].name || secondaryName )
-          // let singleItemPrice = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[0]].pizza].price
-          // let itemCount = this.props.orderHistoryPizzaCountObject[orderObj.pizzas[0]].count
-          // let itemTotal = singleItemPrice*itemCount;
 
           let historyLineItemPizza = orderObj.pizzas.map((pizzaInfo, i) =>{
 
@@ -49,6 +42,7 @@ class OrderHistory extends Component {
               </View>
             )
           })
+
           let historyLineItemSides = orderObj.sides.map((sidesInfo, i) =>{
 
             let itemName = (this.props.orderHistorySidesObject[this.props.orderHistorySidesCountObject[orderObj.sides[i]].side].name || 'Unknown' )
@@ -138,6 +132,25 @@ class OrderHistory extends Component {
 
                           </View>
 
+                          <View style={{flex:.11}}>
+                            <TouchableHighlight
+                              onPress={()=>{console.log('bacon')}}
+
+                              >
+                              <View>
+                                <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
+                                </View>
+                                <View >
+                                  <Text style={styles.welcome}>
+                                    Re-Order
+                                  </Text>
+                                </View>
+                                <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
+                                </View>
+                              </View>
+                            </TouchableHighlight>
+                          </View>
+
 
                         </View>
                       </View>
@@ -180,6 +193,8 @@ mapStateToProps = (state) => {
 
       orderHistorySidesCountObject: state.mainPage.orderHistorySidesCountObject,
       orderHistorySidesObject: state.mainPage.orderHistorySidesObject,
+
+      
     }
 }
 
