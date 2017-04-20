@@ -138,7 +138,7 @@ class OrderHistory extends Component {
                                 {
                                   for (var i = 0; i < orderObj.pizzas.length; i++) {
                                     let pizzaObj = {
-                                      type: 'pizzaTest',
+                                      type: 'Pizza',
                                       data: {
                                         countID: orderObj.pizzas[i],
                                       }
@@ -172,7 +172,7 @@ class OrderHistory extends Component {
                                   for (var i = 0; i < orderObj.sides.length; i++) {
                                     let sideObj = {
                                       id: orderObj.sides[i],
-                                      type: 'sideTest',
+                                      type: 'Side',
                                       data: {
                                         id: orderObj.sides[i],
                                       }
