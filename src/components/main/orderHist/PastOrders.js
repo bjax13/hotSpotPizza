@@ -17,85 +17,58 @@ import {
 } from 'react-native'
 
 class OrderHistory extends Component {
-  componentDidMount(){
-    this.props.updateMain({orderHistoryPageCount: 0})
-    axios.get('http://10.100.0.98:8888/api/orders/')
-      .then((response) => {
-        this.props.updateMain({orderHistoryPageCount: this.props.orderHistoryPageCount+ response.data.results.length})
-        let orderCount = response.data.count
-        let resultsPerPage = response.data.results.length
-        let pages = Math.ceil(orderCount / resultsPerPage);
-        let pageURL = response.data.next;
 
-        if (pageURL.indexOf('=') != -1) {
-          pageURL = pageURL.slice(0,pageURL.indexOf('=')+1)
-        }
-
-        this.props.updateMain({orderHistoryArray: response.data.results});
-
-        for (var i = 2; i <= pages; i++) {
-          axios.get(pageURL+i)
-            .then((response)=>{
-              this.props.updateMain({orderHistoryPageCount: this.props.orderHistoryPageCount+ response.data.results.length})
-              this.props.updateMain({orderHistoryArray: this.props.orderHistoryArray.concat(response.data.results)})
-              console.log(this.props.orderHistoryPageCount);
-              if (this.props.orderHistoryPageCount === response.data.count) {
-                let arr = []
-                for (var i = 0; i < this.props.orderHistoryArray.length; i++) {
-                  this.props.orderHistoryArray[i].modalVisible = false;
-                  arr.push(this.props.orderHistoryArray[i])
-                }
-                this.props.updateMain({orderHistoryArray: arr})
-                for (var i = 0; i < arr.length; i++) {
-                  console.log(arr[i]);
-                  if (arr[i].pizzas.length>0) {
-                    console.log(i + 'Pizza');
-                    for (var j = 0; j < arr[i].pizzas.length; j++) {
-                      console.log(arr[i].pizzas[j]);
-                      axios.get('http://10.100.0.98:8888/api/pizza-counts/'+arr[i].pizzas[j])
-                        .then((response)=>{
-                          let obj = this.props.orderHistoryPizzaCountObject;
-                          obj[response.data.id] = response.data;
-                          this.props.updateMain({orderHistoryPizzaCountObject:obj})
-                          console.log('pizza-count');
-                          console.log(response);
-                          axios.get('http://10.100.0.98:8888/api/pizzas/'+ response.data.pizza)
-                            .then((response)=>{
-                              let obj = this.props.orderHistoryPizzaObject;
-                              obj[response.data.id] = response.data;
-                              this.props.updateMain({orderHistoryPizzaObject:obj})
-                              console.log('pizza');
-                              console.log(response);
-                              console.log(this.props.orderHistoryPizzaCountObject);
-                              console.log(this.props.orderHistoryPizzaObject);
-                            })
-                        })
-                    }
-                  }
-                  if (arr[i].sides.length>0) {
-                    console.log(i + 'side');
-                    for (var j = 0; j < arr[i].sides.length; j++) {
-                      axios.get('http://10.100.0.98:8888/api/side-counts/'+arr[i].sides[j])
-                        .then((response)=>{
-                          // console.log('sides');
-                          // console.log(response);
-                        })
-                    }
-                  }
-
-                }
-              }
-            })
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
 
     render() {
 
         let pastOrders = this.props.orderHistoryArray.sort((a,b)=>{return b.id - a.id}).map( (orderObj, i) => {
+          // let pizzaSize = this.props.pizzaSizeNameArray[this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[0]].pizza].size -1]
+          // let pizzaToppingCount = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[0]].pizza].toppings.length
+          // let secondaryName = pizzaSize + ' ' + pizzaToppingCount  + ' Topping Pizza'
+          // let itemName = (this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[0]].pizza].name || secondaryName )
+          // let singleItemPrice = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[0]].pizza].price
+          // let itemCount = this.props.orderHistoryPizzaCountObject[orderObj.pizzas[0]].count
+          // let itemTotal = singleItemPrice*itemCount;
+
+          let historyLineItemPizza = orderObj.pizzas.map((pizzaInfo, i) =>{
+
+            let pizzaSize = this.props.pizzaSizeNameArray[this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].size -1]
+            let pizzaToppingCount = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].toppings.length
+            let secondaryName = pizzaSize + ' ' + pizzaToppingCount  + ' Topping Pizza'
+            let itemName = (this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].name || secondaryName )
+            let singleItemPrice = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].price
+            let itemCount = this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].count
+            let itemTotal = singleItemPrice*itemCount;
+
+            return(
+              <View key={itemName+i}style={styles.row}>
+                <Text>{itemName} </Text>
+
+                <Text>${singleItemPrice}</Text>
+                <Text>{itemCount}</Text>
+                <Text>${itemTotal}</Text>
+              </View>
+            )
+          })
+          let historyLineItemSides = orderObj.sides.map((sidesInfo, i) =>{
+
+            let itemName = (this.props.orderHistorySidesObject[this.props.orderHistorySidesCountObject[orderObj.sides[i]].side].name || 'Unknown' )
+            let singleItemPrice = this.props.orderHistorySidesObject[this.props.orderHistorySidesCountObject[orderObj.sides[i]].side].price
+            let itemCount = this.props.orderHistorySidesCountObject[orderObj.sides[i]].count
+            let itemTotal = singleItemPrice*itemCount;
+
+            return(
+              <View key={itemName+i}style={styles.row}>
+                <Text>{itemName} </Text>
+
+                <Text>${singleItemPrice}</Text>
+                <Text>{itemCount}</Text>
+                <Text>${itemTotal}</Text>
+              </View>
+            )
+          })
+
+
 
             return (
               <View key={orderObj.id} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
@@ -161,14 +134,9 @@ class OrderHistory extends Component {
                           </View>
                           <View style={{flex:1}}>
 
+                            {historyLineItemPizza}
+                            {historyLineItemSides}
 
-                            <View style={styles.row}>
-                              <Text>Line Item {this.props.orderHistoryPizzaCountObject[orderObj.pizzas[0]].count} </Text>
-
-                              <Text>Cost 4 1</Text>
-                              <Text>#ordered</Text>
-                              <Text>Total</Text>
-                            </View>
                           </View>
 
 
@@ -202,12 +170,17 @@ class OrderHistory extends Component {
 mapStateToProps = (state) => {
     return {
       pizzaTest: state.mainPage.pizzaTest,
+      pizzaSizeNameArray: state.mainPage.pizzaSizeNameArray,
+
       orderHistoryPageCount: state.mainPage.orderHistoryPageCount,
       orderHistoryArray: state.mainPage.orderHistoryArray,
       orderHistoryModal: state.mainPage.orderHistoryModal,
       orderHistoryPizzaCountObject: state.mainPage.orderHistoryPizzaCountObject,
       orderHistoryPizzaObject: state.mainPage.orderHistoryPizzaObject,
       orderHistoryToppingObject: state.mainPageorderHistoryToppingObject,
+
+      orderHistorySidesCountObject: state.mainPage.orderHistorySidesCountObject,
+      orderHistorySidesObject: state.mainPage.orderHistorySidesObject,
     }
 }
 
