@@ -51,7 +51,6 @@ class Checkout extends Component {
                   }
                 }
                 if (p.length + s.length > this.props.deleted.length ) {
-                  console.log('api Called');
                   axios.post('http://10.100.0.98:8888/api/orders/', {
                       "total": this.props.totalCost,
                       "user": "dc6bb53d-2f23-4131-8ea4-a81a24063c0d",
@@ -69,8 +68,6 @@ class Checkout extends Component {
                 }else {
                   console.log('no items in cart');
                 }
-
-                console.log('Checkout')
               }}>
 
               <View>

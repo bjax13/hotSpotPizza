@@ -134,7 +134,45 @@ class OrderHistory extends Component {
 
                           <View style={{flex:.11}}>
                             <TouchableHighlight
-                              onPress={()=>{console.log('bacon')}}
+                              onPress={()=>
+                                {
+                                  for (var i = 0; i < orderObj.pizzas.length; i++) {
+                                    let pizzaObj = {
+                                      type: 'pizzaTest',
+                                      data: {
+                                        countID: orderObj.pizzas[i],
+                                      }
+                                    }
+                                    pizzaObj.data.count = this.props.orderHistoryPizzaCountObject[pizzaObj.data.countID].count
+                                    pizzaObj.data.id = this.props.orderHistoryPizzaCountObject[pizzaObj.data.countID].pizza
+
+                                    pizzaObj.data.crust = this.props.orderHistoryPizzaObject[pizzaObj.data.id].crust
+                                    pizzaObj.data.price = this.props.orderHistoryPizzaObject[pizzaObj.data.id].price
+                                    pizzaObj.data.public_display = this.props.orderHistoryPizzaObject[pizzaObj.data.id].public_display
+                                    pizzaObj.data.size = this.props.orderHistoryPizzaObject[pizzaObj.data.id].size
+                                    pizzaObj.data.toppings = this.props.orderHistoryPizzaObject[pizzaObj.data.id].toppings
+
+                                    pizzaObj.id = pizzaObj.type[0].toLowerCase() + pizzaObj.data.id
+
+                                    // console.log(pizzaObj)
+                                    // console.log(orderObj)
+                                    // console.log('pizza')
+                                    // console.log(this.props.orderHistoryPizzaCountObject);
+                                    // console.log(this.props.orderHistoryPizzaObject);
+                                    // console.log('sides');
+                                    // console.log(this.props.orderHistorySidesCountObject);
+                                    // console.log(this.props.orderHistorySidesObject);
+                                    let currentCart = this.props.cartItems;
+                                    currentCart.push(pizzaObj)
+                                    this.props.updateMain({cartItems: currentCart})
+                                  }
+
+                                  orderObj.modalVisible = false;
+                                  this.forceUpdate();
+
+                                  Actions.Cart();
+                                }
+                              }
 
                               >
                               <View>
@@ -194,7 +232,7 @@ mapStateToProps = (state) => {
       orderHistorySidesCountObject: state.mainPage.orderHistorySidesCountObject,
       orderHistorySidesObject: state.mainPage.orderHistorySidesObject,
 
-      
+      cartItems: state.mainPage.cartItems,
     }
 }
 

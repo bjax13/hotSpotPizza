@@ -38,7 +38,6 @@ class Main extends Component {
             .then((response)=>{
               this.props.updateMain({orderHistoryPageCount: this.props.orderHistoryPageCount+ response.data.results.length})
               this.props.updateMain({orderHistoryArray: this.props.orderHistoryArray.concat(response.data.results)})
-              console.log(this.props.orderHistoryPageCount);
               if (this.props.orderHistoryPageCount === response.data.count) {
                 let arr = []
                 for (var i = 0; i < this.props.orderHistoryArray.length; i++) {
