@@ -45,7 +45,7 @@ class OrderHistory extends Component {
                 <Text style={{flex:10}}>{itemName} </Text>
 
                 <Text style={{flex:4 , textAlign: 'right'}}>${singleItemPrice} x {itemCount} = </Text>
-                <Text style={{flex:2.5, textAlign: 'right'}}>${itemTotal}</Text>
+                <Text style={{flex:2.5, textAlign: 'right'}}>${itemTotal.toFixed(2)}</Text>
               </View>
             )
           })
@@ -61,7 +61,7 @@ class OrderHistory extends Component {
                   <Text style={{flex:10}}>{itemName} </Text>
 
                   <Text style={{flex:4, textAlign: 'right'}}>${singleItemPrice} x {itemCount} = </Text>
-                  <Text style={{flex:2.5, textAlign: 'right'}}>${itemTotal}</Text>
+                  <Text style={{flex:2.5, textAlign: 'right'}}>${itemTotal.toFixed(2)}</Text>
 
               </View>
             )
