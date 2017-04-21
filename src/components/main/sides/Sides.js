@@ -39,9 +39,6 @@ class Sides extends Component {
                 response.data.results[i].count = 0
               }
               this.props.updateMain({pizzaSidesArray: this.props.pizzaSidesArray.concat(response.data.results)})
-              console.log("sides");
-              console.log(this.props.pizzaSidesArray);
-
               let newObj = {}
 
               for (var i = 0; i < this.props.pizzaSidesArray.length; i++) {

@@ -58,13 +58,7 @@ class Checkout extends Component {
                       "sides": s,
                   })
                   .then((response)=> {
-                    console.log(p);
-                    console.log(s);
-                    console.log(this.props.orderHistoryPizzaObject);
-                    console.log(this.props.orderHistoryPizzaCountObject);
-                    console.log(this.props.orderHistorySidesObject);
-                    console.log(this.props.orderHistorySidesCountObject);
-                    console.log(this.props.cartItems);
+  
 
                     for (var i = 0; i < p.length; i++) {
                       if (!this.props.orderHistoryPizzaCountObject.hasOwnProperty(p[i])) {
@@ -115,11 +109,6 @@ class Checkout extends Component {
                         }
                       }
                     }
-
-                    console.log(this.props.orderHistoryPizzaObject);
-                    console.log(this.props.orderHistoryPizzaCountObject);
-                    console.log(this.props.orderHistorySidesObject);
-                    console.log(this.props.orderHistorySidesCountObject);
 
 
 

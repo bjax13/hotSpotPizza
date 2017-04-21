@@ -50,7 +50,6 @@ class AddToOrder extends Component {
             currentCart[currentCart.length-1].data.countID = response.data.id;
 
             this.props.updateMain({cartItems: currentCart})
-            console.log('this is logged');
 
             this.props.updateMain({ pizzaCost: 0});
             this.props.updateMain({ totalToppingsCost: 0});
@@ -79,8 +78,7 @@ class AddToOrder extends Component {
             })
             .then((response)=> {
               last--;
-              console.log('response');
-              console.log(response);
+
               let currentCart = this.props.cartItems;
               let total = this.props.totalCost;
               let data = response.data;

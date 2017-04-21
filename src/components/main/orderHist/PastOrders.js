@@ -51,16 +51,6 @@ class OrderHistory extends Component {
 
           let historyLineItemSides = orderObj.sides.map((sidesInfo, i) =>{
 
-            console.log(sidesInfo);
-            console.log(this.props.pizzaSizeNameArray);
-            console.log(this.props.orderHistorySidesObject);
-            console.log(this.props.orderHistorySidesCountObject);
-            console.log(this.props.pizzaSidesArray);
-            console.log(orderObj);
-
-            console.log(' **** **** ****');
-            console.log(i);
-
             let itemName = (this.props.orderHistorySidesObject[this.props.orderHistorySidesCountObject[orderObj.sides[i]].side].name || 'Unknown' )
             let singleItemPrice = this.props.orderHistorySidesObject[this.props.orderHistorySidesCountObject[orderObj.sides[i]].side].price
             let itemCount = this.props.orderHistorySidesCountObject[orderObj.sides[i]].count
