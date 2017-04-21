@@ -75,6 +75,8 @@ class Main extends Component {
                           .then((response)=>{
                             let obj = this.props.orderHistorySidesObject;
                             obj[response.data.id] = response.data;
+                            console.log('Main');
+                            console.log(obj);
                             this.props.updateMain({orderHistorySidesObject:obj})
 
                           })

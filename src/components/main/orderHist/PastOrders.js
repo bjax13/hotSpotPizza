@@ -25,11 +25,11 @@ class OrderHistory extends Component {
 
           let historyLineItemPizza = orderObj.pizzas.map((pizzaInfo, i) =>{
 
-            console.log(pizzaInfo);
-            console.log(this.props.pizzaSizeNameArray);
-            console.log(this.props.orderHistoryPizzaObject);
-            console.log(this.props.orderHistoryPizzaCountObject);
-            console.log(orderObj);
+            // console.log(pizzaInfo);
+            // console.log(this.props.pizzaSizeNameArray);
+            // console.log(this.props.orderHistoryPizzaObject);
+            // console.log(this.props.orderHistoryPizzaCountObject);
+            // console.log(orderObj);
 
             let pizzaSize = this.props.pizzaSizeNameArray[this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].size -1]
             let pizzaToppingCount = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].toppings.length
@@ -50,6 +50,16 @@ class OrderHistory extends Component {
           })
 
           let historyLineItemSides = orderObj.sides.map((sidesInfo, i) =>{
+
+            console.log(sidesInfo);
+            console.log(this.props.pizzaSizeNameArray);
+            console.log(this.props.orderHistorySidesObject);
+            console.log(this.props.orderHistorySidesCountObject);
+            console.log(this.props.pizzaSidesArray);
+            console.log(orderObj);
+
+            console.log(' **** **** ****');
+            console.log(i);
 
             let itemName = (this.props.orderHistorySidesObject[this.props.orderHistorySidesCountObject[orderObj.sides[i]].side].name || 'Unknown' )
             let singleItemPrice = this.props.orderHistorySidesObject[this.props.orderHistorySidesCountObject[orderObj.sides[i]].side].price
@@ -273,6 +283,8 @@ mapStateToProps = (state) => {
 
       orderHistorySidesCountObject: state.mainPage.orderHistorySidesCountObject,
       orderHistorySidesObject: state.mainPage.orderHistorySidesObject,
+
+      pizzaSidesArray: state.mainPage.pizzaSidesArray,
 
       cartItems: state.mainPage.cartItems,
       totalCost: state.mainPage.totalCost,
