@@ -27,10 +27,10 @@ class LineItems extends Component {
 
     render() {
         let Items = this.props.cartItems
-        .filter(item => this.props.deleted.indexOf(item.id) === -1)
-        .map(item=> {
-          let ItemName = '';
-          let Price = 0;
+          .filter(item => this.props.deleted.indexOf(item.id) === -1)
+          .map(item=> {
+            let ItemName = '';
+            let Price = 0;
 
         if (item.type === 'Side') {
             ItemName = item.data.name

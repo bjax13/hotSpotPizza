@@ -25,11 +25,6 @@ class OrderHistory extends Component {
 
           let historyLineItemPizza = orderObj.pizzas.map((pizzaInfo, i) =>{
 
-            // console.log(pizzaInfo);
-            // console.log(this.props.pizzaSizeNameArray);
-            // console.log(this.props.orderHistoryPizzaObject);
-            // console.log(this.props.orderHistoryPizzaCountObject);
-            // console.log(orderObj);
 
             let pizzaSize = this.props.pizzaSizeNameArray[this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].size -1]
             let pizzaToppingCount = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].toppings.length
@@ -161,14 +156,6 @@ class OrderHistory extends Component {
 
                                     pizzaObj.id = pizzaObj.type[0].toLowerCase() + pizzaObj.data.id
 
-                                    // console.log(pizzaObj)
-                                    console.log(orderObj)
-                                    // console.log('pizza')
-                                    // console.log(this.props.orderHistoryPizzaCountObject);
-                                    // console.log(this.props.orderHistoryPizzaObject);
-                                    // console.log('sides');
-                                    // console.log(this.props.orderHistorySidesCountObject);
-                                    // console.log(this.props.orderHistorySidesObject);
 
                                     let currentCart = this.props.cartItems;
                                     currentCart.push(pizzaObj)

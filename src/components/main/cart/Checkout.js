@@ -36,21 +36,28 @@ class Checkout extends Component {
               onPress={()=>{
 
                 this._onHideUnderlay();
-                console.log(this.props.cartItems);
                 let p = [];
                 let s = [];
+                let skiped = 0;
 
                 for (var i = 0; i < this.props.cartItems.length; i++) {
+                  console.log(this.props.deleted);
+                  console.log(this.props.cartItems);
+                  console.log(this.props.deleted.indexOf(this.props.cartItems[i].id) === -1);
+                  console.log(this.props.cartItems[i].id[0] === 'p');
 
-                  if (this.props.cartItems[i].id[0] === 'p') {
+                  if (this.props.cartItems[i].id[0] === 'p' && this.props.deleted.indexOf(this.props.cartItems[i].id) === -1) {
                     p.push(this.props.cartItems[i].data.countID)
-                  }else if (this.props.cartItems[i].id[0] === 's') {
+                    console.log('pushed');
+                  }else if (this.props.cartItems[i].id[0] === 's' && this.props.deleted.indexOf(this.props.cartItems[i].id) === -1) {
                     s.push(this.props.cartItems[i].data.id)
                   }else {
-                    console.log('IDError: ID does not start with p or s');
+                    console.log('IDError: ID does not start with p or s or was deleted');
+                    skiped++;
                   }
                 }
-                if (p.length + s.length > this.props.deleted.length ) {
+                console.log(p);
+                if (p.length + s.length + skiped > this.props.deleted.length ) {
                   axios.post('http://10.100.0.98:8888/api/orders/', {
                       "total": this.props.totalCost,
                       "user": "dc6bb53d-2f23-4131-8ea4-a81a24063c0d",
@@ -58,11 +65,11 @@ class Checkout extends Component {
                       "sides": s,
                   })
                   .then((response)=> {
-  
+
 
                     for (var i = 0; i < p.length; i++) {
                       if (!this.props.orderHistoryPizzaCountObject.hasOwnProperty(p[i])) {
-                        console.log(p[i]);
+
                         let newPizzaHistCntObj = this.props.orderHistoryPizzaCountObject
                         let newPizzaHistObj = this.props.orderHistoryPizzaObject
                         newPizzaHistCntObj[p[i]] = {
