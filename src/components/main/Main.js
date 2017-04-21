@@ -27,8 +27,10 @@ class Main extends Component {
         let pages = Math.ceil(orderCount / resultsPerPage);
         let pageURL = response.data.next;
 
-        if (pageURL.indexOf('=') != -1) {
-          pageURL = pageURL.slice(0,pageURL.indexOf('=')+1)
+        if (pageURL) {
+          if (pageURL.indexOf('=') != -1) {
+            pageURL = pageURL.slice(0,pageURL.indexOf('=')+1)
+          }
         }
 
         this.props.updateMain({orderHistoryArray: response.data.results});

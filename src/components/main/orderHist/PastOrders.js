@@ -25,6 +25,12 @@ class OrderHistory extends Component {
 
           let historyLineItemPizza = orderObj.pizzas.map((pizzaInfo, i) =>{
 
+            console.log(pizzaInfo);
+            console.log(this.props.pizzaSizeNameArray);
+            console.log(this.props.orderHistoryPizzaObject);
+            console.log(this.props.orderHistoryPizzaCountObject);
+            console.log(orderObj);
+
             let pizzaSize = this.props.pizzaSizeNameArray[this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].size -1]
             let pizzaToppingCount = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].toppings.length
             let secondaryName = pizzaSize + ' ' + pizzaToppingCount  + ' Topping Pizza'
@@ -156,7 +162,7 @@ class OrderHistory extends Component {
                                     pizzaObj.id = pizzaObj.type[0].toLowerCase() + pizzaObj.data.id
 
                                     // console.log(pizzaObj)
-                                    // console.log(orderObj)
+                                    console.log(orderObj)
                                     // console.log('pizza')
                                     // console.log(this.props.orderHistoryPizzaCountObject);
                                     // console.log(this.props.orderHistoryPizzaObject);
@@ -199,10 +205,11 @@ class OrderHistory extends Component {
                                     this.props.updateMain({cartItems: currentCart})
                                   }
 
-
-
                                   orderObj.modalVisible = false;
                                   this.forceUpdate();
+                                  let addTotal = this.props.totalCost;
+                                  addTotal+= parseFloat(orderObj.total)
+                                  this.props.updateMain({totalCost: addTotal})
 
                                   Actions.Cart();
                                 }
@@ -254,6 +261,7 @@ class OrderHistory extends Component {
 mapStateToProps = (state) => {
     return {
       pizzaTest: state.mainPage.pizzaTest,
+
       pizzaSizeNameArray: state.mainPage.pizzaSizeNameArray,
 
       orderHistoryPageCount: state.mainPage.orderHistoryPageCount,
@@ -267,6 +275,7 @@ mapStateToProps = (state) => {
       orderHistorySidesObject: state.mainPage.orderHistorySidesObject,
 
       cartItems: state.mainPage.cartItems,
+      totalCost: state.mainPage.totalCost,
     }
 }
 

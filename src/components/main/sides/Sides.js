@@ -39,6 +39,7 @@ class Sides extends Component {
                 response.data.results[i].count = 0
               }
               this.props.updateMain({pizzaSidesArray: this.props.pizzaSidesArray.concat(response.data.results)})
+              this.props.updateMain({orderHistorySidesObject: this.props.pizzaSidesArray})
             })
         }
       })
@@ -176,6 +177,7 @@ mapStateToProps = (state) => {
       customSidesArr: state.mainPage.customSidesArr,
       totalSidesCost: state.mainPage.totalSidesCost,
       pizzaSidesArray: state.mainPage.pizzaSidesArray,
+      orderHistorySidesObject: state.mainPage.orderHistorySidesObject,
     }
 }
 

@@ -58,6 +58,72 @@ class Checkout extends Component {
                       "sides": s,
                   })
                   .then((response)=> {
+                    console.log(p);
+                    console.log(s);
+                    console.log(this.props.orderHistoryPizzaObject);
+                    console.log(this.props.orderHistoryPizzaCountObject);
+                    console.log(this.props.orderHistorySidesObject);
+                    console.log(this.props.orderHistorySidesCountObject);
+                    console.log(this.props.cartItems);
+
+                    for (var i = 0; i < p.length; i++) {
+                      if (!this.props.orderHistoryPizzaCountObject.hasOwnProperty(p[i])) {
+                        console.log(p[i]);
+                        let newPizzaHistCntObj = this.props.orderHistoryPizzaCountObject
+                        let newPizzaHistObj = this.props.orderHistoryPizzaObject
+                        newPizzaHistCntObj[p[i]] = {
+                          id: p[i],
+                        }
+
+                        for (var j = 0; j < this.props.cartItems.length; j++) {
+                          if (this.props.cartItems[j].data.countID === p[i]) {
+                            newPizzaHistCntObj[p[i]].count = this.props.cartItems[j].data.count;
+                            newPizzaHistCntObj[p[i]].pizza = this.props.cartItems[j].data.id;
+
+                            this.props.updateMain({orderHistoryPizzaCountObject: newPizzaHistCntObj})
+
+                            newPizzaHistObj[newPizzaHistCntObj[p[i]].pizza] = {
+                              crust: this.props.cartItems[j].data.crust,
+                              id: newPizzaHistCntObj[p[i]].pizza,
+                              name: this.props.cartItems[j].data.name,
+                              price: this.props.cartItems[j].data.price,
+                              public_display: this.props.cartItems[j].data.public_display,
+                              size: this.props.cartItems[j].data.size,
+                              toppings: this.props.cartItems[j].data.toppings ,
+                            }
+                            j = this.props.cartItems.length;
+                          }
+                        }
+                      }
+                    }
+                    for (var i = 0; i < s.length; i++) {
+                      if (!this.props.orderHistorySidesCountObject.hasOwnProperty(s[i])) {
+                        console.log(s[i]);
+                        let newSidesHistCntObj = this.props.orderHistorySidesCountObject
+
+                        newSidesHistCntObj[s[i]] = {
+                          id: s[i],
+                        }
+
+                        for (var j = 0; j < this.props.cartItems.length; j++) {
+                          if (this.props.cartItems[j].data.id === s[i]) {
+                            newSidesHistCntObj[s[i]].count = this.props.cartItems[j].data.count;
+                            newSidesHistCntObj[s[i]].side = this.props.cartItems[j].data.id;
+                            j = this.props.cartItems.length;
+                            this.props.updateMain({orderHistorySidesCountObject: newSidesHistCntObj})
+                          }
+                        }
+                      }
+                    }
+
+                    console.log(this.props.orderHistoryPizzaObject);
+                    console.log(this.props.orderHistoryPizzaCountObject);
+                    console.log(this.props.orderHistorySidesObject);
+                    console.log(this.props.orderHistorySidesCountObject);
+
+
+
+
                     this.props.updateMain({totalCost: 0})
                     this.props.updateMain({cartItems: []})
                     Actions.Main();
@@ -87,6 +153,11 @@ mapStateToProps = (state) => {
       cartItems: state.mainPage.cartItems,
       deleted: state.mainPage.deleted,
       submitPizza: state.mainPage.submitPizza,
+
+      orderHistorySidesCountObject: state.mainPage.orderHistorySidesCountObject,
+      orderHistorySidesObject: state.mainPage.orderHistorySidesObject,
+      orderHistoryPizzaCountObject: state.mainPage.orderHistoryPizzaCountObject,
+      orderHistoryPizzaObject: state.mainPage.orderHistoryPizzaObject,
     }
 }
 
