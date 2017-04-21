@@ -108,7 +108,7 @@ class Checkout extends Component {
                         for (var j = 0; j < this.props.cartItems.length; j++) {
                           if (this.props.cartItems[j].data.id === s[i]) {
                             newSidesHistCntObj[s[i]].count = this.props.cartItems[j].data.count;
-                            newSidesHistCntObj[s[i]].side = this.props.cartItems[j].data.id;
+                            newSidesHistCntObj[s[i]].side = this.props.cartItems[j].data.side;
                             j = this.props.cartItems.length;
                             this.props.updateMain({orderHistorySidesCountObject: newSidesHistCntObj})
                           }

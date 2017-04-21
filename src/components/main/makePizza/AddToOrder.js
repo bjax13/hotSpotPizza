@@ -79,6 +79,8 @@ class AddToOrder extends Component {
             })
             .then((response)=> {
               last--;
+              console.log('response');
+              console.log(response);
               let currentCart = this.props.cartItems;
               let total = this.props.totalCost;
               let data = response.data;

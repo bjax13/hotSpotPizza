@@ -41,7 +41,13 @@ class Sides extends Component {
               this.props.updateMain({pizzaSidesArray: this.props.pizzaSidesArray.concat(response.data.results)})
               console.log("sides");
               console.log(this.props.pizzaSidesArray);
-              this.props.updateMain({orderHistorySidesObject: this.props.pizzaSidesArray})
+
+              let newObj = {}
+
+              for (var i = 0; i < this.props.pizzaSidesArray.length; i++) {
+                newObj[i+1]=this.props.pizzaSidesArray[i]
+              }
+              this.props.updateMain({orderHistorySidesObject: newObj})
             })
         }
       })
