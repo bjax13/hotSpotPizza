@@ -38,6 +38,8 @@ class AddToOrder extends Component {
           response.data.count = this.props.pizzaQuantity;
           total += this.props.pizzaCost;
 
+          console.log(response.data);
+
 
           currentCart.push({id: 'p'+response.data.id , type: 'Pizza', data: response.data})
 
@@ -66,7 +68,7 @@ class AddToOrder extends Component {
         });
       }
       addSidesToOrder = ()=>{
-        
+
         let last = 0
         for (var i = 0; i < this.props.customSidesArr.length; i++) {
 

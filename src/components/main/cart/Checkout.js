@@ -53,6 +53,9 @@ class Checkout extends Component {
                   }
                 }
                 console.log(p);
+                console.log(s);
+                console.log(skiped);
+                console.log(this.props.deleted.length);
                 if (p.length + s.length + skiped > this.props.deleted.length ) {
                   axios.post('http://10.100.0.98:8888/api/orders/', {
                       "total": this.props.totalCost,
@@ -95,7 +98,7 @@ class Checkout extends Component {
                     }
                     for (var i = 0; i < s.length; i++) {
                       if (!this.props.orderHistorySidesCountObject.hasOwnProperty(s[i])) {
-  
+
                         let newSidesHistCntObj = this.props.orderHistorySidesCountObject
 
                         newSidesHistCntObj[s[i]] = {
@@ -118,6 +121,7 @@ class Checkout extends Component {
 
                     this.props.updateMain({totalCost: 0})
                     this.props.updateMain({cartItems: []})
+                    this.props.updateMain({deleted: []})
                     Actions.Main();
                   })
                   .catch(function (error) {

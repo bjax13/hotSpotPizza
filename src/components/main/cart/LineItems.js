@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
+import axios from 'axios';
 
 import {
     StyleSheet,
@@ -42,40 +43,66 @@ class LineItems extends Component {
             }
 
             decrement = () =>{
-              console.log( 'decrement');
+              if (item.data.count > 0) {
+                item.data.count--;
 
-              // let arr = this.props.pizzaSidesArray;
-              // if (arr[i].count > 0) {
-              //   arr[i].count--;
-              //   this.props.updateMain({pizzaSidesArray: arr})
-              //
-              //   if (this.props.customSidesArr.indexOf(arr[i].id) != -1) {
-              //     this.props.updateMain({sidesCost: (this.props.sidesCost - (parseFloat(arr[i].price))) });
-              //     this.props.updateMain({totalSidesCost: this.props.totalSidesCost - parseFloat(arr[i].price)});
-              //   }
-              //
-              // }
-              // this.forceUpdate()
+                let arr = this.props.cartItems
+                let total = this.props.totalCost;
+                total -= parseFloat(item.data.price)
+                this.props.updateMain({totalCost: total})
+
+                if (item.data.side) {
+                  axios.post('http://10.100.0.98:8888/api/side-counts/', {
+                    "count": item.data.count,
+                    "side": item.data.side
+                  }).then((response)=>{
+                    item.data.id = response.data.id
+
+                    this.props.updateMain({arr})
+                  })
+                }else {
+                  console.log('pizz');
+                  axios.post('http://10.100.0.98:8888/api/pizza-counts/', {
+                    "count": item.data.count,
+                    "pizza": item.data.id
+                  }).then((response)=>{
+                    item.data.countID = response.data.id
+
+                    this.props.updateMain({arr})
+                  })
+                }
+
+                this.forceUpdate()
+              }
             }
             increment = () =>{
-              console.log('increment');
+              item.data.count++
 
-              // let arr = this.props.pizzaSidesArray;
-              // arr[i].count++;
-              // defaultVal= false;
-              // this.props.updateMain({pizzaSidesArray: arr})
-              //
-              // if (this.props.customSidesArr.indexOf(arr[i].id) != -1) {
-              //   this.props.updateMain({sidesCost: (this.props.sidesCost + (parseFloat(arr[i].price))) });
-              //   this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(arr[i].price)});
-              // }else {
-              //   let newSideArr = this.props.customSidesArr;
-              //   newSideArr.push(sidesObj.id);
-              //   this.props.updateMain({customSidesArr: newSideArr});
-              //   this.props.updateMain({sidesCost: (this.props.sidesCost + (sidesObj.count*parseFloat(sidesObj.price))) });
-              //   this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(sidesObj.price)});
-              // }
-              // this.forceUpdate()
+              let arr = this.props.cartItems
+              let total = this.props.totalCost;
+              total += parseFloat(item.data.price)
+              this.props.updateMain({totalCost: total})
+
+              if (item.data.side) {
+                axios.post('http://10.100.0.98:8888/api/side-counts/', {
+                  "count": item.data.count,
+                  "side": item.data.side
+                }).then((response)=>{
+                  item.data.id = response.data.id
+
+                  this.props.updateMain({arr})
+                })
+              }else {
+                axios.post('http://10.100.0.98:8888/api/pizza-counts/', {
+                  "count": item.data.count,
+                  "pizza": item.data.id
+                }).then((response)=>{
+                  item.data.countID = response.data.id
+
+                  this.props.updateMain({arr})
+                })
+              }
+              this.forceUpdate()
             }
 
           return(
@@ -87,13 +114,13 @@ class LineItems extends Component {
                   style={{flex:3}}>
                   <Text> - </Text>
                 </TouchableHighlight>
-                <Text style={{flex:2}}>{item.data.count}</Text>
+                <Text style={{flex:2.5}}>{item.data.count}</Text>
                 <TouchableHighlight
                   onPress={ increment}
                   style={{flex:3}}>
                   <Text> + </Text>
                 </TouchableHighlight>
-                <Text style={{flex:5}}>{"$"+parseFloat(item.data.price * item.data.count).toFixed(2)}</Text>
+                <Text style={{flex:6}}>{"$"+parseFloat(item.data.price * item.data.count).toFixed(2)}</Text>
               </View>
             </Item>
           );

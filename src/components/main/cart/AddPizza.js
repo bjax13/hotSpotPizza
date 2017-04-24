@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
-import axios from 'axios';
-
 import { Actions } from 'react-native-router-flux'
 
 import {
