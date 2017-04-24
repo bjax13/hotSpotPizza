@@ -32,20 +32,67 @@ class LineItems extends Component {
             let ItemName = '';
             let Price = 0;
 
-        if (item.type === 'Side') {
-            ItemName = item.data.name
-          }else if (item.type === 'Pizza') {
-            ItemName = (this.props.pizzaSizeNameArray[item.data.size-1] + item.data.toppings.length +' Topping '+item.type);
-          }
-          else {
-            ItemName = 'erroros'
-          }
+            if (item.type === 'Side') {
+              ItemName = item.data.name
+            }else if (item.type === 'Pizza') {
+              ItemName = (this.props.pizzaSizeNameArray[item.data.size-1] + item.data.toppings.length +' Topping '+item.type);
+            }
+            else {
+              ItemName = 'erroros'
+            }
+
+            decrement = () =>{
+              console.log( 'decrement');
+
+              // let arr = this.props.pizzaSidesArray;
+              // if (arr[i].count > 0) {
+              //   arr[i].count--;
+              //   this.props.updateMain({pizzaSidesArray: arr})
+              //
+              //   if (this.props.customSidesArr.indexOf(arr[i].id) != -1) {
+              //     this.props.updateMain({sidesCost: (this.props.sidesCost - (parseFloat(arr[i].price))) });
+              //     this.props.updateMain({totalSidesCost: this.props.totalSidesCost - parseFloat(arr[i].price)});
+              //   }
+              //
+              // }
+              // this.forceUpdate()
+            }
+            increment = () =>{
+              console.log('increment');
+
+              // let arr = this.props.pizzaSidesArray;
+              // arr[i].count++;
+              // defaultVal= false;
+              // this.props.updateMain({pizzaSidesArray: arr})
+              //
+              // if (this.props.customSidesArr.indexOf(arr[i].id) != -1) {
+              //   this.props.updateMain({sidesCost: (this.props.sidesCost + (parseFloat(arr[i].price))) });
+              //   this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(arr[i].price)});
+              // }else {
+              //   let newSideArr = this.props.customSidesArr;
+              //   newSideArr.push(sidesObj.id);
+              //   this.props.updateMain({customSidesArr: newSideArr});
+              //   this.props.updateMain({sidesCost: (this.props.sidesCost + (sidesObj.count*parseFloat(sidesObj.price))) });
+              //   this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(sidesObj.price)});
+              // }
+              // this.forceUpdate()
+            }
 
           return(
             <Item key={item.id} id={item.id} onDelete={id => this.onDelete(id)} >
               <View style={{flex:1, flexDirection: 'row'}}>
                 <Text style={{flex:20}}>{ItemName}</Text>
-                <Text style={{flex:4}}>{item.data.count}</Text>
+                <TouchableHighlight
+                  onPress={ decrement}
+                  style={{flex:3}}>
+                  <Text> - </Text>
+                </TouchableHighlight>
+                <Text style={{flex:2}}>{item.data.count}</Text>
+                <TouchableHighlight
+                  onPress={ increment}
+                  style={{flex:3}}>
+                  <Text> + </Text>
+                </TouchableHighlight>
                 <Text style={{flex:5}}>{"$"+parseFloat(item.data.price * item.data.count).toFixed(2)}</Text>
               </View>
             </Item>
