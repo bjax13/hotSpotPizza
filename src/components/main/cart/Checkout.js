@@ -41,10 +41,6 @@ class Checkout extends Component {
                 let skiped = 0;
 
                 for (var i = 0; i < this.props.cartItems.length; i++) {
-                  console.log(this.props.deleted);
-                  console.log(this.props.cartItems);
-                  console.log(this.props.deleted.indexOf(this.props.cartItems[i].id) === -1);
-                  console.log(this.props.cartItems[i].id[0] === 'p');
 
                   if (this.props.cartItems[i].id[0] === 'p' && this.props.deleted.indexOf(this.props.cartItems[i].id) === -1) {
                     p.push(this.props.cartItems[i].data.countID)
@@ -99,7 +95,7 @@ class Checkout extends Component {
                     }
                     for (var i = 0; i < s.length; i++) {
                       if (!this.props.orderHistorySidesCountObject.hasOwnProperty(s[i])) {
-                        console.log(s[i]);
+  
                         let newSidesHistCntObj = this.props.orderHistorySidesCountObject
 
                         newSidesHistCntObj[s[i]] = {
