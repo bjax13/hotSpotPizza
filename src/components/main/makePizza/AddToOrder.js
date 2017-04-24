@@ -66,6 +66,7 @@ class AddToOrder extends Component {
         });
       }
       addSidesToOrder = ()=>{
+        
         let last = 0
         for (var i = 0; i < this.props.customSidesArr.length; i++) {
 

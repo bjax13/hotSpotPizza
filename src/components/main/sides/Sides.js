@@ -64,7 +64,7 @@ class Sides extends Component {
             }
 
             decrement = () =>{
-              console.log(defaultVal);
+
               let arr = this.props.pizzaSidesArray;
               if (arr[i].count > 0) {
                 arr[i].count--;
@@ -87,39 +87,42 @@ class Sides extends Component {
               if (this.props.customSidesArr.indexOf(arr[i].id) != -1) {
                 this.props.updateMain({sidesCost: (this.props.sidesCost + (parseFloat(arr[i].price))) });
                 this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(arr[i].price)});
+              }else {
+                let newSideArr = this.props.customSidesArr;
+                newSideArr.push(sidesObj.id);
+                this.props.updateMain({customSidesArr: newSideArr});
+                this.props.updateMain({sidesCost: (this.props.sidesCost + (sidesObj.count*parseFloat(sidesObj.price))) });
+                this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(sidesObj.price)});
               }
-
-
-
               this.forceUpdate()
             }
 
-            addSides = (sidesInputObj) =>{
-
-              let newSideArr = this.props.customSidesArr;
-              newSideArr.push(sidesInputObj.id);
-              this.props.updateMain({customSidesArr: newSideArr});
-              this.props.updateMain({sidesCost: (this.props.sidesCost + (sidesInputObj.count*parseFloat(sidesInputObj.price))) });
-              this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(sidesInputObj.price)});
-
-            }
-            subSides = (sidesInputObj) =>{
-              let newSideArr = this.props.customSidesArr;
-              this.props.updateMain({sidesCost: (this.props.sidesCost - (sidesInputObj.count*parseFloat(sidesInputObj.price)))})
-              this.props.updateMain({totalSidesCost: this.props.totalSidesCost - parseFloat(sidesInputObj.price)})
-              for (var i = 0; i < newSideArr.length; i++) {
-                if (newSideArr[i] === sidesInputObj.id) {
-                  newSideArr.splice(i,1)
-                  i = newSideArr.length;
-                }
-              }
-              this.props.updateMain({customSidesArr: newSideArr});
-            }
+            //   --- removed CheckBox funtionality for now ----
+            // addSides = (sidesInputObj) =>{
+            //   let newSideArr = this.props.customSidesArr;
+            //   newSideArr.push(sidesObj.id);
+            //   this.props.updateMain({customSidesArr: newSideArr});
+            //   this.props.updateMain({sidesCost: (this.props.sidesCost + (sidesInputObj.count*parseFloat(sidesInputObj.price))) });
+            //   this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(sidesInputObj.price)});
+            // }
+            // subSides = (sidesInputObj) =>{
+            //   let newSideArr = this.props.customSidesArr;
+            //   this.props.updateMain({sidesCost: (this.props.sidesCost - (sidesInputObj.count*parseFloat(sidesInputObj.price)))})
+            //   this.props.updateMain({totalSidesCost: this.props.totalSidesCost - parseFloat(sidesInputObj.price)})
+            //   for (var i = 0; i < newSideArr.length; i++) {
+            //     if (newSideArr[i] === sidesInputObj.id) {
+            //       newSideArr.splice(i,1)
+            //       i = newSideArr.length;
+            //     }
+            //   }
+            //   this.props.updateMain({customSidesArr: newSideArr});
+            // }
 
             return (
               <View key={sidesObj.name} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
                 <View style={{flex:4}}>
-                  <CheckBox
+                  <Text style={styles.optionTitle}>{sidesObj.name}</Text>
+                  {/* <CheckBox   ---- removed CheckBox function ---- 
 
                     label={sidesObj.name}
                     checked={this.defaultVal}
@@ -132,7 +135,7 @@ class Sides extends Component {
                         subSides(sidesObj);
                       }
                     }}
-                  />
+                  /> */}
                 </View>
 
                 <View style={{flex:1.5,flexDirection: 'row'}}>
