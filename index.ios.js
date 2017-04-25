@@ -3,6 +3,7 @@ import{ Provider } from 'react-redux'
 import store from './src/store'
 
 import Main from './src/components/main/Main'
+import Login from './src/components/main/login/Login'
 import CartModal from './src/components/main/cart/CartModal'
 import PizzaModal from './src/components/main/makePizza/PizzaModal'
 import SideModal from './src/components/main/sides/SideModal'
@@ -28,7 +29,8 @@ export default class hotSpotPizza extends Component {
       <Provider store={ store }>
         <Router hideNavBar={true}>
          <Scene key="root">
-           <Scene key="Main" component={Main} title="Main Page" initial={true} />
+           <Scene key="Main" component={Main} title="Main Page"/>
+           <Scene key="Login" component={Login} title="Login Page" initial={true} />
            <Scene key="Cart" component={CartModal} title="Cart Page" />
            <Scene key="MakePizza" component={PizzaModal} title="MakePizza Page" />
            <Scene key="AddSides" component={SideModal} title="AddSides Page" />
