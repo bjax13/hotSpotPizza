@@ -40,10 +40,22 @@ class Login extends Component {
                         ref={(fbLogin) => { this.fbLogin = fbLogin }}
                         permissions={["email","user_friends"]}
                         loginBehavior={FBLoginManager.LoginBehaviors.Native}
-                        onLogin={function(data){
+                        onLogin={(data)=>{
                           console.log("Logged in!");
                           console.log(data);
-                          _this.setState({ user : data.credentials });
+                          console.log(this.props.user);
+                          this.props.updateMain({user: data.credentials});
+                          console.log(this.props.user);
+
+                          // axios.get('http://10.100.0.98:8888/social/facebook?access_token='+data.credentials.token + '&state=facebook' + '&id=1741439249480320'+ '&appsecret=011056ceb801a6d1e616ae7b7650804c')
+                          axios.get('http://10.100.0.98:8888/social/facebook?access_token='+data.credentials.token)
+                            .then(function (response) {
+                              console.log(response);
+                            })
+                            .catch(function (error) {
+                              console.log(error);
+                            });
+
                         }}
                         onLogout={function(){
                           console.log("Logged out.");
@@ -96,15 +108,8 @@ class Login extends Component {
 
 mapStateToProps = (state) => {
     return {
-      orderHistoryPageCount: state.mainPage.orderHistoryPageCount,
-      orderHistoryArray: state.mainPage.orderHistoryArray,
-      orderHistoryModal: state.mainPage.orderHistoryModal,
-      orderHistoryPizzaCountObject: state.mainPage.orderHistoryPizzaCountObject,
-      orderHistoryPizzaObject: state.mainPage.orderHistoryPizzaObject,
-      orderHistoryToppingObject: state.mainPageorderHistoryToppingObject,
+      user: state.mainPage.user,
 
-      orderHistorySidesCountObject: state.mainPage.orderHistorySidesCountObject,
-      orderHistorySidesObject: state.mainPage.orderHistorySidesObject,
     }
 }
 
