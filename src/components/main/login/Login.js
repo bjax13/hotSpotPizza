@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
+import {FBLogin, FBLoginManager} from 'react-native-facebook-login'
+
 import { Actions } from 'react-native-router-flux'
 
 import axios from 'axios';
@@ -34,9 +36,13 @@ class Login extends Component {
 
                       <TouchableHighlight
                         onPress = {Actions.Main}>
-                        <Text style={styles.instructions}>
-                          Loggin
-                        </Text>
+                        <View>
+                          <Text style={styles.instructions}>
+                            Loggin
+                          </Text>
+                          <FBLogin />
+                        </View>
+
                       </TouchableHighlight>
 
                     </View>
