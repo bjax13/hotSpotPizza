@@ -59,7 +59,7 @@ class Checkout extends Component {
                 if (p.length + s.length + skiped > this.props.deleted.length ) {
                   axios.post('http://10.100.0.98:8888/api/orders/', {
                       "total": this.props.totalCost,
-                      "user": "dc6bb53d-2f23-4131-8ea4-a81a24063c0d",
+                      "user": this.props.user.id,
                       "pizzas": p,
                       "sides": s,
                   })
@@ -149,6 +149,7 @@ mapStateToProps = (state) => {
       cartItems: state.mainPage.cartItems,
       deleted: state.mainPage.deleted,
       submitPizza: state.mainPage.submitPizza,
+      user: state.mainPage.user,
 
       orderHistorySidesCountObject: state.mainPage.orderHistorySidesCountObject,
       orderHistorySidesObject: state.mainPage.orderHistorySidesObject,

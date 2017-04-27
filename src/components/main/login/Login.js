@@ -42,15 +42,38 @@ class Login extends Component {
                         loginBehavior={FBLoginManager.LoginBehaviors.Native}
                         onLogin={(data)=>{
                           console.log("Logged in!");
-                          console.log(data);
-                          console.log(this.props.user);
-                          this.props.updateMain({user: data.credentials});
-                          console.log(this.props.user);
+                          this.props.updateMain({userCredentials: data.credentials});
 
-                          // axios.get('http://10.100.0.98:8888/social/facebook?access_token='+data.credentials.token + '&state=facebook' + '&id=1741439249480320'+ '&appsecret=011056ceb801a6d1e616ae7b7650804c')
                           axios.get('http://10.100.0.98:8888/social/facebook?access_token='+data.credentials.token)
                             .then(function (response) {
-                              console.log(response);
+                              console.log(response.data);
+
+                              let userObj = {
+                                id: response.data.id,
+                              }
+
+                              _this.props.updateMain({user: userObj})
+
+                              console.log(userObj.id);
+                              console.log(response.data.token);
+
+                              axios({
+                                method: 'get',
+                                url: 'http://10.100.0.98:8888/api/users/'+userObj.id + '/',
+                                headers: {
+                                  "Authorization": 'Token '+response.data.token
+                                },
+
+                              })
+
+                              // axios.get('http://10.100.0.98:8888/api/users/'+userObj.id,  {Token: 'f1bbf3a6e2714da9b5685fd7100a81975bca3eb0' })
+                                .then((response)=>{
+                                  console.log(response);
+                                })
+                                .catch((error)=>{
+                                  console.log(error);
+                                })
+
                             })
                             .catch(function (error) {
                               console.log(error);
@@ -109,6 +132,8 @@ class Login extends Component {
 mapStateToProps = (state) => {
     return {
       user: state.mainPage.user,
+      userCredentials: state.mainPage.userCredentials,
+      pizzaSauceArray: state.mainPage.pizzaSauceArray,
 
     }
 }

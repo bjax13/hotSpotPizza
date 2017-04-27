@@ -4,6 +4,7 @@ const initialState = {
 
   pizzaTest: false,
   submitPizza: false,
+  userCredentials: {},
 
   user:  {
               "id": "dc6bb53d-2f23-4131-8ea4-a81a24063c0d",
