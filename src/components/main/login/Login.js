@@ -22,6 +22,7 @@ class Login extends Component {
 
     render() {
       var _this = this;
+      var _Actions = Actions;
         return (
           <View style={{flex:1}}>
                 <View style={styles.container}>
@@ -32,7 +33,7 @@ class Login extends Component {
                         Welcome to Hot Spot Pizza!
                       </Text>
                       <Text style={styles.instructions}>
-                        Get Started by Loging In
+                        Get Started by Loging In with Facebook
                       </Text>
 
 
@@ -72,6 +73,8 @@ class Login extends Component {
                                   console.log(error);
                                 })
 
+                                _this.props.updateMain({pizzaTest:false})
+
                             })
                             .catch(function (error) {
                               console.log(error);
@@ -106,14 +109,14 @@ class Login extends Component {
 
 
                       <TouchableHighlight
-                        onPress = {Actions.Main}>
+                        onPress = {()=>{_this.props.updateMain({pizzaTest:false})}}>
                         <View>
                           <Text></Text>
                           <Text></Text>
                           <Text></Text>
                           <Text></Text>
                           <Text style={styles.instructions}>
-                            Login
+                            Login with Dummy Data
                           </Text>
                           {/* <FBLogin /> */}
                         </View>
@@ -129,6 +132,7 @@ class Login extends Component {
 
 mapStateToProps = (state) => {
     return {
+      pizzaTest: state.mainPage.pizzaTest,
       user: state.mainPage.user,
       userCredentials: state.mainPage.userCredentials,
       pizzaSauceArray: state.mainPage.pizzaSauceArray,

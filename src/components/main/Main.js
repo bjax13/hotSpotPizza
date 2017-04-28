@@ -7,12 +7,15 @@ import { Actions } from 'react-native-router-flux'
 
 import axios from 'axios';
 
+import Login from './login/Login'
+
 import {
     StyleSheet,
     Text,
     View,
     Image,
     TouchableHighlight,
+    Modal
 } from 'react-native'
 
 
@@ -75,14 +78,13 @@ class Main extends Component {
                           .then((response)=>{
                             let obj = this.props.orderHistorySidesObject;
                             obj[response.data.id] = response.data;
-                        
+
                             this.props.updateMain({orderHistorySidesObject:obj})
 
                           })
                         })
                     }
                   }
-
                 }
               }
             })
@@ -110,6 +112,12 @@ class Main extends Component {
                       <Text style={styles.instructions}>
                         Get Started by building your Pizza below
                       </Text>
+                      <Modal
+                        transparent={false}
+                        visible={this.props.pizzaTest}
+                        >
+                        <Login></Login>
+                      </Modal>
 
 
                       <TouchableHighlight onPress={Actions.MakePizza}>
@@ -130,6 +138,8 @@ class Main extends Component {
 
 mapStateToProps = (state) => {
     return {
+      pizzaTest: state.mainPage.pizzaTest,
+
       orderHistoryPageCount: state.mainPage.orderHistoryPageCount,
       orderHistoryArray: state.mainPage.orderHistoryArray,
       orderHistoryModal: state.mainPage.orderHistoryModal,
