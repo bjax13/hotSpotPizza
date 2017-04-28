@@ -61,7 +61,7 @@ class LineItems extends Component {
                     this.props.updateMain({arr})
                   })
                 }else {
-                  console.log('pizz');
+                  
                   axios.post('http://10.100.0.98:8888/api/pizza-counts/', {
                     "count": item.data.count,
                     "pizza": item.data.id

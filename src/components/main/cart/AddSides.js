@@ -14,9 +14,6 @@ import {
 
 class AddSides extends Component {
 
-    _onSubmit(){
-      console.log('clicked-submit')
-    }
     _onHideUnderlay(){
       this.props.updateMain({ submitPizza: false });
     }

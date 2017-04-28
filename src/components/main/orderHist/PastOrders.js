@@ -22,17 +22,11 @@ class OrderHistory extends Component {
     render() {
 
         let pastOrders = this.props.orderHistoryArray
-          .filter((order)=> {
-            console.log(order);
-            return order.user === this.props.user.id
-          })
-          .sort((a,b)=>{return b.id - a.id})
+          .filter((order)=> order.user === this.props.user.id)
+          .sort((a,b)=>b.id - a.id)
           .map( (orderObj, i) => {
-            console.log(orderObj);
             let historyLineItemPizza = orderObj.pizzas
               .map((pizzaInfo, i) =>{
-                console.log(pizzaInfo);
-
 
               let pizzaSize = this.props.pizzaSizeNameArray[this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].size -1]
               let pizzaToppingCount = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].toppings.length
@@ -45,7 +39,6 @@ class OrderHistory extends Component {
               return(
                 <View key={itemName+i}style={styles.row}>
                   <Text style={{flex:10}}>{itemName} </Text>
-
                   <Text style={{flex:4 , textAlign: 'right'}}>${singleItemPrice} x {itemCount} = </Text>
                   <Text style={{flex:2.5, textAlign: 'right'}}>${itemTotal.toFixed(2)}</Text>
                 </View>

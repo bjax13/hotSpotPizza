@@ -47,16 +47,11 @@ class Login extends Component {
 
                           axios.get('http://10.100.0.98:8888/social/facebook?access_token='+data.credentials.token)
                             .then(function (response) {
-                              console.log(response.data);
-
                               let userObj = {
                                 id: response.data.id,
                               }
 
                               _this.props.updateMain({user: userObj})
-
-                              console.log(userObj.id);
-                              console.log(response.data.token);
 
                               axios({
                                 method: 'get',
@@ -65,9 +60,7 @@ class Login extends Component {
                                   "Authorization": 'Token '+response.data.token
                                 },
                               }).then((response)=>{
-                                  console.log(response);
                                   _this.props.updateMain({user:response.data})
-                                  console.log(_this.props.user);
                                 })
                                 .catch((error)=>{
                                   console.log(error);

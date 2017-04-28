@@ -18,10 +18,6 @@ import {
     ScrollView,
 } from 'react-native'
 
-const onMakePizza = () => {
-
-  console.log('Button has been pressed!');
-};
 
 class CartModal extends Component {
 
