@@ -7,7 +7,7 @@ const initialState = {
   userCredentials: {},
 
   user:  {
-              "id": "dc6bb53d-2f23-4131-8ea4-a81a24063c0d",
+              "id": "ebdb2707-7d05-46e3-a853-24d8ec5cda9d",
               "last_login": "2017-04-19T21:12:24.286538Z",
               "email": "a@a.com",
               "first_name": "",

@@ -23,8 +23,7 @@ class OrderHistory extends Component {
 
         let pastOrders = this.props.orderHistoryArray
           .filter((order)=> {
-            console.log(order.user);
-            console.log(this.props.user.id);
+            console.log(order);
             return order.user === this.props.user.id
           })
           .sort((a,b)=>{return b.id - a.id})
@@ -105,7 +104,12 @@ class OrderHistory extends Component {
                             style={{position: 'absolute', right: 20 , top: 20 }}
                             onPress={() => {
                               arr = this.props.orderHistoryArray;
-                              arr[i].modalVisible = false;
+                              for (var j = 0; j < arr.length; j++) {
+                                if (arr[j].id === orderObj.id) {
+                                  arr[j].modalVisible = false;
+                                }
+                              }
+
                               this.props.updateMain({orderHistoryArray: arr})
                               this.forceUpdate()
                             }}>
@@ -186,15 +190,6 @@ class OrderHistory extends Component {
                                       sideObj.data.name = this.props.orderHistorySidesObject[sideObj.data.side].name
 
                                       sideObj.id = sideObj.type[0].toLowerCase() + sideObj.data.id
-
-                                      // console.log(sideObj)
-                                      // console.log(orderObj)
-                                      // console.log('side')
-                                      // console.log(this.props.orderHistoryPizzaCountObject);
-                                      // console.log(this.props.orderHistoryPizzaObject);
-                                      // console.log('sides');
-                                      // console.log(this.props.orderHistorySidesCountObject);
-                                      // console.log(this.props.orderHistorySidesObject);
 
                                       let currentCart = this.props.cartItems;
                                       currentCart.push(sideObj)
