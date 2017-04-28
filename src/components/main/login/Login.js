@@ -4,10 +4,10 @@ import { updateSettings } from '../../../actions/updateSettingsPageActions';
 import { updateMain } from '../../../actions/updateMainPageActions';
 
 import {FBLogin, FBLoginManager} from 'react-native-facebook-login'
-
 import { Actions } from 'react-native-router-flux'
-
 import axios from 'axios';
+
+import LoginButton from './LoginButton'
 
 import {
     StyleSheet,
@@ -26,8 +26,6 @@ class Login extends Component {
         return (
           <View style={{flex:1}}>
                 <View style={styles.container}>
-
-
                     <View style={styles.container}>
                       <Text style={styles.welcome}>
                         Welcome to Hot Spot Pizza!
@@ -36,70 +34,7 @@ class Login extends Component {
                         Get Started by Loging In with Facebook
                       </Text>
 
-
-                      <FBLogin style={{ marginBottom: 10, }}
-                        ref={(fbLogin) => { this.fbLogin = fbLogin }}
-                        permissions={["email","user_friends"]}
-                        loginBehavior={FBLoginManager.LoginBehaviors.Native}
-                        onLogin={(data)=>{
-                          console.log("Logged in!");
-                          this.props.updateMain({userCredentials: data.credentials});
-
-                          axios.get('http://10.100.0.98:8888/social/facebook?access_token='+data.credentials.token)
-                            .then(function (response) {
-                              let userObj = {
-                                id: response.data.id,
-                              }
-
-                              _this.props.updateMain({user: userObj})
-
-                              axios({
-                                method: 'get',
-                                url: 'http://10.100.0.98:8888/api/users/'+userObj.id + '/',
-                                headers: {
-                                  "Authorization": 'Token '+response.data.token
-                                },
-                              }).then((response)=>{
-                                  _this.props.updateMain({user:response.data})
-                                })
-                                .catch((error)=>{
-                                  console.log(error);
-                                })
-
-                                _this.props.updateMain({pizzaTest:false})
-
-                            })
-                            .catch(function (error) {
-                              console.log(error);
-                            });
-
-                        }}
-                        onLogout={function(){
-                          console.log("Logged out.");
-                          _this.setState({ user : null });
-                        }}
-                        onLoginFound={function(data){
-                          console.log("Existing login found.");
-                          console.log(data);
-                          _this.setState({ user : data.credentials });
-                        }}
-                        onLoginNotFound={function(){
-                          console.log("No user logged in.");
-                          _this.setState({ user : null });
-                        }}
-                        onError={function(data){
-                          console.log("ERROR");
-                          console.log(data);
-                        }}
-                        onCancel={function(){
-                          console.log("User cancelled.");
-                        }}
-                        onPermissionsMissing={function(data){
-                          console.log("Check permissions!");
-                          console.log(data);
-                        }}
-                      />
-
+                      <LoginButton></LoginButton>
 
                       <TouchableHighlight
                         onPress = {()=>{_this.props.updateMain({pizzaTest:false})}}>

@@ -3,6 +3,7 @@ import { UPDATE_MAIN } from '../actions/updateMainPageActions'
 const initialState = {
 
   pizzaTest: true,
+  loginModal: true,
   submitPizza: false,
   userCredentials: {},
 

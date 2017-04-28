@@ -7,6 +7,7 @@ import { Actions } from 'react-native-router-flux'
 
 import axios from 'axios';
 
+import LoginButton from './login/LoginButton'
 import Login from './login/Login'
 
 import {
@@ -114,7 +115,7 @@ class Main extends Component {
                       </Text>
                       <Modal
                         transparent={false}
-                        visible={this.props.pizzaTest}
+                        visible={this.props.loginModal}
                         >
                         <Login></Login>
                       </Modal>
@@ -129,6 +130,12 @@ class Main extends Component {
                       <TouchableHighlight onPress={Actions.OrderHistory}>
                         <Text style={{color: 'blue'}}>Order History</Text>
                       </TouchableHighlight>
+                      <Text>
+
+                      </Text>
+                      <LoginButton></LoginButton>
+
+
                     </View>
                 </View>
             </View>
@@ -138,7 +145,7 @@ class Main extends Component {
 
 mapStateToProps = (state) => {
     return {
-      pizzaTest: state.mainPage.pizzaTest,
+      loginModal: state.mainPage.loginModal,
 
       orderHistoryPageCount: state.mainPage.orderHistoryPageCount,
       orderHistoryArray: state.mainPage.orderHistoryArray,
