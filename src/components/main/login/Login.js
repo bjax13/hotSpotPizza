@@ -63,12 +63,10 @@ class Login extends Component {
                                 headers: {
                                   "Authorization": 'Token '+response.data.token
                                 },
-
-                              })
-
-                              // axios.get('http://10.100.0.98:8888/api/users/'+userObj.id,  {Token: 'f1bbf3a6e2714da9b5685fd7100a81975bca3eb0' })
-                                .then((response)=>{
+                              }).then((response)=>{
                                   console.log(response);
+                                  _this.props.updateMain({user:response.data})
+                                  console.log(_this.props.user);
                                 })
                                 .catch((error)=>{
                                   console.log(error);
