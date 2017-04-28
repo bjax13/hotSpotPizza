@@ -127,6 +127,12 @@ class Main extends Component {
                       <Text>
 
                       </Text>
+                      <TouchableHighlight onPress={Actions.AddFavorites}>
+                        <Text style={{color: 'green'}}>Pick a Favorite</Text>
+                      </TouchableHighlight>
+                      <Text>
+
+                      </Text>
                       <TouchableHighlight onPress={Actions.OrderHistory}>
                         <Text style={{color: 'blue'}}>Order History</Text>
                       </TouchableHighlight>
