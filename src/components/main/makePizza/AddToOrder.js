@@ -73,47 +73,72 @@ class AddToOrder extends Component {
         console.log(this.props.addToOrderArr);
         console.log(this.props.totalPizzaCost);
         console.log(this.props.pizzaArray);
+        let numOfCalls = 0 ;
 
-        axios.get('http://10.100.0.98:8888/api/pizzas/'+this.props.addToOrderArr[0])
-          .then((response)=>{
-            console.log(response);
+        for (var i = 0; i < this.props.pizzaArray.length; i++) {
 
-            let currentCart = this.props.cartItems;
-            let total = this.props.totalCost;
-            response.data.count = 1;
-            total += this.props.pizzaCost;
+          if (this.props.pizzaArray[i].count > 0 ) {
+            numOfCalls++;
+            console.log(this.props.pizzaArray[i]);
+            console.log(this.props.addToOrderArr);
+            axios.get('http://10.100.0.98:8888/api/pizzas/'+this.props.pizzaArray[i].id)
+              .then((response)=>{
+                console.log(response);
 
-            currentCart.push({id: 'p'+response.data.id , type: 'Pizza', data: response.data})
+                let currentCart = this.props.cartItems;
+                let total = this.props.totalCost;
+                for (var i = 0; i < this.props.pizzaArray.length; i++) {
 
-            axios.post('http://10.100.0.98:8888/api/pizza-counts/', {
-                "count": 1,
-                "pizza": response.data.id
-            })
-            .then((response)=>{
-              console.log(response);
+                  if (this.props.pizzaArray[i].id === response.data.id) {
+                    response.data.count = this.props.pizzaArray[i].count;
+                    i = this.props.pizzaArray.length
+                  }
+                }
 
-              if (true) {
+                total += this.props.pizzaCost;
 
-                console.log(currentCart[currentCart.length-1].data)
-                currentCart[currentCart.length-1].data.countID = response.data.id;
+                currentCart.push({id: 'p'+response.data.id , type: 'Pizza', data: response.data})
 
-                this.props.updateMain({cartItems: currentCart})
+                axios.post('http://10.100.0.98:8888/api/pizza-counts/', {
+                    "count": response.data.count,
+                    "pizza": response.data.id
+                })
+                .then((response)=>{
+                  console.log(response);
+                  console.log(response.data.pizza);
+                  numOfCalls--;
+                  console.log(currentCart);
+                  console.log(currentCart[currentCart.length-1]);
+                  // currentCart[currentCart.length-1].data.countID = response.data.id;
+                  for (var i = 0; i < currentCart.length; i++) {
+                    if (currentCart[i].data.id === response.data.pizza) {
+                      currentCart[i].data.countID = response.data.id
+                    }
+                  }
 
-                this.props.updateMain({ pizzaCost: 0});
-                this.props.updateMain({ totalToppingsCost: 0});
-                this.props.updateMain({customToppingArr: []})
-                this.props.updateMain({totalCost: total})
+                  if (numOfCalls === 0) {
 
-                Actions.Cart();
-              }
-            })
-            .catch((err)=>{
-              console.log(err);
-            });
-          })
-          .catch((error)=>{
-            console.log(error);
-          })
+                    this.props.updateMain({cartItems: currentCart})
+
+                    this.props.updateMain({ pizzaCost: 0});
+                    this.props.updateMain({ totalToppingsCost: 0});
+                    this.props.updateMain({customToppingArr: []})
+                    this.props.updateMain({totalCost: total})
+
+                    Actions.Cart();
+                  }else {
+                    console.log(numOfCalls);
+                  }
+                })
+                .catch((err)=>{
+                  console.log(err);
+                });
+              })
+              .catch((error)=>{
+                console.log(error);
+              })
+          }
+        }
 
       }
 

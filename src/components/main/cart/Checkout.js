@@ -40,9 +40,14 @@ class Checkout extends Component {
                 let s = [];
                 let skiped = 0;
 
+                console.log(this.props.cartItems);
+
                 for (var i = 0; i < this.props.cartItems.length; i++) {
 
+
                   if (this.props.cartItems[i].id[0] === 'p' && this.props.deleted.indexOf(this.props.cartItems[i].id) === -1) {
+                    console.log(this.props.cartItems[i]);
+                    console.log(this.props.cartItems[i].data);
                     p.push(this.props.cartItems[i].data.countID)
                   }else if (this.props.cartItems[i].id[0] === 's' && this.props.deleted.indexOf(this.props.cartItems[i].id) === -1) {
                     s.push(this.props.cartItems[i].data.id)
@@ -52,6 +57,11 @@ class Checkout extends Component {
                   }
                 }
                 if (p.length + s.length + skiped > this.props.deleted.length ) {
+
+                  console.log(p);
+                  console.log(s);
+                  console.log(this.props.user.id);
+                  console.log(this.props.totalCost);
                   axios.post('http://10.100.0.98:8888/api/orders/', {
                       "total": this.props.totalCost,
                       "user": this.props.user.id,
