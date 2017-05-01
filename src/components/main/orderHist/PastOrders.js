@@ -69,8 +69,10 @@ class OrderHistory extends Component {
                 <View key={orderObj.id} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
                   <TouchableHighlight
                     onPress={()=>{
+                      console.log('pressed');
                       arr = this.props.orderHistoryArray;
-                      arr[i].modalVisible = true;
+                      console.log(arr);
+                      orderObj.modalVisible = true;
                       this.props.updateMain({orderHistoryArray: arr})
                       this.forceUpdate()
                     }}
@@ -96,6 +98,7 @@ class OrderHistory extends Component {
                           <TouchableHighlight
                             style={{position: 'absolute', right: 20 , top: 20 }}
                             onPress={() => {
+                              console.log("presssed");
                               arr = this.props.orderHistoryArray;
                               for (var j = 0; j < arr.length; j++) {
                                 if (arr[j].id === orderObj.id) {
