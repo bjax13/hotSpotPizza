@@ -50,10 +50,10 @@ class Favorites extends Component {
               <View style={{flex:9.5}}>
                 <ScrollView >
 
-                  <View style={{flex:9.5, padding: 15}}>
+                  <ScrollView style={{flex:9.5, padding: 15}}>
                     <FavItems></FavItems>
                     <AddToOrder type="favorite"></AddToOrder>
-                  </View>
+                  </ScrollView>
 
                 </ScrollView>
               </View>

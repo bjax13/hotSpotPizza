@@ -16,11 +16,11 @@ import {
 
 class FavItems extends Component {
   componentDidMount(){
-    axios.get('http://10.100.0.98:8888/api/sides/')
+    axios.get('http://10.100.0.98:8888/api/pizzas/')
       .then((response) => {
-        let sidesCount = response.data.count
+        let pizzaCount = response.data.count
         let resultsPerPage = response.data.results.length
-        let pages = Math.ceil(sidesCount / resultsPerPage);
+        let pages = Math.ceil(pizzaCount / resultsPerPage);
         let pageURL = response.data.next;
 
         if (pageURL.indexOf('=') != -1) {
@@ -55,12 +55,14 @@ class FavItems extends Component {
 
     render() {
 
-        let pizzaSides = this.props.pizzaSidesArray.map( (sidesObj, i) => {
+        let pizzaSides = this.props.pizzaSidesArray
+          .filter((order)=> order.public_display === true)
+          .map( (pizzaObj, i) => {
 
             let defaultVal = true;
 
             getCount = () => {
-              return sidesObj.count
+              return pizzaObj.count
             }
 
             decrement = () =>{
@@ -71,7 +73,7 @@ class FavItems extends Component {
                 this.props.updateMain({pizzaSidesArray: arr})
 
                 if (this.props.customSidesArr.indexOf(arr[i].id) != -1) {
-                  this.props.updateMain({sidesCost: (this.props.sidesCost - (parseFloat(arr[i].price))) });
+                  this.props.updateMain({pizzaCost: (this.props.pizzaCost - (parseFloat(arr[i].price))) });
                   this.props.updateMain({totalSidesCost: this.props.totalSidesCost - parseFloat(arr[i].price)});
                 }
 
@@ -85,22 +87,22 @@ class FavItems extends Component {
               this.props.updateMain({pizzaSidesArray: arr})
 
               if (this.props.customSidesArr.indexOf(arr[i].id) != -1) {
-                this.props.updateMain({sidesCost: (this.props.sidesCost + (parseFloat(arr[i].price))) });
+                this.props.updateMain({pizzaCost: (this.props.pizzaCost + (parseFloat(arr[i].price))) });
                 this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(arr[i].price)});
               }else {
                 let newSideArr = this.props.customSidesArr;
-                newSideArr.push(sidesObj.id);
+                newSideArr.push(pizzaObj.id);
                 this.props.updateMain({customSidesArr: newSideArr});
-                this.props.updateMain({sidesCost: (this.props.sidesCost + (sidesObj.count*parseFloat(sidesObj.price))) });
-                this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(sidesObj.price)});
+                this.props.updateMain({pizzaCost: (this.props.pizzaCost + (pizzaObj.count*parseFloat(pizzaObj.price))) });
+                this.props.updateMain({totalSidesCost: this.props.totalSidesCost + parseFloat(pizzaObj.price)});
               }
               this.forceUpdate()
             }
 
             return (
-              <View key={sidesObj.name} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
-                <View style={{flex:4}}>
-                  <Text style={styles.optionTitle}>{sidesObj.name}</Text>
+              <View key={pizzaObj.id} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
+                <View style={{flex:3.8}}>
+                  <Text style={styles.optionTitle}>{pizzaObj.name}</Text>
 
                 </View>
 
@@ -120,7 +122,7 @@ class FavItems extends Component {
                   </TouchableHighlight>
                 </View>
                 <View style={{flex:1, alignItems: 'flex-end'}}>
-                  <Text >{"$"+parseFloat(sidesObj.price).toFixed(2)}</Text>
+                  <Text >{"$"+parseFloat(pizzaObj.price).toFixed(2)}</Text>
                 </View>
               </View>
             );
@@ -147,7 +149,7 @@ class FavItems extends Component {
 
 mapStateToProps = (state) => {
     return {
-      sidesCost: state.mainPage.sidesCost,
+      pizzaCost: state.mainPage.pizzaCost,
       customSidesArr: state.mainPage.customSidesArr,
       totalSidesCost: state.mainPage.totalSidesCost,
       pizzaSidesArray: state.mainPage.pizzaSidesArray,
