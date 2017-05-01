@@ -28,6 +28,8 @@ const initialState = {
 
   customToppingArr: [],
   customSidesArr: [],
+  addToOrderArr: [],
+  pizzaArray: [],
   customPizzaObj: {"price": "0.00","public_display": false,"size": 1,"crust": 1,"toppings": [1]},
   totalToppingsCost: 0.00,
   totalSidesCost: 0.00,

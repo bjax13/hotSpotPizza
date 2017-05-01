@@ -38,7 +38,7 @@ class Favorites extends Component {
            <View style={{marginTop: 22,flex: 1}}>
             <View style={{margin: 5, flex:1}}>
               <View style={{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f7d9de'}}>
-                <Text style= {{fontWeight: '600'}}>Order Total {'$'+(this.props.totalCost+this.props.sidesCost).toFixed(2)}</Text>
+                <Text style= {{fontWeight: '600'}}>Order Total {'$'+(this.props.totalCost+this.props.pizzaCost).toFixed(2)}</Text>
               </View>
 
               <TouchableHighlight
@@ -67,7 +67,7 @@ class Favorites extends Component {
 mapStateToProps = (state) => {
     return {
       totalCost: state.mainPage.totalCost,
-      sidesCost: state.mainPage.sidesCost,
+      pizzaCost: state.mainPage.pizzaCost,
     }
 }
 
