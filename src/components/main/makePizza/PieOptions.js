@@ -68,10 +68,10 @@ class PieOptions extends Component {
         });
     }
 
-    componentDidUpdate(){
-
-      this.props.updateMain({pizzaCost: (this.props.pizzaSize[1]+this.props.pizzaSauce[1]+this.props.pizzaCrust[1]+ this.props.totalToppingsCost)*this.props.pizzaQuantity});
-    }
+    // componentDidUpdate(){
+    //
+    //   this.props.updateMain({pizzaCost: (this.props.pizzaSize[1]+this.props.pizzaSauce[1]+this.props.pizzaCrust[1]+ this.props.totalToppingsCost)*this.props.pizzaQuantity});
+    // }
 
     _dropdown_1_adjustFrame(style) {
       // console.log(`frameStyle={width:${style.width}, height:${style.height}, top:${style.top}, left:${style.left}, right:${style.right}}`);

@@ -92,6 +92,8 @@ class FavItems extends Component {
 
               if (arr[index].id === pizzaObj.id) {
                 arr[index].count++;
+              }else {
+                console.log('ERROR - index and Object do not match');
               }
 
               this.props.updateMain({pizzaArray: arr})

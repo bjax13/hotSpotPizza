@@ -64,6 +64,59 @@ class AddToOrder extends Component {
           console.log(error);
         });
       }
+
+      addFavoritesToOrder = ()=>{
+        console.log('adding Favs');
+
+        console.log(this.props.pizzaCost);
+        console.log(this.props.cartItems);
+        console.log(this.props.addToOrderArr);
+        console.log(this.props.totalPizzaCost);
+        console.log(this.props.pizzaArray);
+
+        axios.get('http://10.100.0.98:8888/api/pizzas/'+this.props.addToOrderArr[0])
+          .then((response)=>{
+            console.log(response);
+
+            let currentCart = this.props.cartItems;
+            let total = this.props.totalCost;
+            response.data.count = 1;
+            total += this.props.pizzaCost;
+
+            currentCart.push({id: 'p'+response.data.id , type: 'Pizza', data: response.data})
+
+            axios.post('http://10.100.0.98:8888/api/pizza-counts/', {
+                "count": 1,
+                "pizza": response.data.id
+            })
+            .then((response)=>{
+              console.log(response);
+
+              if (true) {
+
+                console.log(currentCart[currentCart.length-1].data)
+                currentCart[currentCart.length-1].data.countID = response.data.id;
+
+                this.props.updateMain({cartItems: currentCart})
+
+                this.props.updateMain({ pizzaCost: 0});
+                this.props.updateMain({ totalToppingsCost: 0});
+                this.props.updateMain({customToppingArr: []})
+                this.props.updateMain({totalCost: total})
+
+                Actions.Cart();
+              }
+            })
+            .catch((err)=>{
+              console.log(err);
+            });
+          })
+          .catch((error)=>{
+            console.log(error);
+          })
+
+      }
+
       addSidesToOrder = ()=>{
 
         let last = 0
@@ -130,7 +183,10 @@ class AddToOrder extends Component {
                 }else if (this.props.type === 'sides') {
                   addSidesToOrder();
 
-                }else {
+                }else if (this.props.type === 'favorite') {
+                  addFavoritesToOrder();
+                }
+                else {
                   console.log('You need to specify a correct type ex: pizzas or sides');
                 }
               }}>
@@ -165,6 +221,10 @@ mapStateToProps = (state) => {
       customSidesArr: state.mainPage.customSidesArr,
 
       cartItems: state.mainPage.cartItems,
+
+      addToOrderArr: state.mainPage.addToOrderArr,
+      totalPizzaCost: state.mainPage.totalPizzaCost,
+      pizzaArray: state.mainPage.pizzaArray,
 
     }
 }
