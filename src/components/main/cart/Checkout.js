@@ -86,7 +86,8 @@ class Checkout extends Component {
                             newPizzaHistCntObj[p[i]].pizza = this.props.cartItems[j].data.id;
 
                             this.props.updateMain({orderHistoryPizzaCountObject: newPizzaHistCntObj})
-
+                            console.log(this.props.cartItems[j]);
+                            console.log(this.props.cartItems[j].data.size);
                             newPizzaHistObj[newPizzaHistCntObj[p[i]].pizza] = {
                               crust: this.props.cartItems[j].data.crust,
                               id: newPizzaHistCntObj[p[i]].pizza,

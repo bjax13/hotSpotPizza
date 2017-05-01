@@ -37,7 +37,24 @@ class Login extends Component {
                       <LoginButton></LoginButton>
 
                       <TouchableHighlight
-                        onPress = {()=>{_this.props.updateMain({loginModal:false})}}>
+                        onPress = {()=>{
+
+                          _this.props.updateMain({user: {
+                                      "id": "ebdb2707-7d05-46e3-a853-24d8ec5cda9d",
+                                      "last_login": "2017-04-19T21:12:24.286538Z",
+                                      "email": "a@a.com",
+                                      "first_name": "",
+                                      "last_name": "",
+                                      "image": null,
+                                      "preferred_name": "",
+                                      "gender": null,
+                                      "birthdate": null,
+                                      "phone": "",
+                                      "date_joined": "2017-04-04T17:19:47.218582Z",
+                                      "is_developer": false
+                                    }})
+                          _this.props.updateMain({loginModal:false})
+                        }}>
                         <View>
                           <Text></Text>
                           <Text></Text>
