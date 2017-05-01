@@ -36,7 +36,7 @@ class LineItems extends Component {
             if (item.type === 'Side') {
               ItemName = item.data.name
             }else if (item.type === 'Pizza') {
-              ItemName = (this.props.pizzaSizeNameArray[item.data.size-1] + item.data.toppings.length +' Topping '+item.type);
+              ItemName = (item.data.name||this.props.pizzaSizeNameArray[item.data.size-1] + item.data.toppings.length +' Topping '+item.type);
             }
             else {
               ItemName = 'erroros'
@@ -61,7 +61,7 @@ class LineItems extends Component {
                     this.props.updateMain({arr})
                   })
                 }else {
-                  
+
                   axios.post('http://10.100.0.98:8888/api/pizza-counts/', {
                     "count": item.data.count,
                     "pizza": item.data.id

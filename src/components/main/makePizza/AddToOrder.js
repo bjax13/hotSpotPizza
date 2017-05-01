@@ -104,12 +104,7 @@ class AddToOrder extends Component {
                     "pizza": response.data.id
                 })
                 .then((response)=>{
-                  console.log(response);
-                  console.log(response.data.pizza);
                   numOfCalls--;
-                  console.log(currentCart);
-                  console.log(currentCart[currentCart.length-1]);
-                  // currentCart[currentCart.length-1].data.countID = response.data.id;
                   for (var i = 0; i < currentCart.length; i++) {
                     if (currentCart[i].data.id === response.data.pizza) {
                       currentCart[i].data.countID = response.data.id
