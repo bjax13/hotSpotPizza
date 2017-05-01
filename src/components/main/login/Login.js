@@ -37,7 +37,7 @@ class Login extends Component {
                       <LoginButton></LoginButton>
 
                       <TouchableHighlight
-                        onPress = {()=>{_this.props.updateMain({pizzaTest:false})}}>
+                        onPress = {()=>{_this.props.updateMain({loginModal:false})}}>
                         <View>
                           <Text></Text>
                           <Text></Text>
@@ -60,7 +60,7 @@ class Login extends Component {
 
 mapStateToProps = (state) => {
     return {
-      pizzaTest: state.mainPage.pizzaTest,
+      loginModal: state.mainPage.loginModal,
       user: state.mainPage.user,
       userCredentials: state.mainPage.userCredentials,
       pizzaSauceArray: state.mainPage.pizzaSauceArray,
