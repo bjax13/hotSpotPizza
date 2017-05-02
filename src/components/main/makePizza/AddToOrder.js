@@ -68,11 +68,9 @@ class AddToOrder extends Component {
       addFavoritesToOrder = ()=>{
         console.log('adding Favs');
 
-        console.log(this.props.pizzaCost);
-        console.log(this.props.cartItems);
-        console.log(this.props.addToOrderArr);
-        console.log(this.props.totalPizzaCost);
-        console.log(this.props.pizzaArray);
+        console.log();
+
+
         let numOfCalls = 0 ;
 
         for (var i = 0; i < this.props.pizzaArray.length; i++) {

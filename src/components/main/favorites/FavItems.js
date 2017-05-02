@@ -44,7 +44,11 @@ class FavItems extends Component {
               for (var i = 0; i < this.props.pizzaArray.length; i++) {
                 newObj[i+1]=this.props.pizzaArray[i]
               }
+              console.log(this.props.orderHistoryPizzaObject);
+              console.log(this.props.orderHistoryPizzaObject.size);
               this.props.updateMain({orderHistoryPizzaObject: newObj})
+              console.log(this.props.orderHistoryPizzaObject);
+              console.log(this.props.orderHistoryPizzaObject.size);
             })
         }
       })

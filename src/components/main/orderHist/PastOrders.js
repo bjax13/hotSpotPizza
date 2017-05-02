@@ -28,6 +28,8 @@ class OrderHistory extends Component {
             let historyLineItemPizza = orderObj.pizzas
               .map((pizzaInfo, i) =>{
 
+              console.log(this.props.orderHistoryPizzaObject);
+
               let pizzaSize = this.props.pizzaSizeNameArray[this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].size -1]
               let pizzaToppingCount = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].toppings.length
               let secondaryName = pizzaSize + ' ' + pizzaToppingCount  + ' Topping Pizza'
@@ -69,11 +71,11 @@ class OrderHistory extends Component {
                 <View key={orderObj.id} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
                   <TouchableHighlight
                     onPress={()=>{
-                      console.log('pressed');
                       arr = this.props.orderHistoryArray;
-                      console.log(arr);
                       orderObj.modalVisible = true;
+                      console.log(this.props.orderHistoryArray);
                       this.props.updateMain({orderHistoryArray: arr})
+                      console.log(this.props.orderHistoryArray);
                       this.forceUpdate()
                     }}
                     style={{flex:1}}>
@@ -105,8 +107,9 @@ class OrderHistory extends Component {
                                   arr[j].modalVisible = false;
                                 }
                               }
-
+                              console.log(this.props.orderHistoryArray);
                               this.props.updateMain({orderHistoryArray: arr})
+                              console.log(this.props.orderHistoryArray);
                               this.forceUpdate()
                             }}>
                             <Text style={{fontWeight: '900', color: 'gray'}}>X</Text>
