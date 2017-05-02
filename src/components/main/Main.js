@@ -106,16 +106,31 @@ class Main extends Component {
         flex: 1
       }}>
         <View style={styles.container}>
+          <View style={{flex:1, backgroundColor: '#ccc', alignSelf: 'stretch'}}>
+            <Text>
 
-          <View style={styles.circle}>
-            <Image style={{
-              width: 141,
-              height: 141,
-              alignItems: 'center'
-            }} source={{
-              uri: 'https://www.48hourslogo.com/48hourslogo_data/2014/09/09/201409090947415741.png'
-            }}/>
+            </Text>
           </View>
+
+          <View style={{flex:3.4, marginTop: 5}}>
+            <TouchableHighlight
+              style={styles.circle}
+              onPress={()=>{
+                if (this.props.logoPosition === this.props.logoUri.length-1) {
+                  this.props.updateMain({logoPosition: 0})
+                }else {
+                  let current = this.props.logoPosition;
+                  current++;
+                  this.props.updateMain({logoPosition: current})
+                }
+
+              }}>
+              <Image style={styles.circleImg} source={{
+                uri: this.props.logoUri[this.props.logoPosition]
+              }}/>
+            </TouchableHighlight>
+          </View>
+
           <View style={styles.container}>
             <Text style={styles.welcome}>
               Welcome to Hot Spot Pizza!
@@ -158,6 +173,9 @@ mapStateToProps = (state) => {
   return {
     loginModal: state.mainPage.loginModal,
 
+    logoUri: state.mainPage.logoUri,
+    logoPosition: state.mainPage.logoPosition,
+
     orderHistoryPageCount: state.mainPage.orderHistoryPageCount,
     orderHistoryArray: state.mainPage.orderHistoryArray,
     orderHistoryModal: state.mainPage.orderHistoryModal,
@@ -183,8 +201,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  circleImg: {
+    width: 141,
+    height: 141,
+    alignItems: 'center'
+  },
   container: {
-    flex: 1,
+    flex: 6,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF'

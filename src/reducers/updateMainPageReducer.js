@@ -7,6 +7,16 @@ const initialState = {
   submitPizza: false,
   userCredentials: {},
 
+  logoPosition: 0,
+  logoUri:
+  [
+    'https://www.48hourslogo.com/48hourslogo_data/2014/09/09/201409090947415741.png',
+    'https://www.48hourslogo.com/48hourslogo_data/2014/09/08/2014090814323320522.jpg',
+    'https://www.48hourslogo.com/48hourslogo_data/2014/09/09/2014090903062818739.jpg',
+    'https://www.48hourslogo.com/48hourslogo_data/2014/09/09/2014090903054718739.jpg',
+    'https://www.48hourslogo.com/48hourslogo_data/2014/09/10/201409101224082397.jpg',
+  ],
+
   user: {
     "id": "ebdb2707-7d05-46e3-a853-24d8ec5cda9d",
     "last_login": "2017-04-19T21:12:24.286538Z",
