@@ -66,10 +66,6 @@ class AddToOrder extends Component {
       }
 
       addFavoritesToOrder = ()=>{
-        console.log('adding Favs');
-
-        console.log();
-
 
         let numOfCalls = 0 ;
 
@@ -77,11 +73,9 @@ class AddToOrder extends Component {
 
           if (this.props.pizzaArray[i].count > 0 ) {
             numOfCalls++;
-            console.log(this.props.pizzaArray[i]);
-            console.log(this.props.addToOrderArr);
+
             axios.get('http://10.100.0.98:8888/api/pizzas/'+this.props.pizzaArray[i].id)
               .then((response)=>{
-                console.log(response);
 
                 let currentCart = this.props.cartItems;
                 let total = this.props.totalCost;
@@ -119,8 +113,6 @@ class AddToOrder extends Component {
                     this.props.updateMain({totalCost: total})
 
                     Actions.Cart();
-                  }else {
-                    console.log(numOfCalls);
                   }
                 })
                 .catch((err)=>{

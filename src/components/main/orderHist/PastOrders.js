@@ -28,8 +28,6 @@ class OrderHistory extends Component {
             let historyLineItemPizza = orderObj.pizzas
               .map((pizzaInfo, i) =>{
 
-              console.log(this.props.orderHistoryPizzaObject);
-
               let pizzaSize = this.props.pizzaSizeNameArray[this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].size -1]
               let pizzaToppingCount = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].toppings.length
               let secondaryName = pizzaSize + ' ' + pizzaToppingCount  + ' Topping Pizza'
@@ -73,9 +71,9 @@ class OrderHistory extends Component {
                     onPress={()=>{
                       arr = this.props.orderHistoryArray;
                       orderObj.modalVisible = true;
-                      console.log(this.props.orderHistoryArray);
+
                       this.props.updateMain({orderHistoryArray: arr})
-                      console.log(this.props.orderHistoryArray);
+
                       this.forceUpdate()
                     }}
                     style={{flex:1}}>
@@ -100,16 +98,16 @@ class OrderHistory extends Component {
                           <TouchableHighlight
                             style={{position: 'absolute', right: 20 , top: 20 }}
                             onPress={() => {
-                              console.log("presssed");
+
                               arr = this.props.orderHistoryArray;
                               for (var j = 0; j < arr.length; j++) {
                                 if (arr[j].id === orderObj.id) {
                                   arr[j].modalVisible = false;
                                 }
                               }
-                              console.log(this.props.orderHistoryArray);
+
                               this.props.updateMain({orderHistoryArray: arr})
-                              console.log(this.props.orderHistoryArray);
+
                               this.forceUpdate()
                             }}>
                             <Text style={{fontWeight: '900', color: 'gray'}}>X</Text>

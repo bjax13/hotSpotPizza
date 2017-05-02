@@ -37,26 +37,25 @@ class Main extends Component {
           }
         }
 
-        console.log(this.props.orderHistoryArray);
         this.props.updateMain({orderHistoryArray: response.data.results});
-        console.log(this.props.orderHistoryArray);
+
 
         for (var i = 2; i <= pages; i++) {
           axios.get(pageURL+i)
             .then((response)=>{
               this.props.updateMain({orderHistoryPageCount: this.props.orderHistoryPageCount+ response.data.results.length})
-              console.log(this.props.orderHistoryArray);
+
               this.props.updateMain({orderHistoryArray: this.props.orderHistoryArray.concat(response.data.results)})
-              console.log(this.props.orderHistoryArray);
+
               if (this.props.orderHistoryPageCount === response.data.count) {
                 let arr = []
                 for (var i = 0; i < this.props.orderHistoryArray.length; i++) {
                   this.props.orderHistoryArray[i].modalVisible = false;
                   arr.push(this.props.orderHistoryArray[i])
                 }
-                console.log(this.props.orderHistoryArray);
+
                 this.props.updateMain({orderHistoryArray: arr})
-                console.log(this.props.orderHistoryArray);
+
                 for (var i = 0; i < arr.length; i++) {
                   if (arr[i].pizzas.length>0) {
                     for (var j = 0; j < arr[i].pizzas.length; j++) {
@@ -69,11 +68,9 @@ class Main extends Component {
                             .then((response)=>{
                               let obj = this.props.orderHistoryPizzaObject;
                               obj[response.data.id] = response.data;
-                              console.log(this.props.orderHistoryPizzaObject);
-                              console.log(this.props.orderHistoryPizzaObject.size);
+
                               this.props.updateMain({orderHistoryPizzaObject:obj})
-                              console.log(this.props.orderHistoryPizzaObject);
-                              console.log(this.props.orderHistoryPizzaObject.size);
+
                             })
                         })
                     }
