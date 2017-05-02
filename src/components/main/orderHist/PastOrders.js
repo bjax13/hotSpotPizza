@@ -17,8 +17,6 @@ import {
 } from 'react-native'
 
 class OrderHistory extends Component {
-
-
     render() {
 
         let pastOrders = this.props.orderHistoryArray
@@ -28,12 +26,12 @@ class OrderHistory extends Component {
             let historyLineItemPizza = orderObj.pizzas
               .map((pizzaInfo, i) =>{
 
-              let pizzaSize = this.props.pizzaSizeNameArray[this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].size -1]
-              let pizzaToppingCount = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].toppings.length
-              let secondaryName = pizzaSize + ' ' + pizzaToppingCount  + ' Topping Pizza'
-              let itemName = (this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].name || secondaryName )
-              let singleItemPrice = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].price
-              let itemCount = this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].count
+              let pizzaSize = this.props.pizzaSizeNameArray[this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].size -1];
+              let pizzaToppingCount = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].toppings.length;
+              let secondaryName = pizzaSize + ' ' + pizzaToppingCount  + ' Topping Pizza';
+              let itemName = (this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].name || secondaryName );
+              let singleItemPrice = this.props.orderHistoryPizzaObject[this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].pizza].price;
+              let itemCount = this.props.orderHistoryPizzaCountObject[orderObj.pizzas[i]].count;
               let itemTotal = singleItemPrice*itemCount;
 
               return(
@@ -42,14 +40,14 @@ class OrderHistory extends Component {
                   <Text style={{flex:4 , textAlign: 'right'}}>${singleItemPrice} x {itemCount} = </Text>
                   <Text style={{flex:2.5, textAlign: 'right'}}>${itemTotal.toFixed(2)}</Text>
                 </View>
-              )
-            })
+              );
+            });
 
             let historyLineItemSides = orderObj.sides.map((sidesInfo, i) =>{
 
-              let itemName = (this.props.orderHistorySidesObject[this.props.orderHistorySidesCountObject[orderObj.sides[i]].side].name || 'Unknown' )
-              let singleItemPrice = this.props.orderHistorySidesObject[this.props.orderHistorySidesCountObject[orderObj.sides[i]].side].price
-              let itemCount = this.props.orderHistorySidesCountObject[orderObj.sides[i]].count
+              let itemName = (this.props.orderHistorySidesObject[this.props.orderHistorySidesCountObject[orderObj.sides[i]].side].name || 'Unknown' );
+              let singleItemPrice = this.props.orderHistorySidesObject[this.props.orderHistorySidesCountObject[orderObj.sides[i]].side].price;
+              let itemCount = this.props.orderHistorySidesCountObject[orderObj.sides[i]].count;
               let itemTotal = singleItemPrice*itemCount;
 
               return(
@@ -60,10 +58,8 @@ class OrderHistory extends Component {
                     <Text style={{flex:2.5, textAlign: 'right'}}>${itemTotal.toFixed(2)}</Text>
 
                 </View>
-              )
-            })
-
-
+              );
+            });
 
               return (
                 <View key={orderObj.id} style={{paddingTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
@@ -72,9 +68,9 @@ class OrderHistory extends Component {
                       arr = this.props.orderHistoryArray;
                       orderObj.modalVisible = true;
 
-                      this.props.updateMain({orderHistoryArray: arr})
+                      this.props.updateMain({orderHistoryArray: arr});
 
-                      this.forceUpdate()
+                      this.forceUpdate();
                     }}
                     style={{flex:1}}>
                     <View style={{flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
@@ -103,7 +99,7 @@ class OrderHistory extends Component {
                               for (var j = 0; j < arr.length; j++) {
                                 if (arr[j].id === orderObj.id) {
                                   arr[j].modalVisible = false;
-                                }
+                                };
                               }
 
                               this.props.updateMain({orderHistoryArray: arr})
@@ -154,22 +150,22 @@ class OrderHistory extends Component {
                                           countID: orderObj.pizzas[i],
                                         }
                                       }
-                                      pizzaObj.data.count = this.props.orderHistoryPizzaCountObject[pizzaObj.data.countID].count
-                                      pizzaObj.data.id = this.props.orderHistoryPizzaCountObject[pizzaObj.data.countID].pizza
+                                      pizzaObj.data.count = this.props.orderHistoryPizzaCountObject[pizzaObj.data.countID].count;
+                                      pizzaObj.data.id = this.props.orderHistoryPizzaCountObject[pizzaObj.data.countID].pizza;
 
-                                      pizzaObj.data.crust = this.props.orderHistoryPizzaObject[pizzaObj.data.id].crust
-                                      pizzaObj.data.name = this.props.orderHistoryPizzaObject[pizzaObj.data.id].name
-                                      pizzaObj.data.price = this.props.orderHistoryPizzaObject[pizzaObj.data.id].price
-                                      pizzaObj.data.public_display = this.props.orderHistoryPizzaObject[pizzaObj.data.id].public_display
-                                      pizzaObj.data.size = this.props.orderHistoryPizzaObject[pizzaObj.data.id].size
-                                      pizzaObj.data.toppings = this.props.orderHistoryPizzaObject[pizzaObj.data.id].toppings
+                                      pizzaObj.data.crust = this.props.orderHistoryPizzaObject[pizzaObj.data.id].crust;
+                                      pizzaObj.data.name = this.props.orderHistoryPizzaObject[pizzaObj.data.id].name;
+                                      pizzaObj.data.price = this.props.orderHistoryPizzaObject[pizzaObj.data.id].price;
+                                      pizzaObj.data.public_display = this.props.orderHistoryPizzaObject[pizzaObj.data.id].public_display;
+                                      pizzaObj.data.size = this.props.orderHistoryPizzaObject[pizzaObj.data.id].size;
+                                      pizzaObj.data.toppings = this.props.orderHistoryPizzaObject[pizzaObj.data.id].toppings;
 
-                                      pizzaObj.id = pizzaObj.type[0].toLowerCase() + pizzaObj.data.id
+                                      pizzaObj.id = pizzaObj.type[0].toLowerCase() + pizzaObj.data.id;
 
 
                                       let currentCart = this.props.cartItems;
-                                      currentCart.push(pizzaObj)
-                                      this.props.updateMain({cartItems: currentCart})
+                                      currentCart.push(pizzaObj);
+                                      this.props.updateMain({cartItems: currentCart});
                                     }
 
                                     for (var i = 0; i < orderObj.sides.length; i++) {
@@ -180,24 +176,24 @@ class OrderHistory extends Component {
                                           id: orderObj.sides[i],
                                         }
                                       }
-                                      sideObj.data.count = this.props.orderHistorySidesCountObject[sideObj.data.id].count
-                                      sideObj.data.side = this.props.orderHistorySidesCountObject[sideObj.data.id].side
+                                      sideObj.data.count = this.props.orderHistorySidesCountObject[sideObj.data.id].count;
+                                      sideObj.data.side = this.props.orderHistorySidesCountObject[sideObj.data.id].side;
 
-                                      sideObj.data.price = this.props.orderHistorySidesObject[sideObj.data.side].price
-                                      sideObj.data.name = this.props.orderHistorySidesObject[sideObj.data.side].name
+                                      sideObj.data.price = this.props.orderHistorySidesObject[sideObj.data.side].price;
+                                      sideObj.data.name = this.props.orderHistorySidesObject[sideObj.data.side].name;
 
-                                      sideObj.id = sideObj.type[0].toLowerCase() + sideObj.data.id
+                                      sideObj.id = sideObj.type[0].toLowerCase() + sideObj.data.id;
 
                                       let currentCart = this.props.cartItems;
-                                      currentCart.push(sideObj)
-                                      this.props.updateMain({cartItems: currentCart})
+                                      currentCart.push(sideObj);
+                                      this.props.updateMain({cartItems: currentCart});
                                     }
 
                                     orderObj.modalVisible = false;
                                     this.forceUpdate();
                                     let addTotal = this.props.totalCost;
-                                    addTotal+= parseFloat(orderObj.total)
-                                    this.props.updateMain({totalCost: addTotal})
+                                    addTotal+= parseFloat(orderObj.total);
+                                    this.props.updateMain({totalCost: addTotal});
 
                                     Actions.Cart();
                                   }
@@ -268,7 +264,7 @@ mapStateToProps = (state) => {
       cartItems: state.mainPage.cartItems,
       totalCost: state.mainPage.totalCost,
     }
-}
+};
 
 const mapDispatchToActionCreators = {
     updateMain: updateMain
