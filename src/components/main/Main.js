@@ -102,14 +102,21 @@ class Main extends Component {
 
   render() {
     return (
-      <View style={{
-        flex: 1
-      }}>
-        <View style={styles.container}>
-          <View style={{flex:1, backgroundColor: '#ccc', alignSelf: 'stretch'}}>
-            <Text>
-
-            </Text>
+      <Image
+        source={require('../../../imgs/outOfTheOven.jpg')}
+        style={styles.containerImg}>
+        <View
+          style={styles.container}>
+          <View style={{flex:1, backgroundColor: '#D40001', alignSelf: 'stretch'}}>
+            <TouchableHighlight style={{flex:1}}
+              onPress={()=>{console.log('Pizza Menu Pressed')}}>
+              <View style={{flex:1 , justifyContent: 'center',alignSelf: 'baseline', paddingLeft: 10, paddingTop: 10}}>
+                <Image
+                  style={{height: 35, width:35, tintColor: '#fff'}}
+                  // source={require('../../../imgs/pizza.svg')}/>
+                  source={require('../../../imgs/pizza.png')}/>
+              </View>
+            </TouchableHighlight>
           </View>
 
           <View style={{flex:3.4, marginTop: 5}}>
@@ -132,39 +139,37 @@ class Main extends Component {
           </View>
 
           <View style={styles.container}>
-            <Text style={styles.welcome}>
-              Welcome to Hot Spot Pizza!
-            </Text>
-            <Text style={styles.instructions}>
-              Get Started by building your Pizza below
-            </Text>
+            <View style={{backgroundColor: '#F5FCFF', borderRadius: 5, margin: 5}}>
+              <Text style={styles.welcome}>
+                Welcome to Hot Spot Pizza!
+              </Text>
+              <Text style={styles.instructions}>
+                Get Started by building your Pizza below
+              </Text>
+            </View>
             <Modal transparent={false} visible={this.props.loginModal}>
               <Login></Login>
             </Modal>
 
-            <TouchableHighlight onPress={Actions.MakePizza}>
-              <Text style={{
-                color: 'red'
-              }}>Make A Pizza!</Text>
+            <TouchableHighlight
+              style={styles.button}
+              onPress={Actions.MakePizza}>
+              <Text style={styles.buttonText}>Make A Pizza!</Text>
             </TouchableHighlight>
             <Text></Text>
-            <TouchableHighlight onPress={Actions.AddFavorites}>
-              <Text style={{
-                color: 'green'
-              }}>Pick a Favorite</Text>
+            <TouchableHighlight style={styles.button} onPress={Actions.AddFavorites}>
+              <Text style={styles.buttonText}>Pick a Favorite</Text>
             </TouchableHighlight>
             <Text></Text>
-            <TouchableHighlight onPress={Actions.OrderHistory}>
-              <Text style={{
-                color: 'blue'
-              }}>Order History</Text>
+            <TouchableHighlight style={styles.button} onPress={Actions.OrderHistory}>
+              <Text style={styles.buttonText}>Order History</Text>
             </TouchableHighlight>
             <Text></Text>
             <LoginButton></LoginButton>
 
           </View>
         </View>
-      </View>
+      </Image>
     )
   }
 }
@@ -210,7 +215,12 @@ const styles = StyleSheet.create({
     flex: 6,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    // backgroundColor: '#F5FCFF'
+  },
+  containerImg: {
+    flex: 6,
+    width: null,
+    height: null,
   },
   welcome: {
     fontSize: 20,
@@ -222,7 +232,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5
-  }
+  },
+  button: {
+    borderRadius: 20,
+    borderWidth: 10,
+    borderColor: '#569A21',
+    backgroundColor: '#569A21',
+  },
+  buttonText: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: '#fff'
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToActionCreators)(Main)
