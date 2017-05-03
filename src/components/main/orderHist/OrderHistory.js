@@ -7,29 +7,38 @@ import {Actions} from 'react-native-router-flux'
 
 import PastOrders from './PastOrders'
 
-import {StyleSheet, Text, View, TouchableHighlight, ScrollView} from 'react-native'
+import {StyleSheet, Text, View, Image, TouchableHighlight, ScrollView} from 'react-native'
 
 class OrderHistory extends Component {
 
   render() {
 
     return (
-      <View style={{
+      <Image
+        source={require('../../../../imgs/closeup.jpg')}
+        style={{
         marginTop: 22,
-        flex: 1
+        flex: 1,
+        padding: 5,
+        height: null,
+        width: null,
       }}>
         <View style={{
           margin: 5,
-          flex: 1
+          flex: 1,
+          borderRadius: 5,
+          backgroundColor: '#F5FCFF',
         }}>
           <View style={{
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
+            borderRadius: 5,
             backgroundColor: '#D40001'
           }}>
             <Text style={{
-              fontWeight: '600'
+              fontWeight: '900',
+              color: '#fff'
             }}>Order History</Text>
           </View>
 
@@ -40,7 +49,7 @@ class OrderHistory extends Component {
           }} onPress={Actions.pop}>
             <Text style={{
               fontWeight: '900',
-              color: 'gray'
+              color: '#fff'
             }}>X</Text>
           </TouchableHighlight>
 
@@ -59,7 +68,7 @@ class OrderHistory extends Component {
             </ScrollView>
           </View>
         </View>
-      </View>
+      </Image>
 
     )
   }
