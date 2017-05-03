@@ -14,6 +14,7 @@ import {
     View,
     TouchableHighlight,
     Modal,
+    Image,
 } from 'react-native'
 
 class OrderHistory extends Component {
@@ -85,10 +86,23 @@ class OrderHistory extends Component {
                     visible={orderObj.modalVisible || false}
                     onRequestClose={() => {alert("Modal has been closed.")}}
                     >
-                      <View style={{marginTop: 22, flex: 1}}>
-                        <View style={{margin: 5, flex:1}}>
-                          <View style={{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#D40001'}}>
-                            <Text style= {{fontWeight: '600'}}>Order Detail</Text>
+                      <Image
+                        source={require('../../../../imgs/closeup.jpg')}
+                        style={{
+                        marginTop: 22,
+                        flex: 1,
+                        padding: 5,
+                        height: null,
+                        width: null,
+                      }}>
+                        <View style={{
+                          margin: 5,
+                          flex: 1,
+                          borderRadius: 5,
+                          backgroundColor: '#F5FCFF',
+                        }}>
+                          <View style={{flex:1, justifyContent: 'center', alignItems: 'center',borderRadius: 5, backgroundColor: '#D40001'}}>
+                            <Text style= {{fontWeight: '900', color: '#fff'}}>Order Detail</Text>
                           </View>
 
                           <TouchableHighlight
@@ -106,10 +120,10 @@ class OrderHistory extends Component {
 
                               this.forceUpdate()
                             }}>
-                            <Text style={{fontWeight: '900', color: 'gray'}}>X</Text>
+                            <Text style={{fontWeight: '900', color: '#fff'}}>X</Text>
                           </TouchableHighlight>
 
-                          <View style={{flex:9.5}}>
+                          <View style={{flex:9.5, padding: 4}}>
 
                             <View style={{borderWidth: .5 , borderColor: '#CCC'}}>
                             </View>
@@ -217,7 +231,7 @@ class OrderHistory extends Component {
 
                           </View>
                         </View>
-                       </View>
+                      </Image>
                   </Modal>
                 </View>
               );
