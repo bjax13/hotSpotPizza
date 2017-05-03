@@ -10,29 +10,37 @@ import AddSides from './AddSides';
 
 import {Actions} from 'react-native-router-flux'
 
-import {StyleSheet, Text, View, TouchableHighlight, ScrollView} from 'react-native'
+import {StyleSheet, Text, View, Image, TouchableHighlight, ScrollView} from 'react-native'
 
 class CartModal extends Component {
 
   render() {
 
     return (
-      <View style={{
+      <Image
+        source={require('../../../../imgs/closeup.jpg')}
+        style={{
         marginTop: 22,
-        flex: 1
+        flex: 1,
+        width: null,
+        height: null,
       }}>
         <View style={{
           margin: 5,
-          flex: 1
+          flex: 1,
+          borderRadius: 5,
+          backgroundColor: '#F5FCFF',
         }}>
           <View style={{
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
+            borderRadius: 5,
             backgroundColor: '#D40001'
           }}>
             <Text style={{
-              fontWeight: '600'
+              fontWeight: '600',
+              color: '#fff',
             }}>
               Total - {'$' + (this.props.totalCost).toFixed(2)}</Text>
           </View>
@@ -44,7 +52,7 @@ class CartModal extends Component {
           }} onPress={Actions.Main}>
             <Text style={{
               fontWeight: '900',
-              color: 'gray'
+              color: '#fff',
             }}>X</Text>
           </TouchableHighlight>
 
@@ -95,7 +103,7 @@ class CartModal extends Component {
             </ScrollView>
           </View>
         </View>
-      </View>
+      </Image>
 
     )
   }

@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     width: 100,
 
-    color: '#F692A0',
+    color: '#DD3334',
     fontWeight: 'bold'
   },
   buttonPress: {
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   button2: {
-    borderColor: '#F692A0',
+    borderColor: '#DD3334',
     borderWidth: 2,
     borderRadius: 20
   },
