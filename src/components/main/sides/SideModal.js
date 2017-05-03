@@ -8,7 +8,7 @@ import {Actions} from 'react-native-router-flux'
 import Sides from './Sides';
 import AddToOrder from '../makePizza/AddToOrder';
 
-import {StyleSheet, Text, View, TouchableHighlight, ScrollView} from 'react-native'
+import {StyleSheet, Text, View, Image, TouchableHighlight, ScrollView} from 'react-native'
 
 class SideModal extends Component {
 
@@ -32,34 +32,43 @@ class SideModal extends Component {
   render() {
 
     return (
-      <View style={{
+      <Image
+        source={require('../../../../imgs/closeup.jpg')}
+        style={{
         marginTop: 22,
-        flex: 1
+        flex: 1,
+        padding: 5,
+        height: null,
+        width: null,
       }}>
         <View style={{
           margin: 5,
-          flex: 1
+          flex: 1,
+          borderRadius: 5,
+          backgroundColor: '#F5FCFF',
         }}>
           <View style={{
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
+            borderRadius: 5,
             backgroundColor: '#D40001'
           }}>
             <Text style={{
-              fontWeight: '600'
-            }}>{'$' + (this.props.totalCost + this.props.sidesCost).toFixed(2)}
-              sides</Text>
+              fontWeight: '600',
+              color: '#fff',
+            }}>Total - {'$' + (this.props.totalCost + this.props.sidesCost).toFixed(2)}
+              </Text>
           </View>
 
           <TouchableHighlight style={{
             position: 'absolute',
             right: 20,
             top: 20
-          }} onPress={Actions.pop}>
+          }} onPress={()=>{Actions.pop() ; this.props.updateMain({sidesCost: 0})}}>
             <Text style={{
               fontWeight: '900',
-              color: 'gray'
+              color: '#fff',
             }}>X</Text>
           </TouchableHighlight>
 
@@ -79,7 +88,7 @@ class SideModal extends Component {
             </ScrollView>
           </View>
         </View>
-      </View>
+      </Image>
 
     )
   }

@@ -75,9 +75,7 @@ class PizzaModal extends Component {
             position: 'absolute',
             right: 20,
             top: 20
-          }} onPress={() => {
-            Actions.pop()
-          }}>
+          }} onPress={()=>{Actions.pop() ; this.props.updateMain({pizzaCost: 0})}}>
             <Text style={{
               fontWeight: '900',
               color: '#FFF'

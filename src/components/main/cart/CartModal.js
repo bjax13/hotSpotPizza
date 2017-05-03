@@ -49,7 +49,7 @@ class CartModal extends Component {
             position: 'absolute',
             right: 20,
             top: 20
-          }} onPress={Actions.Main}>
+          }} onPress={()=>{Actions.pop() ; this.props.updateMain({sidesCost: 0})}}>
             <Text style={{
               fontWeight: '900',
               color: '#fff',
