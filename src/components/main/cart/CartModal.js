@@ -29,7 +29,7 @@ class CartModal extends Component {
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#f7d9de'
+            backgroundColor: '#D40001'
           }}>
             <Text style={{
               fontWeight: '600'

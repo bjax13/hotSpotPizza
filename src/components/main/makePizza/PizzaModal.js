@@ -40,22 +40,34 @@ class PizzaModal extends Component {
   render() {
 
     return (
-      <View style={{
+      <Image
+        source={require('../../../../imgs/closeup.jpg')}
+        style={{
         marginTop: 22,
-        flex: 1
+        flex: 1,
+        padding: 5,
+        height: null,
+        width: null,
       }}>
         <View style={{
           margin: 5,
-          flex: 1
+          flex: 1,
+          borderRadius: 5,
+          backgroundColor: '#F5FCFF',
         }}>
           <View style={{
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#f7d9de'
+            backgroundColor: '#D40001',
+            borderColor: '#D40001',
+            borderRadius: 5,
+            borderWidth: 1
+
           }}>
             <Text style={{
-              fontWeight: '600'
+              fontWeight: '800',
+              color: '#fff',
             }}>{'$' + (this.props.totalCost + this.props.pizzaCost).toFixed(2)}</Text>
           </View>
 
@@ -68,7 +80,7 @@ class PizzaModal extends Component {
           }}>
             <Text style={{
               fontWeight: '900',
-              color: 'gray'
+              color: '#FFF'
             }}>X</Text>
           </TouchableHighlight>
 
@@ -104,7 +116,7 @@ class PizzaModal extends Component {
             </ScrollView>
           </View>
         </View>
-      </View>
+      </Image>
 
     )
   }

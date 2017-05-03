@@ -87,7 +87,7 @@ class OrderHistory extends Component {
                     >
                       <View style={{marginTop: 22, flex: 1}}>
                         <View style={{margin: 5, flex:1}}>
-                          <View style={{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f7d9de'}}>
+                          <View style={{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#D40001'}}>
                             <Text style= {{fontWeight: '600'}}>Order Detail</Text>
                           </View>
 
