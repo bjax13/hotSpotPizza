@@ -103,7 +103,7 @@ class Main extends Component {
   render() {
     return (
       <Image
-        source={require('../../../imgs/outOfTheOven.jpg')}
+        source={require('../../../imgs/closeup.jpg')}
         style={styles.containerImg}>
         <View
           style={styles.container}>
@@ -113,7 +113,7 @@ class Main extends Component {
               <View style={{flex:1 , justifyContent: 'center',alignSelf: 'baseline', paddingLeft: 10, paddingTop: 10}}>
                 <Image
                   style={{height: 35, width:35, tintColor: '#fff'}}
-                  // source={require('../../../imgs/pizza.svg')}/>
+                  
                   source={require('../../../imgs/pizza.png')}/>
               </View>
             </TouchableHighlight>
@@ -236,8 +236,8 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     borderWidth: 10,
-    borderColor: '#569A21',
-    backgroundColor: '#569A21',
+    borderColor: '#19A63F',
+    backgroundColor: '#19A63F',
   },
   buttonText: {
     fontSize: 24,

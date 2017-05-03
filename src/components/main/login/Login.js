@@ -20,14 +20,18 @@ class Login extends Component {
       <View style={{
         flex: 1
       }}>
-        <View style={styles.container}>
+        <Image
+          source={require('../../../../imgs/outOfTheOven.jpg')}
+          style={styles.containerImg}>
           <View style={styles.container}>
-            <Text style={styles.welcome}>
-              Welcome to Hot Spot Pizza!
-            </Text>
-            <Text style={styles.instructions}>
-              Get Started by Loging In with Facebook
-            </Text>
+            <View style={{backgroundColor: '#F5FCFF', borderRadius: 5, margin: 5}}>
+              <Text style={styles.welcome}>
+                Welcome to Hot Spot Pizza!
+              </Text>
+              <Text style={styles.instructions}>
+                Get Started by Loging In with Facebook
+              </Text>
+            </View>
 
             <LoginButton></LoginButton>
 
@@ -50,7 +54,7 @@ class Login extends Component {
                 <Text></Text>
                 <Text></Text>
                 <Text></Text>
-                <Text style={styles.instructions}>
+                <Text style={styles.dummyData}>
                   Login with Dummy Data
                 </Text>
                 {/* <FBLogin /> */}
@@ -59,7 +63,7 @@ class Login extends Component {
             </TouchableHighlight>
 
           </View>
-        </View>
+        </Image>
       </View>
     )
   }
@@ -86,7 +90,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    // backgroundColor: '#F5FCFF'
+  },
+  containerImg: {
+    flex: 6,
+    width: null,
+    height: null,
   },
   welcome: {
     fontSize: 20,
@@ -98,7 +107,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5
-  }
+  },
+  dummyData: {
+    textAlign: 'center',
+    color: '#fff',
+    marginBottom: 5
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToActionCreators)(Login)
